@@ -55,6 +55,12 @@ class ContactTest extends TestCase
         $this->assertSame(0, Inquiry::count());
     }
 
+    public function test_redirect_never_leaves_the_site(): void
+    {
+        $this->post('/contact', $this->valid, ['Referer' => 'https://evil.test/phish'])
+            ->assertRedirect(route('contact.show'));
+    }
+
     public function test_honeypot_submission_looks_successful_but_is_not_stored(): void
     {
         $this->post('/contact', [...$this->valid, 'website' => 'http://spam.test'])

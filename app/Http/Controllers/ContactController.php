@@ -19,7 +19,15 @@ class ContactController extends Controller
             $this->notifyStaff($inquiry);
         }
 
-        return back()->with('inquiry_sent', true);
+        return redirect()->to(self::sameSiteBack())->with('inquiry_sent', true);
+    }
+
+    /** Previous page when it is on this site (the form may sit on several pages), otherwise the contact page. */
+    public static function sameSiteBack(): string
+    {
+        $previous = url()->previous();
+
+        return parse_url($previous, PHP_URL_HOST) === request()->getHost() ? $previous : route('contact.show');
     }
 
     /** Saving and notifying are separate outcomes: a mail failure never loses the saved inquiry. */

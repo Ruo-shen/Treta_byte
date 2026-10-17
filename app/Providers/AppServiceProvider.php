@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Http\Controllers\ContactController;
 use App\Http\Requests\StoreInquiryRequest;
 use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Http\Request;
@@ -20,7 +21,7 @@ class AppServiceProvider extends ServiceProvider
         // Contact form: a few per minute and a daily cap per IP. Over the limit, the visitor is sent back
         // with their input and a normal validation error rather than a bare 429 page.
         RateLimiter::for('contact', function (Request $request) {
-            $tooMany = fn () => back()
+            $tooMany = fn () => redirect()->to(ContactController::sameSiteBack())
                 ->withInput($request->except(StoreInquiryRequest::HONEYPOT))
                 ->withErrors(['message' => 'Too many messages sent. Please try again later.']);
 
