@@ -28,6 +28,56 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
 
+    /*
+    |--------------------------------------------------------------------------
+    | TRETA Lab service pages (frontend-owned content definitions)
+    |--------------------------------------------------------------------------
+    |
+    | Keyed by URL slug; only these slugs resolve under /services/{slug}.
+    | Copy fields stay null until approved copy is supplied. A page enters
+    | the sitemap only once its seo_title and meta_description are set.
+    |
+    */
+
+    'offerings' => [
+        'web-development' => [
+            'pillar' => 'build',
+            'name' => 'Web development',
+            'summary' => null,
+            'seo_title' => null,
+            'meta_description' => null,
+            'problems' => [],
+            'deliverables' => [],
+        ],
+        'website-repair' => [
+            'pillar' => 'fix',
+            'name' => 'Website repair',
+            'summary' => null,
+            'seo_title' => null,
+            'meta_description' => null,
+            'problems' => [],
+            'deliverables' => [],
+        ],
+        'website-maintenance' => [
+            'pillar' => 'care',
+            'name' => 'Website maintenance',
+            'summary' => null,
+            'seo_title' => null,
+            'meta_description' => null,
+            'problems' => [],
+            'deliverables' => [],
+        ],
+        'web-applications' => [
+            'pillar' => 'build',
+            'name' => 'Web applications',
+            'summary' => null,
+            'seo_title' => null,
+            'meta_description' => null,
+            'problems' => [],
+            'deliverables' => [],
+        ],
+    ],
+
     'slack' => [
         'notifications' => [
             'bot_user_oauth_token' => env('SLACK_BOT_USER_OAUTH_TOKEN'),

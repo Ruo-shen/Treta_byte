@@ -45,7 +45,8 @@ return [
             'port' => env('MAIL_PORT', 2525),
             'username' => env('MAIL_USERNAME'),
             'password' => env('MAIL_PASSWORD'),
-            'timeout' => null,
+            // Bounded: contact submissions send synchronously (no queue worker on shared hosting).
+            'timeout' => (int) env('MAIL_TIMEOUT', 10),
             'local_domain' => env('MAIL_EHLO_DOMAIN', parse_url((string) env('APP_URL', 'http://localhost'), PHP_URL_HOST)),
         ],
 
@@ -109,6 +110,9 @@ return [
     | used globally for all emails that are sent by your application.
     |
     */
+
+    // Staff recipient for new-inquiry notifications. Empty disables sending; inquiries are still saved.
+    'inquiry_to' => env('INQUIRY_NOTIFY_ADDRESS'),
 
     'from' => [
         'address' => env('MAIL_FROM_ADDRESS', 'hello@example.com'),
