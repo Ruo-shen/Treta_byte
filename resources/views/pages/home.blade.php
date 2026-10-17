@@ -1,0 +1,10 @@
+@extends('layouts.app')
+@section('content')
+@include('components.home.hero')
+@include('components.home.problems')
+@include('components.home.services')
+@include('components.home.why')
+@include('components.home.process')
+@include('components.home.about')
+@include('components.cta')
+@endsection

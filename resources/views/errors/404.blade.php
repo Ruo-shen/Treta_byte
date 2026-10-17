@@ -1,0 +1,4 @@
+@extends('layouts.app')
+@section('content')
+<section class="mx-auto max-w-[1320px] px-5 pb-24 pt-40 sm:px-8 sm:pt-48 lg:px-12"><p class="font-mono text-[12px] uppercase tracking-[0.25em] text-accent">404 / A loose connection</p><h1 class="mt-7 text-[clamp(3rem,7vw,6rem)] font-medium leading-none tracking-[-0.045em]">This page isn’t here.</h1><p class="mt-7 max-w-[550px] text-[20px] leading-relaxed text-muted">The link may have changed, or the address might have a typo. Let’s get you back to something useful.</p><div class="mt-10 flex flex-wrap gap-4"><a href="/" class="inline-flex min-h-12 items-center rounded-lg bg-ink px-6 text-white hover:bg-accent">Back to the homepage ↗</a><a href="/services" class="inline-flex min-h-12 items-center rounded-lg border border-line px-6">Explore services</a></div><p class="mt-16 font-hand text-[28px] text-moss">Even technology takes a wrong turn sometimes.</p></section>
+@endsection
