@@ -17,7 +17,7 @@
         </div>
         <ol class="mt-10 grid gap-x-8 gap-y-8 sm:mt-12 sm:grid-cols-2 sm:gap-y-12 lg:grid-cols-4 lg:gap-x-0 lg:gap-y-0">
             @foreach($problems as [$img, $title, $text, $pos, $h])
-                <li class="reveal grid grid-cols-[112px_1fr] items-center gap-4 border-t border-line pt-6 sm:block sm:border-t-0 sm:pt-0 lg:px-[30px] {{ $loop->first ? '' : 'lg:border-l' }}" style="transition-delay:{{ $loop->index * 80 }}ms">
+                <li class="reveal grid grid-cols-[132px_1fr] items-center gap-4 border-t border-line pt-6 sm:block sm:border-t-0 sm:pt-0 lg:px-[30px] {{ $loop->first ? '' : 'lg:border-l' }}" style="transition-delay:{{ $loop->index * 80 }}ms">
                     <div class="aspect-[960/530] overflow-hidden sm:mx-auto sm:max-w-[320px]">
                         <img src="/images/problems/{{ $img }}.webp" width="960" height="{{ $h }}" alt="" loading="lazy" decoding="async" class="hn-fade h-full w-full object-cover" style="object-position:{{ $pos }}">
                     </div>

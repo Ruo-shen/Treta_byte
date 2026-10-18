@@ -1,16 +1,14 @@
-<section id="about" class="scroll-mt-16 overflow-hidden bg-paper py-20 sm:py-[100px]">
+<section id="about" class="scroll-mt-16 overflow-x-clip bg-paper py-14 sm:py-[100px]">
 <div class="mx-auto w-full max-w-[1320px] px-5 sm:px-8 lg:px-12">
-<div class="grid items-center gap-14 lg:grid-cols-[0.8fr_1.2fr] lg:gap-10">
-<div class="reveal" style="transition-delay:0ms">
-<p class="flex items-center gap-4 font-mono text-[11px] uppercase tracking-[0.3em] text-ink/80">
-<span class="h-2 w-2 bg-accent">
-</span>About TRETA</p>
-<h2 class="mt-9 text-[clamp(2.3rem,4vw,3.4rem)] font-medium leading-[1.08] tracking-[-0.045em]">A small, senior studio.<br>
+<div class="grid items-center gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:gap-10">
+<div class="reveal">
+<x-inner.kicker>About TRETA</x-inner.kicker>
+<h2 class="mt-6 text-[clamp(2.2rem,6vw,3.4rem)] font-medium leading-[1.08] tracking-[-0.045em]">A small, senior studio.<br>
 <span class="text-ink/40">You talk directly to the people doing the work.</span>
 </h2>
-<p class="mt-9 max-w-[530px] text-[18px] leading-[1.6] text-muted">We came together to fix what’s broken, build what’s needed, and care for what matters. You talk directly to the people doing the work — a small team taking responsibility from the first conversation onward.</p>
+<p class="mt-6 max-w-[530px] text-[17px] leading-[1.6] text-muted sm:mt-9 sm:text-[18px]">A small team taking responsibility from the first conversation onward.</p>
 </div>
-<div aria-label="How our disciplines work together" class="reveal relative w-full" style="transition-delay:0ms">
+<div aria-label="How our disciplines work together" class="reveal relative w-full">
 <div class="hidden sm:block">
 <div data-fit-diagram="" class="relative w-full about-diagram">
 <div data-diagram-canvas="" class="absolute left-0 top-0 origin-top-left" style="width:1000px;height:560px;transform:scale(var(--diagram-scale, 0.5))">
@@ -123,13 +121,7 @@
 </div>
 </div>
 <ul class="grid gap-3 sm:hidden">
-<li class="flex items-center gap-4">
-<span class="grid shrink-0 place-items-end overflow-hidden rounded-full" style="width:64px;height:64px;background:#e3e9fb">
-<svg viewBox="0 0 40 40" class="h-[80%] w-[80%] text-ink/15" fill="currentColor" aria-hidden="true">
-<circle cx="20" cy="15" r="7.5" />
-<path d="M5 40c1-9 7.5-14 15-14s14 5 15 14z" />
-</svg>
-</span>
+<li class="flex">
 <div class="rounded-[12px] bg-white/85 px-[18px] py-3.5 shadow-[0_12px_32px_-24px_rgba(23,25,27,0.18)] ring-1 ring-line/40 flex-1 !px-4 !py-4">
 <p class="flex items-center gap-2.5 text-[18px] font-medium tracking-[-0.01em]">
 <span class="h-2 w-2 rounded-full" style="background:#315ceb">
@@ -137,13 +129,7 @@
 <p class="mt-1 pl-[18px] text-[15px] leading-[1.45] text-muted">Turns ideas into simple experiences.</p>
 </div>
 </li>
-<li class="flex items-center gap-4">
-<span class="grid shrink-0 place-items-end overflow-hidden rounded-full" style="width:64px;height:64px;background:#ece6fb">
-<svg viewBox="0 0 40 40" class="h-[80%] w-[80%] text-ink/15" fill="currentColor" aria-hidden="true">
-<circle cx="20" cy="15" r="7.5" />
-<path d="M5 40c1-9 7.5-14 15-14s14 5 15 14z" />
-</svg>
-</span>
+<li class="flex">
 <div class="rounded-[12px] bg-white/85 px-[18px] py-3.5 shadow-[0_12px_32px_-24px_rgba(23,25,27,0.18)] ring-1 ring-line/40 flex-1 !px-4 !py-4">
 <p class="flex items-center gap-2.5 text-[18px] font-medium tracking-[-0.01em]">
 <span class="h-2 w-2 rounded-full" style="background:#8b5cf6">
@@ -151,13 +137,7 @@
 <p class="mt-1 pl-[18px] text-[15px] leading-[1.45] text-muted">Understands your setup and goals.</p>
 </div>
 </li>
-<li class="flex items-center gap-4">
-<span class="grid shrink-0 place-items-end overflow-hidden rounded-full" style="width:64px;height:64px;background:#dcf1ec">
-<svg viewBox="0 0 40 40" class="h-[80%] w-[80%] text-ink/15" fill="currentColor" aria-hidden="true">
-<circle cx="20" cy="15" r="7.5" />
-<path d="M5 40c1-9 7.5-14 15-14s14 5 15 14z" />
-</svg>
-</span>
+<li class="flex">
 <div class="rounded-[12px] bg-white/85 px-[18px] py-3.5 shadow-[0_12px_32px_-24px_rgba(23,25,27,0.18)] ring-1 ring-line/40 flex-1 !px-4 !py-4">
 <p class="flex items-center gap-2.5 text-[18px] font-medium tracking-[-0.01em]">
 <span class="h-2 w-2 rounded-full" style="background:#14b8a6">
@@ -165,13 +145,7 @@
 <p class="mt-1 pl-[18px] text-[15px] leading-[1.45] text-muted">Builds useful, reliable systems.</p>
 </div>
 </li>
-<li class="flex items-center gap-4">
-<span class="grid shrink-0 place-items-end overflow-hidden rounded-full" style="width:64px;height:64px;background:#fbe9dc">
-<svg viewBox="0 0 40 40" class="h-[80%] w-[80%] text-ink/15" fill="currentColor" aria-hidden="true">
-<circle cx="20" cy="15" r="7.5" />
-<path d="M5 40c1-9 7.5-14 15-14s14 5 15 14z" />
-</svg>
-</span>
+<li class="flex">
 <div class="rounded-[12px] bg-white/85 px-[18px] py-3.5 shadow-[0_12px_32px_-24px_rgba(23,25,27,0.18)] ring-1 ring-line/40 flex-1 !px-4 !py-4">
 <p class="flex items-center gap-2.5 text-[18px] font-medium tracking-[-0.01em]">
 <span class="h-2 w-2 rounded-full" style="background:#f97316">

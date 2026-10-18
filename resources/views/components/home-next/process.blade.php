@@ -15,7 +15,7 @@
         </div>
         <ol class="border-t border-line">
             @foreach($steps as [$name, $text])
-                <li class="reveal grid grid-cols-[40px_1fr] gap-x-3 gap-y-2 border-b border-line py-6 sm:grid-cols-[80px_1fr_1.3fr] sm:gap-8 sm:py-9">
+                <li class="reveal grid grid-cols-[40px_1fr] gap-x-3 gap-y-2 border-b border-line py-5 sm:grid-cols-[80px_1fr_1.3fr] sm:gap-8 sm:py-9">
                     <span class="pt-2 font-mono text-[12px] text-accent">0{{ $loop->iteration }}</span>
                     <h3 class="text-[24px] font-medium tracking-[-0.02em]">{{ $name }}</h3>
                     <p class="col-start-2 text-[16px] leading-[1.55] text-muted sm:col-start-3 sm:text-[15px] sm:leading-[1.6]">{{ $text }}</p>
