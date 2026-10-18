@@ -2,6 +2,7 @@
 @import 'lenis/dist/lenis.css';
 @import './pages/contact.css';
 @import './pages/blog.css';
+@import './pages/home-next.css';
 @source '../views/**/*.blade.php';
 @source '../../config/services.php';
 
