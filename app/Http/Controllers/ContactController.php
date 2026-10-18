@@ -22,12 +22,26 @@ class ContactController extends Controller
         return redirect()->to(self::sameSiteBack())->with('inquiry_sent', true);
     }
 
-    /** Previous page when it is on this site (the form may sit on several pages), otherwise the contact page. */
+    /**
+     * Previous page when it is on this exact site (scheme, host and port of APP_URL), otherwise the contact page.
+     * Rejects backslashes, userinfo and non-http(s) schemes, which parsers disagree about (open-redirect tricks).
+     */
     public static function sameSiteBack(): string
     {
         $previous = url()->previous();
+        $site = parse_url((string) config('app.url'));
+        $url = parse_url($previous);
 
-        return parse_url($previous, PHP_URL_HOST) === request()->getHost() ? $previous : route('contact.show');
+        $port = fn (?array $u) => $u['port'] ?? (strtolower((string) ($u['scheme'] ?? '')) === 'https' ? 443 : 80);
+        $safe = is_array($url) && is_array($site)
+            && ! str_contains($previous, chr(92))
+            && ! isset($url['user']) && ! isset($url['pass'])
+            && in_array(strtolower((string) ($url['scheme'] ?? '')), ['http', 'https'], true)
+            && strtolower((string) ($url['scheme'] ?? '')) === strtolower((string) ($site['scheme'] ?? ''))
+            && strtolower((string) ($url['host'] ?? '')) === strtolower((string) ($site['host'] ?? ''))
+            && $port($url) === $port($site);
+
+        return $safe ? $previous : route('contact.show');
     }
 
     /** Saving and notifying are separate outcomes: a mail failure never loses the saved inquiry. */

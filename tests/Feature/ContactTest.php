@@ -4,6 +4,7 @@ namespace Tests\Feature;
 
 use App\Enums\InquiryTopic;
 use App\Models\Inquiry;
+use Illuminate\Foundation\Http\Middleware\ValidateCsrfToken;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
@@ -136,5 +137,57 @@ class ContactTest extends TestCase
         $this->post('/contact', $this->valid)->assertSessionHasErrors('message');
 
         $this->assertSame(20, Inquiry::count());
+    }
+
+    /** @return array<string, array{0: string}> */
+    public static function hostileReferers(): array
+    {
+        return [
+            'other host' => ['https://evil.test/phish'],
+            'backslash trick' => ['https://evil.test\@localhost/x'],
+            'userinfo' => ['http://localhost@evil.test/x'],
+            'userinfo on own host' => ['http://user:pw@localhost/x'],
+            'other port' => ['http://localhost:8080/x'],
+            'other scheme' => ['https://localhost/x'],
+            'javascript' => ['javascript://localhost/%0Aalert(1)'],
+            'protocol relative' => ['//evil.test/x'],
+        ];
+    }
+
+    #[\PHPUnit\Framework\Attributes\DataProvider('hostileReferers')]
+    public function test_hostile_referers_fall_back_to_the_contact_page_on_success_and_on_throttle(string $referer): void
+    {
+        $this->post('/contact', $this->valid, ['Referer' => $referer])->assertRedirect(route('contact.show'));
+
+        // Same fallback from the rate-limiter response.
+        for ($i = 0; $i < 3; $i++) {
+            $this->post('/contact', $this->valid, ['Referer' => $referer]);
+        }
+        $this->post('/contact', $this->valid, ['Referer' => $referer])->assertRedirect(route('contact.show'));
+    }
+
+    public function test_same_site_referer_is_kept(): void
+    {
+        $this->post('/contact', $this->valid, ['Referer' => 'http://localhost/services?x=1'])
+            ->assertRedirect('http://localhost/services?x=1');
+    }
+
+    public function test_post_without_csrf_token_is_rejected_with_419(): void
+    {
+        // Laravel skips CSRF verification under test; re-enable it for this request.
+        $this->app->bind(ValidateCsrfToken::class, fn ($app) => new class($app, $app->make('encrypter')) extends ValidateCsrfToken
+        {
+            protected function runningUnitTests()
+            {
+                return false;
+            }
+        });
+
+        $this->post('/contact', $this->valid)->assertStatus(419);
+        $this->assertSame(0, Inquiry::count());
+
+        $this->get('/contact');
+        $this->post('/contact', [...$this->valid, '_token' => csrf_token()])->assertSessionHas('inquiry_sent');
+        $this->assertSame(1, Inquiry::count());
     }
 }
