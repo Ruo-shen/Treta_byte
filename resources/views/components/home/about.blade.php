@@ -5,8 +5,8 @@
 <p class="flex items-center gap-4 font-mono text-[11px] uppercase tracking-[0.3em] text-ink/80">
 <span class="h-2 w-2 bg-accent">
 </span>About TRETA</p>
-<h2 class="mt-9 text-[clamp(2.3rem,4vw,3.4rem)] font-medium leading-[1.08] tracking-[-0.045em]">Three friends.<br>
-<span class="text-ink/40">One accountable studio.</span>
+<h2 class="mt-9 text-[clamp(2.3rem,4vw,3.4rem)] font-medium leading-[1.08] tracking-[-0.045em]">A small, senior studio.<br>
+<span class="text-ink/40">You talk directly to the people doing the work.</span>
 </h2>
 <p class="mt-9 max-w-[530px] text-[18px] leading-[1.6] text-muted">We came together to fix what’s broken, build what’s needed, and care for what matters. You talk directly to the people doing the work — a small team taking responsibility from the first conversation onward.</p>
 </div>
