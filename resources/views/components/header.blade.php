@@ -1,6 +1,6 @@
 <header class="fixed inset-x-0 top-0 z-50 site-header">
 <div class="mx-auto flex w-[calc(100%-24px)] items-center justify-between rounded-[14px] border transition-[max-width,height,transform,background-color,border-color,box-shadow,padding] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] border-transparent bg-transparent px-3 shadow-none sm:px-6 lg:px-10 header-shell">
-<a href="/" aria-label="TRETA home" class="relative flex h-[36px] shrink-0 items-center transition-[width] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] w-[120px] header-brand">
+<a href="/" aria-label="TRETA home" class="relative flex h-11 shrink-0 items-center md:h-[36px] transition-[width] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] w-[120px] header-brand">
 <span class="absolute left-0 text-[19px] font-medium tracking-[0.42em] transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] opacity-100 header-wordmark">TRETA</span>
 <span class="absolute left-0 flex h-[36px] w-[36px] items-center justify-center rounded-[10px] border border-line bg-paper text-[14px] font-semibold tracking-[-0.02em] transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] scale-75 opacity-0 header-monogram">T<span class="text-accent">.</span>
 </span>
@@ -20,7 +20,7 @@
 </svg>
 </a>
 </div>
-<button aria-controls="mobile-navigation" data-menu-toggle="" type="button" class="flex h-10 w-10 items-center justify-center md:hidden" aria-label="Open menu" aria-expanded="false">
+<button aria-controls="mobile-navigation" data-menu-toggle="" type="button" class="flex h-11 w-11 items-center justify-center md:hidden" aria-label="Open menu" aria-expanded="false">
 <span class="relative block h-3 w-5">
 <span class="absolute left-0 h-[1.5px] w-5 bg-ink transition-all top-0">
 </span>
@@ -35,13 +35,13 @@
 <a href="/#process" class="block border-b border-line py-4 text-[22px] tracking-tight">Process</a>
 <a href="/about" class="block border-b border-line py-4 text-[22px] tracking-tight">About</a>
 <a href="/blog" class="block border-b border-line py-4 text-[22px] tracking-tight">Blog</a>
-<a href="/contact" class="mt-6 inline-flex items-center gap-2 rounded-lg bg-ink px-5 py-3 text-[15px] font-medium text-white">Let's talk <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" class="h-4 w-4" aria-hidden="true">
+<a href="/contact" class="mt-6 flex min-h-[52px] w-full items-center justify-center gap-2 rounded-[10px] bg-accent px-5 text-[16px] font-medium text-white hover:bg-[#2a4fd0]">Start a conversation <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" class="h-4 w-4" aria-hidden="true">
 <path d="M4.5 11.5l7-7M5.5 4.5h6v6" />
 </svg>
 </a>
 </nav>
 </header>
 <noscript>
-<nav class="flex flex-wrap gap-x-6 gap-y-3 border-t border-line bg-paper px-5 py-4 md:hidden" aria-label="Mobile without JavaScript"><a href="/services">Services</a><a href="/work">Work</a><a href="/about">About</a><a href="/blog">Blog</a><a href="/contact">Contact</a></nav>
+<nav class="flex flex-wrap gap-x-6 gap-y-3 border-t border-line bg-paper px-5 py-4 md:hidden" aria-label="Mobile without JavaScript"><a href="/services" class="inline-flex min-h-11 items-center">Services</a><a href="/work" class="inline-flex min-h-11 items-center">Work</a><a href="/about" class="inline-flex min-h-11 items-center">About</a><a href="/blog" class="inline-flex min-h-11 items-center">Blog</a><a href="/contact" class="inline-flex min-h-11 items-center">Contact</a></nav>
 <style>[data-menu-toggle] { display: none; } .site-header { position: relative; }</style>
 </noscript>
