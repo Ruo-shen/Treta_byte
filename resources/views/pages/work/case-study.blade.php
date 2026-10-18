@@ -21,7 +21,7 @@
         <p class="mt-6 max-w-[720px] text-[17px] leading-[1.6] text-muted sm:text-[20px]">{{ $project['summary'] }}</p>
     </header>
 
-    <div class="mx-auto grid w-full max-w-[1320px] gap-10 px-5 pb-16 sm:px-8 lg:grid-cols-[300px_minmax(0,1fr)] lg:gap-16 lg:px-12 lg:pb-24">
+    <div class="mx-auto grid w-full max-w-[1320px] grid-cols-1 gap-10 px-5 pb-16 sm:px-8 lg:grid-cols-[300px_minmax(0,1fr)] lg:gap-16 lg:px-12 lg:pb-24">
         <aside class="lg:sticky lg:top-24 lg:self-start">
             @if($facts)
                 <dl class="grid grid-cols-2 gap-x-6 gap-y-5 border-t border-line pt-5 lg:grid-cols-1">

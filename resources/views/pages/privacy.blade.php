@@ -1,60 +1,64 @@
 @extends('layouts.app')
 @php($seo = array_merge($seo ?? [], ['robots' => 'noindex,follow']))
 @section('content')
-<div class="inner-site privacy-page">
-    <header class="inner-shell privacy-opening">
-        <p class="kicker">Privacy / Information, plainly</p>
-        <h1 class="inner-title">Your information.<br>Handled <span class="text-moss">with care.</span></h1>
-        <p class="inner-lede">This notice is being prepared alongside the inquiry service. It is prelaunch information, with the remaining decisions stated openly.</p>
-        <p class="policy-status"><span aria-hidden="true"></span>Prelaunch notice · final practices pending confirmation</p>
-    </header>
-    <div class="inner-shell privacy-document">
-        <nav aria-label="Privacy sections">
-            <p class="kicker">On this page</p>
-            <a href="#information">What the form asks for</a><a href="#purpose">Why it is requested</a><a href="#decisions">What remains to be confirmed</a><a href="#external-services">External services</a>
+<x-inner.header variant="editorial" kicker="Privacy / Information, plainly" lede="This notice is being prepared alongside the inquiry service. It is prelaunch information, with the remaining decisions stated openly.">
+    <x-slot:title>Your information.<br>Handled <span class="text-moss">with care.</span></x-slot:title>
+    <x-slot:actions>
+        <p class="inline-flex items-center gap-3 rounded-full border border-ink/20 bg-white px-4 py-2.5 text-[15px] leading-snug"><span class="h-2 w-2 shrink-0 rounded-full bg-[#8b7750]" aria-hidden="true"></span>Prelaunch notice · final practices pending confirmation</p>
+    </x-slot:actions>
+</x-inner.header>
+
+<x-inner.band>
+    <div class="grid grid-cols-1 gap-10 lg:grid-cols-[240px_minmax(0,1fr)] lg:gap-20">
+        <nav aria-label="Privacy sections" class="lg:sticky lg:top-24 lg:self-start">
+            <p class="hidden font-mono text-[12px] uppercase tracking-[0.14em] text-muted lg:block">On this page</p>
+            <div class="no-scrollbar -mx-5 flex gap-2 overflow-x-auto px-5 sm:-mx-8 sm:px-8 lg:mx-0 lg:mt-3 lg:flex-col lg:gap-0 lg:overflow-visible lg:px-0">
+                @foreach(['information' => 'What the form asks for', 'purpose' => 'Why it is requested', 'decisions' => 'What remains to be confirmed', 'external-services' => 'External services'] as $id => $label)
+                    <a href="#{{ $id }}" class="inline-flex min-h-11 shrink-0 items-center rounded-full border border-line bg-white px-4 text-[15px] hover:border-ink/40 lg:rounded-none lg:border-0 lg:border-b lg:bg-transparent lg:px-0">{{ $label }}</a>
+                @endforeach
+            </div>
         </nav>
-        <div>
-            <section id="information">
-                <span class="index-number">01 / Information</span>
-                <h2>What the form asks for.</h2>
-                <p>The inquiry form asks for your name, email address, an optional company name, a topic and your message. These details help explain the request and provide a way to respond.</p>
-                <p>Please leave out passwords, payment details and sensitive personal information.</p>
+
+        <div class="max-w-[760px]">
+            <x-inner.placeholder class="mb-10" what="final privacy policy: storage and access, retention, how to make a request, email provider (owner to confirm)" />
+
+            <section id="information" class="scroll-mt-28 border-t border-ink/15 pb-12 pt-8">
+                <p class="font-mono text-[12px] uppercase tracking-[0.14em] text-accent">01 / Information</p>
+                <h2 class="mt-4 text-[clamp(1.6rem,4vw,2rem)] font-medium leading-[1.15] tracking-[-0.025em]">What the form asks for.</h2>
+                <div class="mt-5 space-y-4 text-[17px] leading-[1.7] text-muted sm:text-[18px]">
+                    <p>The inquiry form asks for your name, email address, an optional company name, a topic and your message. These details help explain the request and provide a way to respond.</p>
+                    <p>Please leave out passwords, payment details and sensitive personal information.</p>
+                </div>
             </section>
-            <section id="purpose">
-                <span class="index-number">02 / Purpose</span>
-                <h2>A conversation about your request.</h2>
-                <p>The intended purpose of an inquiry is to understand the work you need and follow up with you. The completed notice will describe the actual storage, email delivery and access practices used by the service.</p>
+
+            <section id="purpose" class="scroll-mt-28 border-t border-ink/15 pb-12 pt-8">
+                <p class="font-mono text-[12px] uppercase tracking-[0.14em] text-accent">02 / Purpose</p>
+                <h2 class="mt-4 text-[clamp(1.6rem,4vw,2rem)] font-medium leading-[1.15] tracking-[-0.025em]">A conversation about your request.</h2>
+                <p class="mt-5 text-[17px] leading-[1.7] text-muted sm:text-[18px]">The intended purpose of an inquiry is to understand the work you need and follow up with you. The completed notice will describe the actual storage, email delivery and access practices used by the service.</p>
             </section>
-            <section id="decisions">
-                <span class="index-number">03 / Before launch</span>
-                <h2>The details still being confirmed.</h2>
-                <dl class="policy-ledger">
-                    <div>
-                        <dt>Storage & access</dt>
-                        <dd>Where inquiries are stored and who can access them.</dd>
-                    </div>
-                    <div>
-                        <dt>Retention</dt>
-                        <dd>How long information is kept and when it is deleted.</dd>
-                    </div>
-                    <div>
-                        <dt>Your requests</dt>
-                        <dd>A verified contact method for questions, corrections or deletion requests.</dd>
-                    </div>
-                    <div>
-                        <dt>Email delivery</dt>
-                        <dd>The provider and handling of inquiry notifications.</dd>
-                    </div>
-                </dl>
+
+            <section id="decisions" class="scroll-mt-28 border-t border-ink/15 pb-12 pt-8">
+                <p class="font-mono text-[12px] uppercase tracking-[0.14em] text-accent">03 / Before launch</p>
+                <h2 class="mt-4 text-[clamp(1.6rem,4vw,2rem)] font-medium leading-[1.15] tracking-[-0.025em]">The details still being confirmed.</h2>
+                <x-inner.facts class="mt-6" :items="[
+                    ['Storage & access', 'Where inquiries are stored and who can access them.'],
+                    ['Retention', 'How long information is kept and when it is deleted.'],
+                    ['Your requests', 'A verified contact method for questions, corrections or deletion requests.'],
+                    ['Email delivery', 'The provider and handling of inquiry notifications.'],
+                ]" />
             </section>
-            <section id="external-services">
-                <span class="index-number">04 / External services</span>
-                <h2>Fonts, analytics and future changes.</h2>
-                <p>This frontend requests fonts from Google Fonts. Your browser contacts that service to load them. Analytics identifiers and any consent requirements remain pending review; no analytics service is enabled by this frontend.</p>
-                <p>The notice must be updated to reflect the actual service before launch. This page is excluded from indexing while those details remain unresolved.</p>
+
+            <section id="external-services" class="scroll-mt-28 border-t border-ink/15 pb-12 pt-8">
+                <p class="font-mono text-[12px] uppercase tracking-[0.14em] text-accent">04 / External services</p>
+                <h2 class="mt-4 text-[clamp(1.6rem,4vw,2rem)] font-medium leading-[1.15] tracking-[-0.025em]">Fonts, analytics and future changes.</h2>
+                <div class="mt-5 space-y-4 text-[17px] leading-[1.7] text-muted sm:text-[18px]">
+                    <p>This frontend requests fonts from Google Fonts. Your browser contacts that service to load them. Analytics identifiers and any consent requirements remain pending review; no analytics service is enabled by this frontend.</p>
+                    <p>The notice must be updated to reflect the actual service before launch. This page is excluded from indexing while those details remain unresolved.</p>
+                </div>
             </section>
-            <a href="{{ route('contact.show') }}" class="inner-link">Back to the inquiry page ↗</a>
+
+            <x-inner.button :href="route('contact.show')" variant="link">Back to the inquiry page</x-inner.button>
         </div>
     </div>
-</div>
+</x-inner.band>
 @endsection
