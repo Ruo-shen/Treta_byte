@@ -8,15 +8,10 @@
 <x-inner.header variant="editorial" kicker="The journal" lede="Notes on websites, systems, and the practical work of keeping technology useful.">
     <x-slot:title>A little clarity<br><span class="text-moss">goes a long way.</span></x-slot:title>
     @if($categories->isNotEmpty())
-        <nav aria-label="Categories">
-            <div class="no-scrollbar -mx-5 flex gap-2 overflow-x-auto px-5 sm:mx-0 sm:flex-wrap sm:overflow-visible sm:px-0">
-                @php $chip = 'inline-flex min-h-11 shrink-0 items-center rounded-full border px-5 text-[15px] transition-colors'; @endphp
-                <a href="{{ route('blog.index') }}" @if(!$activeCategory) aria-current="page" @endif class="{{ $chip }} {{ !$activeCategory ? 'border-ink bg-ink text-white' : 'border-ink/20 bg-white hover:border-ink/50' }}">All</a>
-                @foreach($categories as $category)
-                    <a href="{{ route('blog.index', ['category' => $category->slug]) }}" @if($activeCategory?->is($category)) aria-current="page" @endif class="{{ $chip }} {{ $activeCategory?->is($category) ? 'border-ink bg-ink text-white' : 'border-ink/20 bg-white hover:border-ink/50' }}">{{ $category->name }}</a>
-                @endforeach
-            </div>
-        </nav>
+        <x-inner.chips label="Categories" :items="array_merge(
+            [['All', route('blog.index'), ! $activeCategory]],
+            $categories->map(fn ($category) => [$category->name, route('blog.index', ['category' => $category->slug]), (bool) $activeCategory?->is($category)])->all(),
+        )" />
     @endif
 </x-inner.header>
 
@@ -38,7 +33,7 @@
                 @if($featuredImage)
                     <img src="{{ $featuredImage['url'] }}" alt="{{ $featured->featured_image_alt }}" width="{{ $featuredImage['width'] }}" height="{{ $featuredImage['height'] }}" class="aspect-[16/10] h-auto w-full rounded-[14px] border border-line bg-soft object-cover">
                 @else
-                    <div class="relative aspect-[16/10] overflow-hidden rounded-[14px] bg-[#e4e8df] p-6 sm:p-8" aria-hidden="true">
+                    <div class="relative aspect-[16/10] overflow-hidden rounded-[14px] bg-mist p-6 sm:p-8" aria-hidden="true">
                         <svg class="pointer-events-none absolute bottom-0 right-0 h-[80%] w-auto" viewBox="0 0 360 340" fill="none" preserveAspectRatio="xMaxYMax meet"><path d="M10 340 A170 170 0 0 1 340 160" stroke="#4c6656" stroke-opacity="0.35" /><path d="M145 340 V30 H250 V168 H360" stroke="#4c6656" stroke-opacity="0.35" /><rect x="250" y="0" width="30" height="30" fill="#315ceb" /></svg>
                         <p class="relative font-mono text-[12px] uppercase tracking-[0.16em] text-moss">{{ $featured->category?->name ?? 'The journal' }}</p>
                         <p class="relative mt-6 text-[clamp(3.5rem,9vw,6rem)] font-light leading-none tracking-[-0.05em] text-ink/80">{{ $featured->published_at->format('j M') }}</p>
@@ -56,6 +51,7 @@
             </article>
         @endif
         @if($rest->isNotEmpty())
+            @unless($featured)<h2 class="sr-only">Articles</h2>@endunless
             <ul class="{{ $featured ? 'mt-14 border-t border-ink/15 pt-12' : '' }} grid gap-x-6 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
                 @foreach($rest as $post)
                     <li>@include('blog._card')</li>

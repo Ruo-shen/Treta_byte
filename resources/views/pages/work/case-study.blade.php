@@ -34,14 +34,10 @@
                 </dl>
             @endif
             @if($chapters)
-                <nav aria-label="Case study sections" class="mt-6 border-t border-line pt-5">
+                <div class="mt-6 border-t border-line pt-5">
                     <p class="hidden font-mono text-[12px] uppercase tracking-[0.14em] text-muted lg:block">Inside the project</p>
-                    <div class="no-scrollbar -mx-5 flex gap-2 overflow-x-auto px-5 sm:-mx-8 sm:px-8 lg:mx-0 lg:mt-3 lg:flex-col lg:gap-0 lg:overflow-visible lg:px-0">
-                        @foreach($chapters as $chapter)
-                            <a href="#{{ $chapter['id'] }}" class="inline-flex min-h-11 shrink-0 items-center rounded-full border border-line bg-white px-4 text-[15px] hover:border-ink/40 lg:rounded-none lg:border-0 lg:border-b lg:bg-transparent lg:px-0">{{ $chapter['title'] }}</a>
-                        @endforeach
-                    </div>
-                </nav>
+                    <x-inner.chips stack label="Case study sections" class="lg:mt-3" :items="collect($chapters)->map(fn ($chapter) => [$chapter['title'], '#'.$chapter['id'], false])->all()" />
+                </div>
             @endif
             @if($service)
                 <x-inner.button :href="route('services.show', $project['service'])" variant="link" class="mt-4">Explore the related service</x-inner.button>
@@ -72,7 +68,7 @@
                         <ul class="mt-6 max-w-[680px] space-y-3">
                             @foreach($chapter['points'] as $point)
                                 <li class="flex gap-4 text-[17px] leading-[1.5]">
-                                    <span class="mt-0.5 grid h-6 w-6 shrink-0 place-items-center rounded-[5px] border border-moss/50 text-moss" aria-hidden="true"><svg viewBox="0 0 12 12" class="h-3 w-3" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2.5 6.5l2.2 2.2L9.5 3.5" /></svg></span>{{ $point }}
+                                    <span class="mt-0.5 grid h-6 w-6 shrink-0 place-items-center rounded-[5px] border border-moss/50 text-moss" aria-hidden="true"><x-inner.check /></span>{{ $point }}
                                 </li>
                             @endforeach
                         </ul>
@@ -102,7 +98,7 @@
             <ul class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
                 @foreach($project['outcomes'] as $outcome)
                     <li class="flex gap-4 rounded-[12px] border border-line bg-white p-5 text-[17px] leading-[1.5]">
-                        <span class="mt-0.5 grid h-6 w-6 shrink-0 place-items-center rounded-full bg-moss/10 text-moss" aria-hidden="true"><svg viewBox="0 0 12 12" class="h-3 w-3" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2.5 6.5l2.2 2.2L9.5 3.5" /></svg></span>{{ $outcome }}
+                        <span class="mt-0.5 grid h-6 w-6 shrink-0 place-items-center rounded-full bg-moss/10 text-moss" aria-hidden="true"><x-inner.check /></span>{{ $outcome }}
                     </li>
                 @endforeach
             </ul>
@@ -111,6 +107,6 @@
 </article>
 
 <x-inner.cta kicker="A similar challenge?" label="Tell us about your project" body="Start with what you know. We’ll ask the useful questions.">
-    <x-slot:heading>Your situation will be different.<br><span class="text-[#a7b3a6]">Let’s understand it.</span></x-slot:heading>
+    <x-slot:heading>Your situation will be different.<br><span class="text-sage">Let’s understand it.</span></x-slot:heading>
 </x-inner.cta>
 @endsection

@@ -81,12 +81,19 @@ let scrolled = false
 const syncHeader = () =>
   header?.toggleAttribute("data-compact", scrolled && !!menu?.hidden)
 
+// While the full-screen menu is open the page behind it must not be reachable by keyboard or screen reader.
+const setPageInert = (inert: boolean) =>
+  document
+    .querySelectorAll<HTMLElement>("main, footer")
+    .forEach((element) => (element.inert = inert))
+
 function closeMenu(restoreFocus = false) {
   if (!toggle || !menu) return
   menu.hidden = true
   toggle.setAttribute("aria-expanded", "false")
   toggle.setAttribute("aria-label", "Open menu")
   header?.removeAttribute("data-open")
+  setPageInert(false)
   lenis?.start()
   syncHeader()
   if (restoreFocus) toggle.focus()
@@ -99,8 +106,11 @@ toggle?.addEventListener("click", () => {
   toggle.setAttribute("aria-expanded", String(open))
   toggle.setAttribute("aria-label", open ? "Close menu" : "Open menu")
   header?.toggleAttribute("data-open", open)
-  if (open) lenis?.stop()
-  else lenis?.start()
+  setPageInert(open)
+  if (open) {
+    lenis?.stop()
+    menu.querySelector<HTMLElement>("a")?.focus()
+  } else lenis?.start()
   syncHeader()
 })
 menu?.addEventListener("click", (event) => {
@@ -179,3 +189,6 @@ document
       }
     })
   })
+
+// After a server-side form response, move focus to the alert summary or the success receipt.
+document.querySelector<HTMLElement>("[data-focus-on-load]")?.focus()

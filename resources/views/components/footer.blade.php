@@ -6,7 +6,7 @@
 <p class="mt-9 text-[17px] leading-[1.55] text-ink/75 max-md:mt-2 max-md:text-[15px]">Technology should work for you.<br>Independent digital solutions studio.</p>
 </div>
 <nav aria-label="Studio">
-<p class="text-[11px] font-medium uppercase tracking-[0.42em] text-ink/60 max-md:hidden">Studio</p>
+<p class="text-[11px] font-medium uppercase tracking-[0.42em] text-ink/60 max-md:sr-only">Studio</p>
 <ul class="mt-7 space-y-[14px] max-md:mt-0 max-md:grid max-md:space-y-0 max-md:grid-cols-3">
 <li>
 <a href="/services" class="text-[17px] text-ink/85 transition-colors hover:text-accent max-md:flex max-md:min-h-11 max-md:items-center max-md:text-[15px]">Services</a>
@@ -29,7 +29,7 @@
 </ul>
 </nav>
 <nav aria-label="Services">
-<p class="text-[11px] font-medium uppercase tracking-[0.42em] text-ink/60 max-md:hidden">Services</p>
+<p class="text-[11px] font-medium uppercase tracking-[0.42em] text-ink/60 max-md:sr-only">Services</p>
 <ul class="mt-7 space-y-[14px] max-md:mt-0 max-md:grid max-md:space-y-0 max-md:grid-cols-2">
 <li>
 <a href="/services/web-development" class="text-[17px] text-ink/85 transition-colors hover:text-accent max-md:flex max-md:min-h-11 max-md:items-center max-md:text-[15px]">Web development</a>
@@ -46,7 +46,7 @@
 </ul>
 </nav>
 <div>
-<p class="text-[11px] font-medium uppercase tracking-[0.42em] text-ink/60 max-md:hidden">Get in touch</p>
+<p class="text-[11px] font-medium uppercase tracking-[0.42em] text-ink/60 max-md:sr-only">Get in touch</p>
 <a href="/contact" class="mt-7 block text-[17px] text-ink/85 hover:text-accent max-md:hidden">Start a conversation ↗</a>
 <p class="mt-[14px] text-[17px] text-muted max-md:mt-0 max-md:inline max-md:text-[15px]">Based in Nepal.</p>
 <p class="mt-[14px] text-[17px] text-muted max-md:mt-0 max-md:inline max-md:text-[15px]">Working worldwide.</p>

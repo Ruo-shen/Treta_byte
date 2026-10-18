@@ -8,7 +8,7 @@
         <input id="website" name="website" tabindex="-1" autocomplete="off" value="">
     </div>
     @if($errors->any())
-        <div role="alert" tabindex="-1" class="flex flex-wrap items-center gap-x-3 gap-y-1 rounded-[10px] border border-danger/40 bg-[#fdf6f4] px-4 py-3 text-[15px] text-danger">
+        <div role="alert" tabindex="-1" data-focus-on-load class="flex flex-wrap items-center gap-x-3 gap-y-1 rounded-[10px] border border-danger/40 bg-[#fdf6f4] px-4 py-3 text-[15px] text-danger">
             <p class="font-medium">Please check:</p>
             <ul class="flex flex-wrap gap-x-4">
                 @foreach($errors->keys() as $field)
@@ -44,7 +44,7 @@
         <label for="topic" class="mb-2 block text-[15px] font-medium">What do you need? <span aria-hidden="true">*</span></label>
         <select id="topic" name="topic" class="field" required @error('topic') aria-invalid="true" aria-describedby="topic-error" @enderror>
             @foreach($topics as $value => $label)
-                <option value="{{ $value }}" @selected(old('topic', request('topic', 'general')) === $value)>{{ $label }}</option>
+                <option value="{{ $value }}" @selected(old('topic', array_key_exists((string) request('topic'), $topics) ? request('topic') : 'general') === $value)>{{ $label }}</option>
             @endforeach
         </select>
         @error('topic')
