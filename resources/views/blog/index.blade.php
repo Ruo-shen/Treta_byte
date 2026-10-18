@@ -43,7 +43,7 @@
                 <div>
                     <p class="font-mono text-[12px] uppercase leading-relaxed tracking-[0.14em] text-muted">Latest · @if($featured->category){{ $featured->category->name }} · @endif<time datetime="{{ $featured->published_at->toDateString() }}">{{ $featured->published_at->format('j M Y') }}</time> · {{ $featured->reading_time }} min read</p>
                     <h2 class="mt-4 text-[clamp(1.9rem,4.5vw,3rem)] font-medium leading-[1.08] tracking-[-0.035em]">
-                        <a href="{{ route('blog.show', $featured->slug) }}" class="after:absolute after:inset-0 after:content-['']">{{ $featured->title }}</a>
+                        <a href="{{ route('blog.show', $featured->slug) }}" class="flex min-h-11 items-center after:absolute after:inset-0 after:content-['']">{{ $featured->title }}</a>
                     </h2>
                     <p class="mt-4 max-w-[560px] text-[17px] leading-[1.65] text-muted">{{ $featured->excerpt }}</p>
                     <p class="mt-5 inline-flex min-h-11 items-center gap-2 text-[15px] font-medium" aria-hidden="true">Read the article <span class="text-accent">↗</span></p>
