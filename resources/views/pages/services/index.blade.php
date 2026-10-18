@@ -53,5 +53,7 @@
     ]" />
 </x-inner.band>
 
-<x-inner.cta kicker="Start a conversation" label="Help me find a starting point" body="Tell us what’s going on. We’ll reply with honest next steps — even if that means pointing you elsewhere." />
+<x-inner.cta label="Help me find a starting point" body="Start with what you know. We’ll ask the useful questions.">
+    <x-slot:heading>Same team.<br><span class="text-[#a7b3a6]">Different starting points.</span></x-slot:heading>
+</x-inner.cta>
 @endsection

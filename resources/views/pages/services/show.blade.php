@@ -36,5 +36,15 @@
     </x-inner.band>
 @endif
 
-<x-inner.cta label="Discuss {{ strtolower($service['name']) }}" :href="route('contact.show', ['topic' => $service['pillar']])" body="Start with what you know. We’ll ask the useful questions." />
+@php
+    $closing = [
+        'website-repair' => ['What’s happening?', 'An error message helps. So does “the form stopped sending on Tuesday.”'],
+        'web-development' => ['Clarity before decoration.', 'Start with what you know. We’ll ask the useful questions.'],
+        'web-applications' => ['The best feature might be one less step.', 'Start with what you know. We’ll ask the useful questions.'],
+        'website-maintenance' => ['Quiet work. Visible responsibility.', 'Start with what you know. We’ll ask the useful questions.'],
+    ][$slug];
+@endphp
+<x-inner.cta label="Discuss {{ strtolower($service['name']) }}" :href="route('contact.show', ['topic' => $service['pillar']])" :body="$closing[1]">
+    <x-slot:heading>{{ $closing[0] }}</x-slot:heading>
+</x-inner.cta>
 @endsection
