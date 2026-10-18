@@ -14,7 +14,7 @@
 @endphp
 @if($variant === 'editorial')
     <header {{ $attributes->class('overflow-x-clip bg-soft pt-[72px]') }}>
-        <div class="{{ $shell }} py-14 sm:py-20 lg:py-28">
+        <div class="{{ $shell }} py-12 sm:py-20 lg:py-28">
             @if($kicker)<x-inner.kicker>{{ $kicker }}</x-inner.kicker>@endif
             <h1 class="{{ $h1 }} mt-6 max-w-[1100px] sm:text-[clamp(3rem,7vw,6.2rem)]">{{ $title }}</h1>
             <div class="mt-10 grid gap-8 border-t border-ink/15 pt-8 lg:grid-cols-[1.2fr_0.8fr] lg:gap-16">
@@ -28,13 +28,13 @@
     <header {{ $attributes->class('overflow-x-clip bg-paper pt-[72px]') }}>
         <div class="{{ $dark ? 'on-dark mx-3 overflow-hidden rounded-[16px] bg-dark text-white sm:mx-5' : '' }}">
             <div class="{{ $shell }} grid gap-12 py-12 sm:py-16 lg:grid-cols-[1.1fr_0.9fr] lg:items-center lg:gap-16 lg:py-24">
-                <div>
+                <div class="min-w-0">
                     @if($kicker)<x-inner.kicker :dark="$dark">{{ $kicker }}</x-inner.kicker>@endif
                     <h1 class="{{ $h1 }} mt-6">{{ $title }}</h1>
                     @if($lede)<p class="{{ $ledeClass }} mt-6 max-w-[580px] sm:mt-7">{{ $lede }}</p>@endif
                     @isset($actions)<div class="mt-8 flex flex-wrap items-center gap-x-8 gap-y-4">{{ $actions }}</div>@endisset
                 </div>
-                @if($slot->isNotEmpty())<div>{{ $slot }}</div>@endif
+                @if($slot->isNotEmpty())<div class="min-w-0">{{ $slot }}</div>@endif
             </div>
         </div>
     </header>

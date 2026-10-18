@@ -11,7 +11,7 @@
             <span class="h-2.5 w-2.5 rounded-full {{ $dark ? 'bg-white/20' : 'bg-ink/15' }}"></span>
             <span class="h-2.5 w-2.5 rounded-full {{ $dark ? 'bg-white/20' : 'bg-ink/15' }}"></span>
         </span>
-        @if($label)<span class="truncate">{{ $label }}</span>@endif
+        @if($label)<span class="min-w-0 truncate">{{ $label }}</span>@endif
     </div>
     <div class="p-5 sm:p-7">{{ $slot }}</div>
 </div>
