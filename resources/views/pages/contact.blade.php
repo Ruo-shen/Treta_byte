@@ -1,27 +1,9 @@
 @extends('layouts.app')
 @section('content')
-@include('components.page-intro', ['eyebrow' => 'Start a conversation', 'heading' => 'Tell us what’s going on.', 'intro' => 'A broken website, an idea for something new, or a system that needs care. You don’t need a technical brief to get started.'])
-<section class="mx-auto grid max-w-[1320px] gap-12 px-5 py-16 sm:px-8 sm:py-24 lg:grid-cols-[0.8fr_1.2fr] lg:gap-24 lg:px-12">
-    <aside><p class="font-hand text-[28px] text-moss">Start with the problem.<br>We’ll take it from there.</p><h2 class="mt-9 text-[25px] font-medium">A useful first conversation.</h2><p class="mt-4 max-w-[350px] text-[17px] leading-relaxed text-muted">Tell us what you’re trying to do, what’s getting in the way, and any timing that matters. Please leave out passwords and sensitive information.</p><a href="/privacy" class="mt-7 inline-flex min-h-11 items-center border-b border-ink/30 text-[15px]">How inquiry information is handled</a></aside>
-    <div>
-        @if(session('inquiry_sent'))
-        <div role="status" class="mb-8 rounded-xl border border-moss/25 bg-sage/20 p-6"><h2 class="text-[25px] font-medium">Thanks for telling us.</h2><p class="mt-3 leading-relaxed">Your inquiry has been received. We’ll be in touch using the email you provided.</p></div>
-        @endif
-        @if($errors->any())
-        <div role="alert" tabindex="-1" class="mb-8 rounded-xl border border-[#a63326]/30 bg-white p-6"><h2 class="text-[22px] font-medium">A few details need attention.</h2><ul class="mt-4 list-disc space-y-2 pl-5">@foreach($errors->all() as $message)<li>{{ $message }}</li>@endforeach</ul></div>
-        @endif
-        <form method="POST" action="{{ route('contact.store') }}" data-inquiry-form class="space-y-7">
-            @csrf
-            <div class="grid gap-7 sm:grid-cols-2">
-                <div><label for="name" class="mb-2 block text-[15px]">Name <span aria-hidden="true">*</span></label><input id="name" class="field" name="name" value="{{ old('name') }}" autocomplete="name" maxlength="255" required @error('name') aria-invalid="true" aria-describedby="name-error" @enderror>@error('name')<p id="name-error" class="mt-2 text-[14px] text-[#a63326]">{{ $message }}</p>@enderror</div>
-                <div><label for="email" class="mb-2 block text-[15px]">Email <span aria-hidden="true">*</span></label><input id="email" class="field" name="email" type="email" value="{{ old('email') }}" autocomplete="email" maxlength="255" required @error('email') aria-invalid="true" aria-describedby="email-error" @enderror>@error('email')<p id="email-error" class="mt-2 text-[14px] text-[#a63326]">{{ $message }}</p>@enderror</div>
-            </div>
-            <div><label for="company" class="mb-2 block text-[15px]">Company <span class="text-muted">(optional)</span></label><input id="company" class="field" name="company" value="{{ old('company') }}" autocomplete="organization" maxlength="255" @error('company') aria-invalid="true" aria-describedby="company-error" @enderror>@error('company')<p id="company-error" class="mt-2 text-[14px] text-[#a63326]">{{ $message }}</p>@enderror</div>
-            <div><label for="topic" class="mb-2 block text-[15px]">What do you need? <span aria-hidden="true">*</span></label><select id="topic" name="topic" class="field" required @error('topic') aria-invalid="true" aria-describedby="topic-error" @enderror>@foreach($topics as $value => $label)<option value="{{ $value }}" @selected(old('topic', request('topic', 'general')) === $value)>{{ $label }}</option>@endforeach</select>@error('topic')<p id="topic-error" class="mt-2 text-[14px] text-[#a63326]">{{ $message }}</p>@enderror</div>
-            <div><label for="message" class="mb-2 block text-[15px]">Tell us a little more <span aria-hidden="true">*</span></label><textarea id="message" name="message" rows="7" class="field resize-y" required maxlength="10000" @error('message') aria-invalid="true" aria-describedby="message-error" @enderror>{{ old('message') }}</textarea>@error('message')<p id="message-error" class="mt-2 text-[14px] text-[#a63326]">{{ $message }}</p>@enderror</div>
-            <p class="text-[14px] text-muted">Fields marked * are required. Read our <a href="/privacy" class="underline underline-offset-4">privacy information</a> before sending.</p>
-            <button type="submit" class="inline-flex min-h-[52px] items-center gap-8 rounded-lg bg-ink px-7 py-3 text-white hover:bg-accent disabled:cursor-wait disabled:opacity-60">Send inquiry <span aria-hidden="true">↗</span></button>
-        </form>
-    </div>
-</section>
+<div class="inner-site contact-page"><section class="inner-shell contact-layout"><div class="contact-letter"><p class="kicker">Contact / Start with the problem</p><h1 class="inner-title">Tell us where<br>it gets <span class="text-moss">stuck.</span></h1><p class="inner-lede">A website that keeps breaking. A new idea. Too much work in too many places. A few details are enough to start.</p><div class="contact-next"><p class="hand-note">No perfect brief required.</p><h2>What happens next?</h2><ol><li><span>01</span>We read what you’ve shared.</li><li><span>02</span>We ask any useful follow-up questions.</li><li><span>03</span>We discuss a sensible next step.</li></ol><p>A conversation comes before a commitment.</p></div></div><div class="inquiry-paper">
+@if(session('inquiry_sent'))<div class="inquiry-receipt" role="status"><span class="receipt-check" aria-hidden="true">✓</span><p class="kicker">Inquiry received</p><h2>Your note<br>made it through.</h2><p>Thanks for explaining what’s going on. We’ll use the email you provided to follow up.</p><div class="receipt-line"><span>Next step</span><b>A conversation about the work</b></div><a class="inner-link" href="{{ route('services.index') }}">Explore what we do ↗</a><a class="inner-link" href="{{ route('contact.show') }}">Send another inquiry</a></div>
+@else<div class="paper-heading"><span class="kicker">A note to TRETA Lab</span><span aria-hidden="true">↗</span></div><h2 class="sr-only">Send an inquiry</h2>@if($errors->any())<div class="form-errors" role="alert" tabindex="-1"><h3>A few details need attention.</h3><ul>@foreach($errors->getMessages() as $field => $messages)<li><a href="#{{ $field }}">{{ $messages[0] }}</a></li>@endforeach</ul></div>@endif
+@include('components.inquiry-form')
+@endif
+</div></section><div class="inner-shell contact-care"><span class="kicker">A small note on privacy</span><p>Only share what helps us understand the request. Please don’t include passwords, payment information or other sensitive details.</p><a href="{{ route('privacy') }}" class="inner-link">Read the privacy information ↗</a></div></div>
 @endsection
