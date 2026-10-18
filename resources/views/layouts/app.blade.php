@@ -42,6 +42,10 @@
     <a class="skip-link" href="#main-content">Skip to content</a>
     @include('components.header')
     <main id="main-content" tabindex="-1">@yield('content')</main>
-    @include('components.footer')
+    @hasSection('footer-variant')
+        @include('components.footer-next')
+    @else
+        @include('components.footer')
+    @endif
 </body>
 </html>

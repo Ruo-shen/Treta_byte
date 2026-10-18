@@ -1,4 +1,5 @@
 @extends('layouts.app')
+@section('footer-variant', 'next')
 @section('content')
 @include('pages.services.details.'.$slug)
 
@@ -35,6 +36,8 @@
         @endforeach
     </x-inner.band>
 @endif
+
+<x-inner.faq :group="'services.'.$slug" tone="soft" />
 
 @php
     $closing = [

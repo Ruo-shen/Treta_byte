@@ -1,4 +1,5 @@
 @extends('layouts.app')
+@section('footer-variant', 'next')
 @section('content')
 <x-inner.header variant="split" kicker="About / A small, senior studio" lede="Technology should work for you. Not the other way around. TRETA exists to make that a practical commitment.">
     <x-slot:title>Three friends.<br>Different skills.<br><span class="text-moss">One responsibility.</span></x-slot:title>
@@ -47,6 +48,8 @@
         </div>
     </x-inner.band>
 @endif
+
+<x-inner.trust />
 
 <x-inner.cta label="Let’s talk" body="Tell us what you’re working on.">
     <x-slot:heading>Good collaboration starts<br><span class="text-sage">with a conversation.</span></x-slot:heading>

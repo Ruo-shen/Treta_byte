@@ -17,15 +17,15 @@
         ['Support', '3 open', 'Avg. reply 1.2h', 'M4 5h16v11H9l-5 4z'],
     ];
     $pill = 'shrink-0 rounded-md px-2 py-[3px] text-[12px]';
-    $card = 'rounded-[14px] bg-white shadow-[0_24px_48px_-28px_rgba(23,25,27,0.28)] ring-1 ring-ink/[0.05]';
+    $card = 'hn-card';
     $arrow = '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" class="h-4 w-4 transition-transform group-hover:translate-x-0.5" aria-hidden="true"><path d="M2.5 8h11M9 3.5L13.5 8 9 12.5" /></svg>';
 @endphp
-<section id="services" class="scroll-mt-16 overflow-x-clip bg-paper py-14 sm:py-[60px]">
+<section id="services" class="hn-seam scroll-mt-16 overflow-x-clip bg-paper py-14 sm:py-20 lg:py-24">
     <div class="mx-auto w-full max-w-[1260px] px-5 sm:px-8">
         <div class="grid gap-10 lg:grid-cols-2 lg:gap-8">
             <div class="reveal">
                 <x-inner.kicker>Services</x-inner.kicker>
-                <h2 class="mt-6 text-[clamp(2.3rem,6vw,3.6rem)] font-semibold leading-[1.02] tracking-[-0.05em] lg:mt-9">Three disciplines. <span class="text-ink/45">One accountable team.</span></h2>
+                <h2 class="mt-6 hn-h2 lg:mt-9">Three disciplines. <span class="text-ink/45">One accountable team.</span></h2>
                 <p class="mt-6 max-w-[470px] text-[16.5px] leading-[1.45] text-muted lg:mt-7">Engage us for a single fix, a full build, or ongoing care. Same team, same standards, from quick wins to long-term partnerships.</p>
             </div>
             {{-- 01 Fix --}}

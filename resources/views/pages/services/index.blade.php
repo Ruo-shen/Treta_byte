@@ -1,4 +1,5 @@
 @extends('layouts.app')
+@section('footer-variant', 'next')
 @section('content')
 @php
     $pillars = [
@@ -44,7 +45,9 @@
     </div>
 </x-inner.band>
 
-<x-inner.band tone="soft" kicker="Before we begin">
+<x-inner.engagement />
+
+<x-inner.band kicker="Before we begin">
     <x-slot:heading>A conversation.<br>Then a clear scope.</x-slot:heading>
     <x-inner.facts layout="grid" :items="[
         ['01 / Talk it through', 'The goal, what you already have, and what’s getting in the way.'],
@@ -52,6 +55,8 @@
         ['03 / Know the next step', 'A clear next step, understood before the work starts.'],
     ]" />
 </x-inner.band>
+
+<x-inner.trust />
 
 <x-inner.cta label="Help me find a starting point" body="Start with what you know. We’ll ask the useful questions.">
     <x-slot:heading>Same team.<br><span class="text-sage">Different starting points.</span></x-slot:heading>

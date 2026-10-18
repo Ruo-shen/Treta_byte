@@ -35,3 +35,47 @@
     linear-gradient(to bottom, transparent, #000 8%, #000 90%, transparent);
   mask-composite: intersect;
 }
+
+/* Round 2 polish: one card, one section seam, one h2. */
+.hn-card {
+  border: 1px solid var(--color-line);
+  border-radius: 14px;
+  background: #fff;
+  box-shadow: 0 24px 48px -32px rgb(23 25 27 / 28%);
+  transition:
+    transform 200ms ease,
+    border-color 200ms ease,
+    box-shadow 200ms ease;
+}
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .hn-card:hover {
+    transform: translateY(-2px);
+    border-color: rgb(23 25 27 / 25%);
+    box-shadow: 0 28px 52px -30px rgb(23 25 27 / 34%);
+  }
+}
+.hn-card:focus-within {
+  border-color: rgb(23 25 27 / 35%);
+}
+.hn-card :focus-visible {
+  outline-offset: 3px;
+}
+.hn-seam {
+  position: relative;
+}
+.hn-seam::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: min(1180px, calc(100% - 40px));
+  height: 1px;
+  transform: translateX(-50%);
+  background: linear-gradient(90deg, transparent, var(--color-line) 15%, var(--color-line) 85%, transparent);
+}
+.hn-h2 {
+  font-size: clamp(2.2rem, 5.6vw, 3.3rem);
+  font-weight: 500;
+  line-height: 1.05;
+  letter-spacing: -0.04em;
+}

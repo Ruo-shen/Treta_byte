@@ -6,11 +6,11 @@
         ['Maintain', 'After launch we stay close: monitoring, improving and fixing before small issues become big ones.'],
     ];
 @endphp
-<section id="process" class="scroll-mt-16 bg-paper py-14 sm:py-24">
+<section id="process" class="hn-seam scroll-mt-16 bg-paper py-14 sm:py-20 lg:py-24">
     <div class="mx-auto grid w-full max-w-[1320px] gap-8 px-5 sm:px-8 lg:grid-cols-[1fr_1.5fr] lg:gap-20 lg:px-12">
         <div class="reveal lg:sticky lg:top-28 lg:self-start">
             <x-inner.kicker>Process</x-inner.kicker>
-            <h2 class="mt-5 text-[clamp(2rem,5.5vw,2.9rem)] font-medium leading-[1.04] tracking-[-0.035em]">Clear steps.<br>No surprises.</h2>
+            <h2 class="mt-5 hn-h2">Clear steps.<br>No surprises.</h2>
             <p class="mt-5 max-w-[380px] text-[16px] leading-[1.6] text-muted">Every engagement follows the same honest rhythm, whether it's a two-day fix or a two-year partnership.</p>
         </div>
         <ol class="border-t border-line">

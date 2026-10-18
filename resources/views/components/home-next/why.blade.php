@@ -9,10 +9,10 @@
     ];
 @endphp
 <section class="on-dark relative overflow-x-clip bg-[#141517] text-white">
-    <div class="relative mx-auto grid w-full max-w-[1440px] gap-10 px-5 py-14 sm:px-8 lg:grid-cols-[0.93fr_1.07fr] lg:gap-0 lg:py-[72px] lg:pl-[108px] lg:pr-[64px]">
+    <div class="relative mx-auto grid w-full max-w-[1440px] gap-10 px-5 py-14 sm:px-8 sm:py-20 lg:grid-cols-[0.93fr_1.07fr] lg:gap-0 lg:py-[72px] lg:pl-[108px] lg:pr-[64px]">
         <div class="reveal lg:pb-[300px]">
             <x-inner.kicker dark>Why TRETA exists</x-inner.kicker>
-            <h2 class="mt-6 text-[clamp(2.2rem,6vw,3.15rem)] font-medium leading-[1.05] tracking-[-0.04em] lg:ml-4 lg:mt-8">Technology should<br>work for you.<br><span class="text-[#b7c1b9]">Not the other way around.</span></h2>
+            <h2 class="mt-6 hn-h2 lg:ml-4 lg:mt-8">Technology should<br>work for you.<br><span class="text-[#b7c1b9]">Not the other way around.</span></h2>
             <p class="mt-5 max-w-[520px] text-[17px] leading-[1.6] text-white/75 lg:ml-4">We came together as professionals who kept seeing the same thing: businesses let down by unclear communication, unfinished work and nobody taking responsibility.</p>
             <div class="relative mt-7 lg:ml-4">
                 <a href="#process" class="inline-flex min-h-[48px] items-center gap-3 rounded-md bg-white px-5 text-[15px] text-ink transition-colors hover:bg-paper">Our approach {!! $arrow !!}</a>

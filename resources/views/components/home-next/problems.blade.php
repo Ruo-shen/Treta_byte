@@ -6,12 +6,12 @@
         ['2', 'Nobody responsible<br>for upkeep', 'No updates, no backups and no one to call when something goes wrong — often after a developer has moved on.', '50% 50%', 533],
     ];
 @endphp
-<section id="problems" class="scroll-mt-16 overflow-x-clip bg-paper py-14 sm:py-[72px]">
+<section id="problems" class="hn-seam scroll-mt-16 overflow-x-clip bg-paper py-14 sm:py-20 lg:py-24">
     <div class="mx-auto w-full max-w-[1260px] px-5 sm:px-8">
         <div class="reveal grid gap-5 lg:grid-cols-[1fr_0.8fr] lg:items-end lg:gap-16 lg:pl-[30px]">
             <div>
                 <x-inner.kicker>Problems we solve</x-inner.kicker>
-                <h2 class="mt-5 text-[clamp(2.3rem,6vw,3.4rem)] font-semibold leading-[0.98] tracking-[-0.05em] sm:mt-6">Common problems,<br>practical <span class="text-moss">fixes.</span></h2>
+                <h2 class="mt-5 hn-h2 sm:mt-6">Common problems,<br>practical <span class="text-moss">fixes.</span></h2>
             </div>
             <p class="max-w-[460px] text-[16.5px] leading-[1.6] text-muted">Most businesses do not need more technology. They need the technology they already have to work — reliably, and without constant firefighting.</p>
         </div>
