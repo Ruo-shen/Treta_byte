@@ -40,7 +40,7 @@
                                             <p class="flex items-center gap-3"><span class="grid h-[15px] w-[15px] shrink-0 place-items-center border-[1.5px] border-ink/80"><x-inner.check class="h-2.5 w-2.5" /></span>{{ $line }}</p>
                                         @endforeach
                                     </div>
-                                    <span class="absolute right-[4%] top-[18%] h-[58%] w-[9px] rotate-[18deg] rounded-full bg-gradient-to-r from-[#111] via-[#3a3a3a] to-[#111]"></span>
+                                    <span class="absolute right-[7%] top-[18%] h-[58%] w-[9px] rotate-[18deg] rounded-full bg-gradient-to-r from-[#111] via-[#3a3a3a] to-[#111]"></span>
                                 </div>
                             @else
                                 <div class="{{ $box }} bg-[radial-gradient(100%_100%_at_30%_0%,#3a3b3d,#18191b_70%)]">

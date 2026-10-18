@@ -6,5 +6,5 @@
 @include('components.home-next.why')
 @include('components.home-next.process')
 @include('components.home-next.about')
-@include('components.cta')
+<x-inner.cta />
 @endsection
