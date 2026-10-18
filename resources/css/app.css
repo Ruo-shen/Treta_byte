@@ -1,6 +1,11 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500;600;700&family=Caveat:wght@500&family=JetBrains+Mono:wght@400;500&display=swap');
 @import 'tailwindcss';
 @import 'lenis/dist/lenis.css';
+@import './pages/services.css';
+@import './pages/work.css';
+@import './pages/about.css';
+@import './pages/contact.css';
+@import './pages/blog.css';
+@import './pages/legal.css';
 @source '../views/**/*.blade.php';
 @source '../../config/services.php';
 
@@ -14,6 +19,7 @@
   --color-muted: #64625d;
   --font-sans: 'Inter Tight', ui-sans-serif, system-ui, sans-serif;
   --color-moss: #4c6656;
+  --color-danger: #a63326;
   --font-hand: 'Caveat', cursive;
   --font-mono: 'JetBrains Mono', ui-monospace, monospace;
 }
@@ -120,7 +126,7 @@ html.lenis { scroll-padding-top: 0; }
 .skip-link:focus { transform: none; }
 input, select, textarea { font: inherit; }
 .field { display: block; width: 100%; min-height: 48px; border: 1px solid #86847f; border-radius: 6px; padding: 12px 14px; background: white; }
-.field[aria-invalid=true] { border-color: #a63326; }
+.field[aria-invalid=true] { border-color: var(--color-danger); }
 .article-content { font-size: 18px; line-height: 1.75; overflow-wrap: anywhere; }
 .article-content > * + * { margin-top: 1.4em; }
 .article-content h2 { font-size: 32px; line-height: 1.15; font-weight: 500; letter-spacing: -.025em; }
