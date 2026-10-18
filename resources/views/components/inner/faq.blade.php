@@ -23,7 +23,7 @@
                             <summary class="flex min-h-14 cursor-pointer list-none items-center justify-between gap-6 py-4 text-[18px] font-medium leading-snug tracking-[-0.01em] marker:content-none [&::-webkit-details-marker]:hidden sm:text-[20px]">
                                 <span>{{ $item['q'] }}</span>
                                 <span class="grid h-8 w-8 shrink-0 place-items-center rounded-full ring-1 ring-ink/20 transition-transform group-open:rotate-45" aria-hidden="true">
-                                    <svg viewBox="0 0 12 12" width="12" height="12" class="h-3 w-3" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 1v10M1 6h10" /></svg>
+                                    <x-inner.icon name="plus" class="h-4 w-4" />
                                 </span>
                             </summary>
                             <p class="max-w-[640px] pb-6 text-[16px] leading-[1.65] text-muted sm:text-[17px]">{{ $item['a'] }}</p>

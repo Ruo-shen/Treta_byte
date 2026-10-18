@@ -29,11 +29,11 @@
                 <a href="#process" class="inline-flex min-h-[52px] items-center justify-center gap-2.5 rounded-[8px] bg-white px-6 text-[15.5px] font-medium ring-1 ring-line transition-colors hover:ring-ink/30">Explore our approach <span aria-hidden="true">→</span></a>
             </div>
             <nav aria-label="Our three disciplines" class="mt-5 flex items-center justify-center gap-x-6 font-mono text-[12px] uppercase tracking-[0.16em] text-ink/75">
-                <a href="{{ route('services.show', 'website-repair') }}" class="inline-flex min-h-11 min-w-11 items-center justify-center hover:text-accent">Fix</a>
+                <a href="{{ route('services.show', 'website-repair') }}" class="inline-flex min-h-11 min-w-11 items-center justify-center hover:text-accent"><x-inner.icon name="fix" class="mr-1.5 h-4 w-4" />Fix</a>
                 <span aria-hidden="true" class="text-ink/30">/</span>
-                <a href="{{ route('services.show', 'web-development') }}" class="inline-flex min-h-11 min-w-11 items-center justify-center hover:text-accent">Build</a>
+                <a href="{{ route('services.show', 'web-development') }}" class="inline-flex min-h-11 min-w-11 items-center justify-center hover:text-accent"><x-inner.icon name="build" class="mr-1.5 h-4 w-4" />Build</a>
                 <span aria-hidden="true" class="text-ink/30">/</span>
-                <a href="{{ route('services.show', 'website-maintenance') }}" class="inline-flex min-h-11 min-w-11 items-center justify-center hover:text-accent">Care</a>
+                <a href="{{ route('services.show', 'website-maintenance') }}" class="inline-flex min-h-11 min-w-11 items-center justify-center hover:text-accent"><x-inner.icon name="care" class="mr-1.5 h-4 w-4" />Care</a>
             </nav>
             <div aria-hidden="true" class="mt-6 flex items-center justify-center gap-5 xl:hidden">
                 <x-inner.note :tape="false" tilt="left" class="!px-4 !py-3 text-left !text-[18px] !leading-[1.15]">Broken website?<br>Need support?</x-inner.note>

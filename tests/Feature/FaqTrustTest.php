@@ -86,4 +86,16 @@ class FaqTrustTest extends TestCase
         $this->get('/')->assertOk()->assertDontSee('on-footer-next', false);
         $this->get('/about')->assertOk()->assertSee('on-footer-next', false);
     }
+
+    public function test_icons_are_decorative_by_default_and_engagement_ships_default_art(): void
+    {
+        $this->assertStringContainsString('aria-hidden="true"', Blade::render('<x-inner.icon name="fix" />'));
+        $this->assertStringContainsString('aria-label="Mail"', Blade::render('<x-inner.icon name="mail" title="Mail" />'));
+
+        $html = Blade::render('<x-inner.engagement />');
+        $this->assertSame(3, substr_count($html, 'viewBox="0 0 200 96"'));
+        $custom = Blade::render('<x-inner.engagement :art="$art" />', ['art' => ['project' => '<svg data-custom="1"></svg>']]);
+        $this->assertStringContainsString('data-custom="1"', $custom);
+        $this->assertSame(2, substr_count($custom, 'viewBox="0 0 200 96"'));
+    }
 }

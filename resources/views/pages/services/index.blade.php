@@ -22,7 +22,7 @@
             @php $items = array_filter($services, fn ($s) => $s['pillar'] === $pillar); $solo = count($items) === 1; @endphp
             <div class="grid gap-8 border-t border-ink/15 py-8 sm:py-10 lg:grid-cols-[0.75fr_1.25fr] lg:gap-14 lg:py-14">
                 <div>
-                    <p class="font-mono text-[12px] uppercase tracking-[0.14em] text-accent">{{ $index }}</p>
+                    <p class="flex items-center gap-2.5 font-mono text-[12px] uppercase tracking-[0.14em] text-accent"><x-inner.icon :name="$pillar" class="h-5 w-5" />{{ $index }}</p>
                     <h3 class="mt-4 text-[clamp(1.7rem,4vw,2.4rem)] font-medium leading-[1.1] tracking-[-0.03em]">{{ $question }}</h3>
                     <p class="mt-4 max-w-[420px] text-[16px] leading-[1.6] text-muted">{{ $blurb }}</p>
                 </div>
