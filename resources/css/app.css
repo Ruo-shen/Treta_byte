@@ -100,7 +100,20 @@ body {
 [hidden] { display: none !important; }
 :focus-visible { outline: 2px solid var(--color-accent); outline-offset: 5px; }
 html { scroll-padding-top: 88px; }
-header[data-scrolled], header[data-open] { border-color: var(--color-line); background: color-mix(in srgb, var(--color-paper) 94%, transparent); backdrop-filter: blur(12px); }
+.site-header[data-open] { max-height: 100dvh; overflow-y: auto; border-bottom: 1px solid var(--color-line); background: color-mix(in srgb, var(--color-paper) 95%, transparent); backdrop-filter: blur(12px); }
+.header-shell { max-width: 1320px; height: 72px; transform: translateY(0); }
+.site-header[data-compact] .header-shell { max-width: 500px; height: 50px; transform: translateY(10px); padding-inline: 6px; border-color: var(--color-line); background: rgb(255 255 255 / 90%); box-shadow: 0 10px 30px -18px rgb(23 25 27 / 35%); backdrop-filter: blur(12px); }
+.site-header[data-compact] .header-brand { width: 36px; }
+.site-header[data-compact] .header-wordmark { transform: translateX(-8px); opacity: 0; }
+.site-header[data-compact] .header-monogram { scale: 1; opacity: 1; }
+.site-header[data-compact] .header-links a { padding-inline: 10px; font-size: 13.5px; }
+.site-header[data-compact] .header-contact { width: auto; }
+.site-header[data-compact] .header-divider { opacity: 1; }
+.site-header[data-compact] .header-cta { height: 36px; border-radius: 10px; padding-inline: 12px; font-size: 13px; border-color: rgb(49 92 235 / 20%); background: #e6ecfd; color: var(--color-accent); }
+.site-header[data-compact] .header-cta:hover { background: var(--color-accent); color: white; }
+.site-header[data-open] [data-menu-toggle] > span > span:first-child { top: 6px; transform: rotate(45deg); }
+.site-header[data-open] [data-menu-toggle] > span > span:last-child { top: 6px; transform: rotate(-45deg); }
+.about-diagram { aspect-ratio: 1000 / 560; }
 .skip-link { position: fixed; left: 12px; top: 8px; z-index: 100; padding: 12px 18px; background: var(--color-ink); color: white; transform: translateY(-150%); }
 .skip-link:focus { transform: none; }
 input, select, textarea { font: inherit; }

@@ -24,7 +24,7 @@
 <a href="/contact" class="text-[17px] text-ink/85 transition-colors hover:text-accent">Contact</a>
 </li>
 <li>
-<a href="/blog" class="text-[17px] text-ink/85 hover:text-accent">Journal</a>
+<a href="/blog" class="text-[17px] text-ink/85 hover:text-accent">Blog</a>
 </li>
 </ul>
 </nav>
