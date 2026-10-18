@@ -1,11 +1,7 @@
 @import 'tailwindcss';
 @import 'lenis/dist/lenis.css';
-@import './pages/services.css';
-@import './pages/work.css';
-@import './pages/about.css';
 @import './pages/contact.css';
 @import './pages/blog.css';
-@import './pages/legal.css';
 @source '../views/**/*.blade.php';
 @source '../../config/services.php';
 
@@ -17,13 +13,44 @@
   --color-sage: #a7b8ab;
   --color-line: #e5e4df;
   --color-muted: #64625d;
-  --font-sans: 'Inter Tight', ui-sans-serif, system-ui, sans-serif;
+  --font-sans: 'Inter Tight', 'Inter Tight Fallback', ui-sans-serif, system-ui, sans-serif;
   --color-moss: #4c6656;
   --color-danger: #a63326;
   --color-dark: #1b1c1e;
+  --color-mist: #e4e8df;
+  --color-accent-hover: #2a4fd0;
   --color-note: #fbf8ec;
-  --font-hand: 'Caveat', cursive;
-  --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+  --font-hand: 'Caveat', 'Caveat Fallback', cursive;
+  --font-mono: 'JetBrains Mono', 'JetBrains Mono Fallback', ui-monospace, monospace;
+}
+
+/* Metric-matched local fallbacks (measured against the web fonts) so the font swap does not reflow text. */
+@font-face {
+  font-family: 'Inter Tight Fallback';
+  src: local('Arial'), local('Helvetica Neue'), local('Helvetica');
+  size-adjust: 98%;
+  ascent-override: 99%;
+  descent-override: 24.5%;
+  line-gap-override: 0%;
+  unicode-range: U+0020-007E, U+00A0-00FF, U+2013-2014, U+2018-201D, U+2022, U+2026;
+}
+@font-face {
+  font-family: 'JetBrains Mono Fallback';
+  src: local('Courier New'), local('Menlo');
+  size-adjust: 100%;
+  ascent-override: 102%;
+  descent-override: 30%;
+  line-gap-override: 0%;
+  unicode-range: U+0020-007E, U+00A0-00FF, U+2013-2014, U+2018-201D, U+2022, U+2026;
+}
+@font-face {
+  font-family: 'Caveat Fallback';
+  src: local('Comic Sans MS'), local('Segoe Print');
+  size-adjust: 71%;
+  ascent-override: 134%;
+  descent-override: 42%;
+  line-gap-override: 0%;
+  unicode-range: U+0020-007E, U+00A0-00FF, U+2013-2014, U+2018-201D, U+2022, U+2026;
 }
 
 html {
@@ -56,25 +83,6 @@ body {
   transform: none;
 }
 
-@keyframes float-y {
-  0%,
-  100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-6px);
-  }
-}
-.float-y {
-  animation: float-y 5s ease-in-out infinite;
-}
-
-@keyframes spin-slow {
-  to {
-    transform: rotate(360deg);
-  }
-}
-
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
@@ -88,21 +96,8 @@ body {
   }
 }
 
-@keyframes fade-in {
-  from { opacity: 0; transform: translateY(4px); }
-  to { opacity: 1; transform: none; }
-}
-
 .no-scrollbar { scrollbar-width: none; }
 .no-scrollbar::-webkit-scrollbar { display: none; }
-
-@keyframes marquee {
-  from { transform: translateX(0); }
-  to { transform: translateX(-50%); }
-}
-.animate-marquee { animation: marquee 40s linear infinite; }
-.group:hover .animate-marquee { animation-play-state: paused; }
-@media (prefers-reduced-motion: reduce) { .animate-marquee { animation: none; } }
 
 /* Content remains readable when scripts fail. */
 .reveal { opacity: 1; transform: none; }
