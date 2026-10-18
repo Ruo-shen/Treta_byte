@@ -6,7 +6,7 @@ Canonical GitHub repository: [Ruo-shen/treta_labs](https://github.com/Ruo-shen/t
 
 ## Current status
 
-Documentation and workflow are defined. Laravel implementation has not started.
+Frontend (Blade, Tailwind CSS v4, native TypeScript) and backend (Laravel 12, Filament 5) are integrated on `main`. The site is under development and not launched. See [`BACKEND_HANDOFF.md`](BACKEND_HANDOFF.md) for routes, data contracts, environment variables and deploy notes.
 
 The existing Figma Make React project is a visual reference. It is not the production architecture and must be preserved separately during implementation.
 
@@ -43,34 +43,32 @@ Required locally:
 - Node.js and npm
 - SQLite or MySQL
 
-## Expected local commands
+## Active local workspace (Laragon)
 
-The final commands will be confirmed after the Laravel foundation exists. The normal workflow will use:
+All development now happens in `C:\laragon\www\Treta-labs` (a clone of this repository, `main`).
+
+- Site: `http://treta-labs.test` (hosts entry required) or `http://treta-labs.localhost` (no hosts entry needed). The Apache vhost `C:\laragon\etc\apache2\sites-enabled\treta-labs.test.conf` points at `public/` only.
+- Admin: `/admin`. Create staff with `php artisan make:filament-user`; there is no registration.
+- PHP 8.4 (Laragon Apache uses PHP 8.4.23 via FastCGI), MySQL 8.4 database `treta_labs`, mail caught by Mailpit (`http://localhost:8025`).
+
+First-time setup:
 
 ```powershell
 composer install
-Copy-Item .env.example .env
+npm ci
+Copy-Item .env.example .env   # then set APP_URL, DB_* (mysql, treta_labs) and MAIL_* (Mailpit: smtp 127.0.0.1:1025)
 php artisan key:generate
 php artisan migrate
-npm install
-npm run build
+php artisan storage:link
+npm run build                 # or `npm run dev` while editing CSS/JS
 php artisan test
-php artisan serve
 ```
 
-Do not run `composer create-project`, install Filament, or pin framework versions until hosting compatibility has been recorded.
+Node.js is used only locally to build assets; production serves the compiled `public/build`.
 
-## Worktrees
+## History: original worktrees
 
-After the shared foundation commit:
-
-```text
-treta_labs/             main
-treta_labs-frontend/    feat/frontend
-treta_labs-backend/     feat/backend
-```
-
-`main` is used for integration. Codex owns the frontend worktree; Claude owns the backend worktree. See `AGENTS.md` for exact boundaries.
+The frontend and backend were built in separate worktrees under `C:\treta` (`treta_labs` on `main`, `treta_labs-frontend` on `feat/frontend`, `treta_labs-backend` on `feat/backend`, plus `first-backend`). They were merged into `main` and are kept unchanged for reference; do not develop there.
 
 ## Known launch dependencies
 

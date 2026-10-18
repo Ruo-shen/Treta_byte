@@ -33,6 +33,8 @@ Do not add a client portal, customer accounts, payments, CRM, page builder, publ
 
 ## Branches and worktrees
 
+**Active workspace (since 2026-10-18):** `C:\laragon\www\Treta-labs`, a clone on `main` served at `http://treta-labs.test`. Frontend and backend are integrated there; create short-lived feature branches from `main` in that clone. The original `C:\treta` worktrees described below are kept for reference only.
+
 - `main` is integration-only.
 - Codex works in `feat/frontend` using the frontend worktree.
 - Claude works in `feat/backend` using the backend worktree.
