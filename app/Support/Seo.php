@@ -92,7 +92,7 @@ class Seo
         $description = $post->meta_description ?: $post->excerpt;
 
         return [
-            ...self::make($post->seo_title ?: $post->title, $description, null, [
+            ...self::make($post->seo_title ?: $post->title.' — '.config('app.name'), $description, null, [
                 'type' => 'article',
                 'og_image' => $ogImage,
                 'robots' => $preview ? 'noindex,nofollow' : ($post->robots ?: 'index,follow'),

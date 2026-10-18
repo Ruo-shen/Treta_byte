@@ -9,7 +9,7 @@
             <div>
                 <div class="grid grid-cols-7 gap-1.5 sm:gap-2" aria-hidden="true">
                     @foreach(range(1, 28) as $day)
-                        <span class="grid aspect-square place-items-center rounded-[6px] font-mono text-[12px] {{ in_array($day, [4, 11, 18, 25]) ? 'bg-moss text-white' : 'bg-ink/[0.06] text-ink/50' }}">{{ in_array($day, [4, 11, 18, 25]) ? '✓' : sprintf('%02d', $day) }}</span>
+                        <span class="grid aspect-square place-items-center rounded-[6px] font-mono text-[12px] {{ in_array($day, [3, 9, 10, 17, 23]) ? 'bg-moss text-white' : 'bg-ink/[0.06] text-transparent' }}">✓</span>
                     @endforeach
                 </div>
                 <p class="mt-4 font-mono text-[12px] text-muted">Illustration only. Actual scope and timing are agreed together.</p>
@@ -32,7 +32,7 @@
         <ul class="space-y-3">
             @foreach($service['problems'] as $problem)
                 <li class="flex items-start gap-4 rounded-[10px] border border-line bg-white px-5 py-4 text-[17px] leading-[1.45]">
-                    <span class="mt-0.5 grid h-6 w-6 shrink-0 place-items-center rounded-full bg-moss/10 text-moss" aria-hidden="true"><svg viewBox="0 0 12 12" class="h-3 w-3" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2.5 6.5l2.2 2.2L9.5 3.5" /></svg></span>{{ $problem }}
+                    <span class="mt-0.5 grid h-6 w-6 shrink-0 place-items-center rounded-full bg-moss/10 text-moss" aria-hidden="true"><x-inner.check /></span>{{ $problem }}
                 </li>
             @endforeach
         </ul>

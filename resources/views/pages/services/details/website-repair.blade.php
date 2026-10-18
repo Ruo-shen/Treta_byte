@@ -51,7 +51,7 @@
             <ul class="space-y-4 text-[17px]">
                 @foreach(['Access', 'Backups', 'A safe place to test'] as $check)
                     <li class="flex items-center gap-4">
-                        <span class="grid h-6 w-6 place-items-center rounded-[5px] border border-moss/50 text-moss" aria-hidden="true"><svg viewBox="0 0 12 12" class="h-3 w-3" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2.5 6.5l2.2 2.2L9.5 3.5" /></svg></span>{{ $check }}
+                        <span class="grid h-6 w-6 place-items-center rounded-[5px] border border-moss/50 text-moss" aria-hidden="true"><x-inner.check /></span>{{ $check }}
                     </li>
                 @endforeach
             </ul>
