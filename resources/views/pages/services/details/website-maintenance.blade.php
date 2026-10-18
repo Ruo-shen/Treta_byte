@@ -1,59 +1,50 @@
-<section class="inner-shell care-intro">
-    <p class="kicker">Care / Website maintenance</p>
-    <div class="care-heading">
-        <h1 class="inner-title">A little care.<br><span class="text-moss">A lot less uncertainty.</span></h1>
-        <p class="inner-lede">Websites don’t stand still after launch. Updates, small issues and everyday changes need someone to notice — and someone to act.</p>
-    </div>
-    <div class="care-ledger">
-        <div>
-            <p class="kicker">An example care rhythm</p>
-            <p class="hand-note">Quiet work.<br>Visible responsibility.</p>
-        </div>
-        <div class="care-month">
-            <div class="calendar-grid" aria-hidden="true">
-                <span class="">01</span><span class="">02</span><span class="">03</span><span class="calendar-check">✓</span><span class="">05</span><span class="">06</span><span class="">07</span><span class="">08</span><span class="">09</span><span class="">10</span><span class="calendar-check">✓</span><span class="">12</span><span class="">13</span><span class="">14</span><span class="">15</span><span class="">16</span><span class="">17</span><span class="calendar-check">✓</span><span class="">19</span><span class="">20</span><span class="">21</span><span class="">22</span><span class="">23</span><span class="">24</span><span class="calendar-check">✓</span><span class="">26</span><span class="">27</span><span class="">28</span>
+<x-inner.header variant="editorial" kicker="Care / Website maintenance" lede="Websites don’t stand still after launch. Updates, small issues and everyday changes need someone to notice — and someone to act.">
+    <x-slot:title>A little care.<br><span class="text-moss">A lot less uncertainty.</span></x-slot:title>
+    <x-inner.mockup label="care-rhythm / an example month">
+        <div class="grid gap-8 lg:grid-cols-[0.8fr_1.2fr_1fr] lg:items-center lg:gap-10">
+            <div>
+                <p class="font-mono text-[12px] uppercase tracking-[0.14em] text-muted">An example care rhythm</p>
+                <p class="mt-3 font-hand text-[30px] leading-[1.15] text-moss">Quiet work.<br>Visible responsibility.</p>
             </div>
-            <p>Illustration only. Actual scope and timing are agreed together.</p>
+            <div>
+                <div class="grid grid-cols-7 gap-1.5 sm:gap-2" aria-hidden="true">
+                    @foreach(range(1, 28) as $day)
+                        <span class="grid aspect-square place-items-center rounded-[6px] font-mono text-[12px] {{ in_array($day, [4, 11, 18, 25]) ? 'bg-moss text-white' : 'bg-ink/[0.06] text-ink/50' }}">{{ in_array($day, [4, 11, 18, 25]) ? '✓' : sprintf('%02d', $day) }}</span>
+                    @endforeach
+                </div>
+                <p class="mt-4 font-mono text-[12px] text-muted">Illustration only. Actual scope and timing are agreed together.</p>
+            </div>
+            <ul class="space-y-3 text-[16px]">
+                @foreach([['Check', 'Notice changes and risks.'], ['Maintain', 'Update and verify safely.'], ['Improve', 'Make useful small changes.'], ['Report', 'Explain what happened.']] as [$verb, $text])
+                    <li><span class="font-mono text-[13px] uppercase tracking-[0.1em] text-accent">{{ $verb }}</span> <span class="text-muted">{{ $text }}</span></li>
+                @endforeach
+            </ul>
         </div>
-        <ul>
-            <li><span>Check</span> Notice changes and risks.</li>
-            <li><span>Maintain</span> Update and verify safely.</li>
-            <li><span>Improve</span> Make useful small changes.</li>
-            <li><span>Report</span> Explain what happened.</li>
-        </ul>
-    </div>
-</section>
-<section class="inner-shell section-space two-column">
-    <div>
-        <p class="kicker">Clear ownership</p>
-        <h2 class="inner-heading">“Who looks after that?”<br>should have an answer.</h2>
-    </div>
-    <div>
-        <p class="inner-body">A maintenance arrangement starts with understanding the system you have. We agree responsibilities, communication, access and what to do when something needs attention.</p>
-        <ul class="checklist">
+    </x-inner.mockup>
+</x-inner.header>
+
+<x-inner.band kicker="Clear ownership">
+    <div class="grid gap-10 lg:grid-cols-[1fr_1fr] lg:gap-16">
+        <div>
+            <h2 class="text-[clamp(1.9rem,5.5vw,3.2rem)] font-medium leading-[1.1] tracking-[-0.035em]">“Who looks after that?”<br>should have an answer.</h2>
+            <p class="mt-5 max-w-[480px] text-[17px] leading-[1.65] text-muted">A maintenance arrangement starts with understanding the system you have. We agree responsibilities, communication, access and what to do when something needs attention.</p>
+        </div>
+        <ul class="space-y-3">
             @foreach($service['problems'] as $problem)
-                <li>{{ $problem }}</li>
+                <li class="flex items-start gap-4 rounded-[10px] border border-line bg-white px-5 py-4 text-[17px] leading-[1.45]">
+                    <span class="mt-0.5 grid h-6 w-6 shrink-0 place-items-center rounded-full bg-moss/10 text-moss" aria-hidden="true"><svg viewBox="0 0 12 12" class="h-3 w-3" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2.5 6.5l2.2 2.2L9.5 3.5" /></svg></span>{{ $problem }}
+                </li>
             @endforeach
         </ul>
     </div>
-</section>
-<section class="care-agreement section-space">
-    <div class="inner-shell">
-        <p class="kicker">Agree it before you need it</p>
-        <h2 class="inner-heading">A care plan should be clear<br>about its boundaries.</h2>
-        <div class="agreement-columns">
-            <div>
-                <h3>Included work</h3>
-                <p>Which systems, updates and routine tasks are covered.</p>
-            </div>
-            <div>
-                <h3>Communication</h3>
-                <p>How to ask for help and what response arrangements are agreed.</p>
-            </div>
-            <div>
-                <h3>Additional work</h3>
-                <p>How larger changes are scoped, reviewed and approved.</p>
-            </div>
-        </div>
-    </div>
-</section>
+</x-inner.band>
+
+<x-inner.band tone="soft" kicker="Agree it before you need it">
+    <x-slot:heading>A care plan should be clear<br class="hidden sm:inline"> about its boundaries.</x-slot:heading>
+    <x-inner.facts layout="grid" :items="[
+        ['Included work', 'Which systems, updates and routine tasks are covered.'],
+        ['Communication', 'How to ask for help and what response arrangements are agreed.'],
+        ['Additional work', 'How larger changes are scoped, reviewed and approved.'],
+    ]" />
+    <x-inner.placeholder class="mt-10" what="care plan options and response times" />
+</x-inner.band>
