@@ -37,7 +37,7 @@ class AdminResourcesTest extends TestCase
         $post = Post::factory()->create();
         $inquiry = Inquiry::factory()->create();
 
-        foreach (['/admin/posts', '/admin/posts/create', "/admin/posts/{$post->id}/edit", '/admin/categories', '/admin/inquiries', "/admin/inquiries/{$inquiry->id}/edit"] as $url) {
+        foreach (['/admin/posts', '/admin/posts/create', "/admin/posts/{$post->id}/edit", '/admin/categories', '/admin/inquiries', "/admin/inquiries/{$inquiry->id}", "/admin/inquiries/{$inquiry->id}/edit"] as $url) {
             $this->get($url)->assertRedirect('/admin/login');
         }
     }
@@ -48,7 +48,7 @@ class AdminResourcesTest extends TestCase
         $post = Post::factory()->create();
         $inquiry = Inquiry::factory()->create();
 
-        foreach (['/admin/posts', '/admin/posts/create', "/admin/posts/{$post->id}/edit", '/admin/categories', '/admin/inquiries', "/admin/inquiries/{$inquiry->id}/edit"] as $url) {
+        foreach (['/admin/posts', '/admin/posts/create', "/admin/posts/{$post->id}/edit", '/admin/categories', '/admin/inquiries', "/admin/inquiries/{$inquiry->id}", "/admin/inquiries/{$inquiry->id}/edit"] as $url) {
             $this->get($url)->assertOk();
         }
     }
