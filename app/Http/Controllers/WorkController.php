@@ -18,11 +18,9 @@ class WorkController extends Controller
     public function show(string $slug): View
     {
         $project = self::enabledProjects()[$slug] ?? abort(404);
-        $view = 'pages.work.'.$slug;
 
-        abort_unless(view()->exists($view), 404);
-
-        return view($view, [
+        // Every approved project renders through the shared case-study template.
+        return view('pages.work.case-study', [
             'seo' => Seo::make($project['seo_title'] ?? $project['title'], $project['meta_description'] ?? null),
             'slug' => $slug,
             'project' => $project,

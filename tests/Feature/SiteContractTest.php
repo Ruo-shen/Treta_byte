@@ -32,7 +32,7 @@ class SiteContractTest extends TestCase
     {
         $html = $this->get('/contact')->assertOk()->getContent();
 
-        $this->assertMatchesRegularExpression('#<div aria-hidden="true"[^>]*>.*?name="website"[^>]*tabindex="-1"[^>]*autocomplete="off"#s', $html);
+        $this->assertMatchesRegularExpression('#<div[^>]*aria-hidden="true"[^>]*>.*?name="website"[^>]*tabindex="-1"[^>]*autocomplete="off"#s', $html);
         $this->assertStringContainsString('name="name" value="" autocomplete="name" maxlength="100"', $html);
         $this->assertStringContainsString('maxlength="150"', $html);
         $this->assertStringContainsString('maxlength="5000"', $html);
@@ -363,5 +363,21 @@ class SiteContractTest extends TestCase
         $this->assertNotNull($problem('http://tretalab.com', 'production'));
         $this->assertNotNull($problem('https://127.0.0.1', 'production'));
         $this->assertNull($problem('https://tretalab.com', 'production'));
+    }
+
+    public function test_enabled_project_renders_case_study_template_and_enters_sitemap(): void
+    {
+        config(['work' => [
+            'approved-story' => ['enabled' => true, 'title' => 'Approved story', 'summary' => 'Story summary.',
+                'chapters' => [['id' => 'problem', 'title' => 'The problem', 'paragraphs' => ['Paragraph one.']]]],
+            'pending-story' => ['enabled' => false, 'title' => 'Pending story', 'summary' => 'Hidden.'],
+        ]]);
+
+        $this->get('/work/approved-story')->assertOk()->assertSee('Approved story')->assertSee('The problem');
+        $this->get('/work/pending-story')->assertNotFound();
+
+        $xml = $this->get('/sitemap.xml')->getContent();
+        $this->assertStringContainsString('/work/approved-story<', $xml);
+        $this->assertStringNotContainsString('/work/pending-story', $xml);
     }
 }

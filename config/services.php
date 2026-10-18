@@ -4,12 +4,10 @@ return [
     'postmark' => ['key' => env('POSTMARK_API_KEY')],
     'resend' => ['key' => env('RESEND_API_KEY')],
     'ses' => ['key' => env('AWS_ACCESS_KEY_ID'), 'secret' => env('AWS_SECRET_ACCESS_KEY'), 'region' => env('AWS_DEFAULT_REGION', 'us-east-1')],
-
-    // TRETA Lab service pages (frontend-owned content). Only these slugs resolve under /services/{slug}.
     'offerings' => [
         'website-repair' => [
             'slug' => 'website-repair',
-            'pillar' => 'Fix',
+            'pillar' => 'fix',
             'name' => 'Website repair',
             'summary' => 'When a website is slow, broken or keeps failing, we find the real cause and fix it properly — then explain what changed in plain language.',
             'seo_title' => 'Website Repair & Technical Fixes | TRETA',
@@ -29,7 +27,7 @@ return [
         ],
         'web-development' => [
             'slug' => 'web-development',
-            'pillar' => 'Build',
+            'pillar' => 'build',
             'name' => 'Web development',
             'summary' => 'We design and build fast, accessible websites that are easy to update and built to keep working long after launch.',
             'seo_title' => 'Website Design & Development | TRETA',
@@ -49,7 +47,7 @@ return [
         ],
         'web-applications' => [
             'slug' => 'web-applications',
-            'pillar' => 'Build',
+            'pillar' => 'build',
             'name' => 'Web applications',
             'summary' => 'When spreadsheets and disconnected tools slow your team down, we build web applications shaped around how your business actually works.',
             'seo_title' => 'Custom Web Applications & Internal Tools | TRETA',
@@ -69,7 +67,7 @@ return [
         ],
         'website-maintenance' => [
             'slug' => 'website-maintenance',
-            'pillar' => 'Care',
+            'pillar' => 'care',
             'name' => 'Website maintenance',
             'summary' => 'We keep your website or system updated, backed up and monitored — with one accountable team to contact when something needs attention.',
             'seo_title' => 'Website Maintenance & Technical Support | TRETA',
@@ -88,4 +86,5 @@ return [
             ],
         ],
     ],
+    'slack' => ['notifications' => ['bot_user_oauth_token' => env('SLACK_BOT_USER_OAUTH_TOKEN'), 'channel' => env('SLACK_BOT_USER_DEFAULT_CHANNEL')]],
 ];

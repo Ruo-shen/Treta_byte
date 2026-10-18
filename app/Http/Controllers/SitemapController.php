@@ -47,10 +47,8 @@ class SitemapController extends Controller
             }
         }
 
-        foreach (WorkController::enabledProjects() as $slug => $project) {
-            if (view()->exists('pages.work.'.$slug)) {
-                $urls[] = [Seo::absolute(route('work.show', $slug, false)), null];
-            }
+        foreach (array_keys(WorkController::enabledProjects()) as $slug) {
+            $urls[] = [Seo::absolute(route('work.show', $slug, false)), null];
         }
 
         // Only live, indexable posts that are their own canonical.
