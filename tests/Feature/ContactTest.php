@@ -9,6 +9,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 use Mockery;
+use PHPUnit\Framework\Attributes\DataProvider;
 use Symfony\Component\Mailer\Exception\TransportException;
 use Symfony\Component\Mailer\SentMessage;
 use Symfony\Component\Mailer\Transport\AbstractTransport;
@@ -154,7 +155,7 @@ class ContactTest extends TestCase
         ];
     }
 
-    #[\PHPUnit\Framework\Attributes\DataProvider('hostileReferers')]
+    #[DataProvider('hostileReferers')]
     public function test_hostile_referers_fall_back_to_the_contact_page_on_success_and_on_throttle(string $referer): void
     {
         $this->post('/contact', $this->valid, ['Referer' => $referer])->assertRedirect(route('contact.show'));

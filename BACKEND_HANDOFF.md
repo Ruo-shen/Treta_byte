@@ -25,7 +25,7 @@ php artisan test
 5. `php artisan storage:link`. If the host forbids symlinks, create the link `public/storage -> ../storage/app/public` in the host panel; without it uploaded images 404 (and post pages simply omit the image).
 6. `php artisan optimize` (config, route, event and view caches; verified working). After any `.env` or deploy change run `php artisan optimize:clear && php artisan optimize`. Re-run `php artisan filament:upgrade` after updating Filament.
 7. Document root must be `public/`. Make `storage/` and `bootstrap/cache/` writable.
-8. Post-deploy checks: `/robots.txt` (production shows `Disallow: /admin` and the sitemap line), `/sitemap.xml`, `/admin/login`, a 404 URL, submit the contact form.
+8. Post-deploy checks: confirm `APP_URL` is the public https URL (production logs a warning at boot otherwise, and canonicals, sitemap and robots depend on it); `/robots.txt` (production shows `Disallow: /admin` and the sitemap line); `/sitemap.xml`; `/admin/login`; a 404 URL; `/blog?page=2` with 13+ posts; submit the contact form; `request()->ip()` behind a proxy returns the visitor IP, not the proxy (set `TRUSTED_PROXIES`); `public/storage` link resolves an uploaded image.
 
 No cron and no queue worker are needed: scheduled posts go live by themselves because the `published` scope compares `published_at` to the current time on each request (verified by tests). Nothing is scheduled in `routes/console.php`. `CACHE_STORE=database` and `SESSION_DRIVER=database` use the same MySQL database.
 
@@ -90,7 +90,7 @@ Both analytics values stay empty until the IDs and the privacy/consent wording a
 
 ## Verified (local Windows, PHP 8.4.23, SQLite)
 
-- `php artisan test`: 57 passed. Added: view contracts, approved titles, 404, structured data, redirects, old-slug 301, robots, GA4 gating, headers, trusted proxies.
+- `php artisan test`: 74 passed. Added: view contracts, approved titles and unique descriptions, 404 (no canonical), structured data, redirects (reserved paths), old-slug 301, robots, GA4 gating, headers, trusted proxies, open-redirect payloads, CSRF 419, blog pagination SEO, sitemap column selection.
 - `vendor/bin/pint --test` passes; `npm run build` and `npm run check` pass.
 - `migrate:fresh` and `migrate:rollback` on an empty SQLite file; `php artisan optimize` (config, events, routes, views) and `filament:assets` work.
 - Earlier, on the first-backend branch: MySQL 8.4.3 suite, `composer audit`, upload limits, preview access, rate limits.
@@ -98,8 +98,18 @@ Both analytics values stay empty until the IDs and the privacy/consent wording a
 ## Not verified / deferred
 
 - Real SMTP delivery, the production host, symlink support, and a MySQL re-run of the new migration and tests.
-- CSRF enforcement: the form carries `@csrf`, but Laravel skips CSRF checks under test, so the 419 path is not exercised.
+- Browser console showed two `Failed to fetch` errors on the Filament create-post page right after saving. No custom redirect or JS exists in our code; it looks like an aborted Livewire request during the post-save redirect (possibly the single-threaded `artisan serve`). Not reproduced or confirmed.
 - Staff 2FA is not enabled. Filament supports it.
 - Category archives have no route in docs §4 and stay out of the sitemap.
 - `db:seed` seeds nothing on purpose (every user is an admin).
 - The Vite manifest is not required by tests (`withoutVite()`); real asset loading is checked only by `npm run build`.
+
+## Known tradeoffs and launch inputs
+
+- **Contact limiter** counts every POST to `/contact` (valid, invalid and honeypot): 3 per minute and 20 per day per IP. A visitor correcting validation errors can hit it; accepted for V1.
+- **`User::canAccessPanel` returns true for every user.** That is safe only because there is no registration or import path; any future way to create users must restrict panel access first.
+- **Pagination SEO:** `/blog?page=N` (N ≥ 2) has a self-canonical and a "— Page N" title suffix; out-of-range pages return 404; the page-1 link is `/blog`.
+- **Meta descriptions** live in `config/seo.php` `descriptions`, copied from approved on-page text. `/privacy` still carries its "being prepared" text and is not in the sitemap.
+- **Social cards:** `twitter:card` is `summary_large_image` only when a post has an og image, otherwise `summary`. **No default og:image exists**; launch input: an approved site-wide social image.
+- **Redirect config** is GET/HEAD only and rejects sources that are application paths (`/admin`, `/livewire`, `/filament`, `/up`, `/storage`, `/build`, `/contact`, `/sitemap.xml`, `/robots.txt`, the static pages and asset folders).
+- **Contact redirect-back** accepts the previous URL only when scheme, host and port equal `APP_URL` and it has no backslash or userinfo; otherwise `/contact`. With a dev host that differs from `APP_URL`, the visitor lands on `/contact`.

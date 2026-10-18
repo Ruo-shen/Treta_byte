@@ -54,7 +54,9 @@ class SitemapController extends Controller
         }
 
         // Only live, indexable posts that are their own canonical.
-        Post::published()->latest('published_at')->get()
+        Post::published()
+            ->select(['id', 'slug', 'title', 'seo_title', 'meta_description', 'excerpt', 'robots', 'canonical_url', 'social_image_path', 'featured_image_path', 'published_at', 'updated_at'])
+            ->latest('published_at')->get()
             ->reject(fn (Post $post) => str_starts_with((string) $post->robots, 'noindex'))
             ->each(function (Post $post) use (&$urls) {
                 $seo = Seo::forPost($post);

@@ -4,9 +4,11 @@ namespace Tests\Feature;
 
 use App\Models\Post;
 use App\Models\User;
+use App\Providers\AppServiceProvider;
 use App\Support\Redirects;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
 use Tests\TestCase;
@@ -79,7 +81,7 @@ class SiteContractTest extends TestCase
             $this->get($url)->assertOk()->assertSee("<title>{$title}</title>", false);
         }
 
-        $this->get('/')->assertSee('content="'.config('seo.default_description').'"', false);
+        $this->get('/')->assertSee('content="'.e(config('seo.descriptions.home')).'"', false);
         $this->get('/services/website-repair')
             ->assertSee('<title>'.e(config('services.offerings.website-repair.seo_title')).'</title>', false)
             ->assertSee('content="'.e(config('services.offerings.website-repair.meta_description')).'"', false);
@@ -267,5 +269,99 @@ class SiteContractTest extends TestCase
 
         config(['trustedproxy.proxies' => '10.0.0.1']);
         $this->assertSame('203.0.113.9', $get());
+    }
+
+    public function test_redirects_cannot_shadow_application_paths(): void
+    {
+        $valid = Redirects::valid([
+            '/contact' => '/about', '/admin/login' => '/', '/admin' => '/', '/livewire/update' => '/', '/up' => '/',
+            '/storage/x.png' => '/', '/build/app.js' => '/', '/sitemap.xml' => '/', '/robots.txt' => '/', '/blog' => '/', '/ADMIN/x' => '/',
+            '/old-page' => '/services', '/blog/old-slug' => '/blog/new-slug',
+        ]);
+
+        $this->assertSame(['/old-page' => '/services', '/blog/old-slug' => '/blog/new-slug'], $valid);
+    }
+
+    public function test_page_descriptions_are_unique_and_short(): void
+    {
+        $seen = [];
+        foreach (['/', '/services', '/work', '/about', '/contact', '/blog', '/privacy', '/nope'] as $url) {
+            $html = $this->get($url)->getContent();
+            preg_match('#<meta name="description" content="([^"]*)"#', $html, $m);
+            $desc = html_entity_decode($m[1]);
+
+            $this->assertNotEmpty($desc, $url);
+            $this->assertLessThanOrEqual(165, mb_strlen($desc), $url);
+            $this->assertNotContains($desc, $seen, "duplicate description on {$url}");
+            $seen[] = $desc;
+        }
+    }
+
+    public function test_blog_pagination_seo(): void
+    {
+        config(['app.url' => 'https://tretalab.com']);
+        Post::factory()->published()->count(13)->create();
+
+        $this->get('/blog')->assertSee('<link rel="canonical" href="https://tretalab.com/blog">', false)
+            ->assertSee('<title>The journal — TRETA Lab</title>', false);
+
+        $page2 = $this->get('/blog?page=2')->assertOk()
+            ->assertSee('<link rel="canonical" href="https://tretalab.com/blog?page=2">', false)
+            ->assertSee('<title>The journal — TRETA Lab — Page 2</title>', false)
+            ->assertDontSee('?page=1', false);
+        $page2->assertSee('href="'.route('blog.index').'"', false);
+
+        $this->get('/blog?page=3')->assertNotFound();
+        $this->get('/blog?page=999')->assertNotFound();
+    }
+
+    public function test_not_found_page_has_no_canonical(): void
+    {
+        $this->get('/some/missing/path')->assertNotFound()
+            ->assertDontSee('rel="canonical"', false)->assertDontSee('og:url', false)->assertDontSee('/some/missing/path', false);
+    }
+
+    public function test_twitter_card_follows_og_image(): void
+    {
+        $this->get('/')->assertSee('<meta name="twitter:card" content="summary">', false);
+
+        Storage::fake('public');
+        $post = Post::factory()->published()->create(['social_image_path' => 'posts/s.png']);
+        $this->get("/blog/{$post->slug}")->assertSee('<meta name="twitter:card" content="summary_large_image">', false)
+            ->assertSee('property="og:image"', false);
+    }
+
+    public function test_sitemap_does_not_load_article_bodies(): void
+    {
+        Post::factory()->published()->create(['content' => '<p>SECRETBODY</p>']);
+        $queries = [];
+        DB::listen(function ($q) use (&$queries) {
+            $queries[] = $q->sql;
+        });
+
+        $this->get('/sitemap.xml')->assertOk();
+
+        $posts = array_values(array_filter($queries, fn ($s) => str_contains($s, 'from "posts"')));
+        $this->assertNotEmpty($posts);
+        foreach ($posts as $sql) {
+            $this->assertStringNotContainsString('"content"', $sql);
+            $this->assertStringNotContainsString('*', $sql);
+        }
+    }
+
+    public function test_app_url_problem_is_reported_only_in_production(): void
+    {
+        $problem = fn (string $url, string $env) => (function () use ($url, $env) {
+            config(['app.url' => $url]);
+            $this->app['env'] = $env;
+
+            return AppServiceProvider::appUrlProblem();
+        })();
+
+        $this->assertNull($problem('http://localhost', 'testing'));
+        $this->assertNotNull($problem('http://localhost', 'production'));
+        $this->assertNotNull($problem('http://tretalab.com', 'production'));
+        $this->assertNotNull($problem('https://127.0.0.1', 'production'));
+        $this->assertNull($problem('https://tretalab.com', 'production'));
     }
 }

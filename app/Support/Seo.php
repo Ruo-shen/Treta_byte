@@ -33,7 +33,7 @@ class Seo
     /** SEO for a static page whose approved title lives in config/seo.php `titles`. */
     public static function forPage(string $key, string $path, array $extra = []): array
     {
-        return self::make(config("seo.titles.{$key}"), null, $path, $extra);
+        return self::make(config("seo.titles.{$key}"), config("seo.descriptions.{$key}"), $path, $extra);
     }
 
     /** Organization from facts the site already states: name and URL only. */

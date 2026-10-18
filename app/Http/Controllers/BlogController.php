@@ -16,9 +16,21 @@ class BlogController extends Controller
 {
     public function index(): View
     {
+        $posts = Post::published()->with('category')->latest('published_at')->paginate(12);
+        $page = $posts->currentPage();
+
+        // Pages past the end are not real pages.
+        abort_if($page > 1 && $posts->isEmpty(), 404);
+
+        // Page 1 is /blog; later pages are self-canonical with their own title.
+        $seo = Seo::forPage('blog', $page > 1 ? "/blog?page={$page}" : '/blog');
+        if ($page > 1) {
+            $seo['title'] .= " — Page {$page}";
+        }
+
         return view('blog.index', [
-            'seo' => Seo::forPage('blog', '/blog'),
-            'posts' => Post::published()->with('category')->latest('published_at')->paginate(12),
+            'seo' => $seo,
+            'posts' => $posts,
             'categories' => Category::whereHas('posts', fn ($q) => $q->published())->orderBy('name')->get(),
         ]);
     }

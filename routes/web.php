@@ -8,11 +8,13 @@ use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\SitemapController;
 use App\Http\Controllers\WorkController;
 use App\Support\Redirects;
+use Illuminate\Routing\RedirectController;
 use Illuminate\Support\Facades\Route;
 
 // Moved URLs (config/redirects.php) come first so they win over any public route.
 foreach (Redirects::valid(config('redirects', [])) as $from => $to) {
-    Route::redirect($from, $to, 301);
+    // Same action Route::redirect() uses (cache-safe), but GET/HEAD only.
+    Route::match(['GET', 'HEAD'], $from, RedirectController::class)->defaults('destination', $to)->defaults('status', 301);
 }
 
 // Public route contract: docs/ARCHITECTURE.md §4.

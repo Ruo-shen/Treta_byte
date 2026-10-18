@@ -15,12 +15,13 @@
     <title>{{ $seo['title'] }}</title>
     <meta name="description" content="{{ $seo['description'] }}">
     <meta name="robots" content="{{ $seo['robots'] }}">
-    <link rel="canonical" href="{{ $seo['canonical'] }}">
+    @if(!empty($seo['canonical']))<link rel="canonical" href="{{ $seo['canonical'] }}">@endif
     <meta property="og:site_name" content="TRETA Lab">
     <meta property="og:title" content="{{ $seo['title'] }}">
     <meta property="og:description" content="{{ $seo['description'] }}">
-    <meta property="og:url" content="{{ $seo['canonical'] }}">
+    @if(!empty($seo['canonical']))<meta property="og:url" content="{{ $seo['canonical'] }}">@endif
     <meta property="og:type" content="{{ $seo['type'] }}">
+    <meta name="twitter:card" content="{{ !empty($seo['og_image']) ? 'summary_large_image' : 'summary' }}">
     @if(!empty($seo['og_image']))
         <meta property="og:image" content="{{ $seo['og_image'] }}">
     @endif

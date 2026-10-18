@@ -3,7 +3,7 @@
     @if($paginator->onFirstPage())
         <span class="inline-flex min-h-11 items-center text-muted/60" aria-hidden="true">← Newer</span>
     @else
-        <a href="{{ $paginator->previousPageUrl() }}" rel="prev" class="inline-flex min-h-11 items-center hover:text-accent">← Newer</a>
+        <a href="{{ $paginator->currentPage() === 2 ? route('blog.index') : $paginator->previousPageUrl() }}" rel="prev" class="inline-flex min-h-11 items-center hover:text-accent">← Newer</a>
     @endif
     @foreach($elements as $element)
         @if(is_string($element))
@@ -13,7 +13,7 @@
                 @if($page == $paginator->currentPage())
                     <span class="inline-flex min-h-11 items-center border-b border-ink" aria-current="page">{{ $page }}</span>
                 @else
-                    <a href="{{ $url }}" class="inline-flex min-h-11 items-center text-muted hover:text-accent" aria-label="Page {{ $page }}">{{ $page }}</a>
+                    <a href="{{ $page == 1 ? route('blog.index') : $url }}" class="inline-flex min-h-11 items-center text-muted hover:text-accent" aria-label="Page {{ $page }}">{{ $page }}</a>
                 @endif
             @endforeach
         @endif
