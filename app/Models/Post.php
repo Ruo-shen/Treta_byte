@@ -59,6 +59,10 @@ class Post extends Model
                 $post->slug = Str::slug($post->title);
             }
 
+            if ($post->reading_minutes === null || $post->isDirty('content')) {
+                $post->reading_minutes = $post->calculateReadingMinutes();
+            }
+
             if ($post->status === PostStatus::Published && $post->published_at === null) {
                 $post->published_at = now();
             }
@@ -135,14 +139,18 @@ class Post extends Model
         return ['url' => $disk->url($path), 'width' => $size[0], 'height' => $size[1]];
     }
 
-    /** Whole minutes to read the article at ~220 words per minute (minimum 1): $post->reading_time. */
+    /** Whole minutes to read the article at ~220 words per minute (minimum 1). */
+    public function calculateReadingMinutes(): int
+    {
+        $words = preg_split('/\s+/u', trim(strip_tags($this->contentHtml())), -1, PREG_SPLIT_NO_EMPTY);
+
+        return max(1, (int) ceil(count($words) / 220));
+    }
+
+    /** $post->reading_time: the stored value (kept current by the saving hook), computed on the fly only for unsaved models. */
     protected function readingTime(): Attribute
     {
-        return Attribute::get(function (): int {
-            $words = preg_split('/\s+/u', trim(strip_tags($this->contentHtml())), -1, PREG_SPLIT_NO_EMPTY);
-
-            return max(1, (int) ceil(count($words) / 220));
-        });
+        return Attribute::get(fn (): int => $this->reading_minutes ?? $this->calculateReadingMinutes());
     }
 
     public function author(): BelongsTo
