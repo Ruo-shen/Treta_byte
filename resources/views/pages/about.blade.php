@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('content')
-<x-inner.header variant="split" kicker="About / A small, senior studio" lede="Technology should work for you. Not the other way around. TRETA Lab exists to make that a practical commitment.">
+<x-inner.header variant="split" kicker="About / A small, senior studio" lede="Technology should work for you. Not the other way around. TRETA exists to make that a practical commitment.">
     <x-slot:title>Three friends.<br>Different skills.<br><span class="text-moss">One responsibility.</span></x-slot:title>
     <x-inner.note tilt="right" class="mx-auto max-w-[400px] p-8 sm:p-10 lg:mx-0 lg:ml-auto">
         <p class="font-mono text-[12px] uppercase leading-relaxed tracking-[0.16em] text-muted">The idea we came together around</p>

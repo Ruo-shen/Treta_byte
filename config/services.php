@@ -10,7 +10,7 @@ return [
             'pillar' => 'fix',
             'name' => 'Website repair',
             'summary' => 'When a website is slow, broken or keeps failing, we find the real cause and fix it properly — then explain what changed in plain language.',
-            'seo_title' => 'Website Repair & Technical Fixes | TRETA',
+            'seo_title' => 'Website Repair & Technical Fixes — TRETA',
             'meta_description' => 'Slow, broken or unreliable website? TRETA finds the cause, fixes it properly and explains what changed — for businesses in Nepal and worldwide.',
             'problems' => [
                 'Pages load slowly or time out',
@@ -30,7 +30,7 @@ return [
             'pillar' => 'build',
             'name' => 'Web development',
             'summary' => 'We design and build fast, accessible websites that are easy to update and built to keep working long after launch.',
-            'seo_title' => 'Website Design & Development | TRETA',
+            'seo_title' => 'Website Design & Development — TRETA',
             'meta_description' => 'Fast, accessible business websites built to last beyond launch. TRETA designs and develops websites for businesses in Nepal and internationally.',
             'problems' => [
                 'Your current website is outdated or hard to edit',
@@ -50,7 +50,7 @@ return [
             'pillar' => 'build',
             'name' => 'Web applications',
             'summary' => 'When spreadsheets and disconnected tools slow your team down, we build web applications shaped around how your business actually works.',
-            'seo_title' => 'Custom Web Applications & Internal Tools | TRETA',
+            'seo_title' => 'Custom Web Applications & Internal Tools — TRETA',
             'meta_description' => 'Dashboards, portals, automations and internal tools built around how your business works. TRETA builds practical web applications.',
             'problems' => [
                 'Important work lives in scattered spreadsheets',
@@ -70,7 +70,7 @@ return [
             'pillar' => 'care',
             'name' => 'Website maintenance',
             'summary' => 'We keep your website or system updated, backed up and monitored — with one accountable team to contact when something needs attention.',
-            'seo_title' => 'Website Maintenance & Technical Support | TRETA',
+            'seo_title' => 'Website Maintenance & Technical Support — TRETA',
             'meta_description' => 'Ongoing updates, backups, monitoring and support so your website keeps running. TRETA provides maintenance for businesses in Nepal and worldwide.',
             'problems' => [
                 'Nobody is responsible for updates or backups',

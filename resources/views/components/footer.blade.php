@@ -53,7 +53,7 @@
 </div>
 </div>
 <div class="relative z-10 mt-16 flex flex-col gap-4 pb-8 text-[13.5px] text-ink/70 sm:flex-row sm:items-center sm:justify-between md:mt-[70px] max-md:mt-0 max-md:flex-row max-md:items-center max-md:justify-between max-md:gap-2 max-md:pb-1 max-md:text-[13px]">
-<p>© {{ date('Y') }} TRETA Lab. All rights reserved.</p>
+<p>© {{ date('Y') }} TRETA. All rights reserved.</p>
 <div class="flex items-center gap-12 max-md:gap-0">
 <a href="/privacy" class="max-md:inline-flex max-md:min-h-11 max-md:items-center max-md:px-3">Privacy</a>
 <a href="#page-top" class="inline-flex items-center gap-2 hover:text-ink max-md:min-h-11 max-md:min-w-11 max-md:justify-center">

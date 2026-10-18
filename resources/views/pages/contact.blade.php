@@ -29,7 +29,7 @@
             @else
                 <div class="rounded-[14px] border border-line bg-white p-5 shadow-[0_28px_60px_-44px_rgba(23,25,27,0.45)] sm:p-9">
                     <div class="mb-6 flex items-center justify-between gap-4 border-b border-line pb-5">
-                        <p class="font-mono text-[12px] uppercase tracking-[0.16em] text-muted">A note to TRETA Lab</p>
+                        <p class="font-mono text-[12px] uppercase tracking-[0.16em] text-muted">A note to TRETA</p>
                         <span class="text-muted" aria-hidden="true">↗</span>
                     </div>
                     <h2 class="sr-only">Send an inquiry</h2>

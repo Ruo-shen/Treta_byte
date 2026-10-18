@@ -1,6 +1,6 @@
 @php
     $seo = array_merge([
-        'title' => 'TRETA Lab — Fix. Build. Care.',
+        'title' => 'TRETA — Fix. Build. Care.',
         'description' => 'A technology solutions studio. We fix what is broken, build what is needed, and care for what matters.',
         'canonical' => url()->current(),
         'robots' => 'index,follow',
@@ -16,7 +16,7 @@
     <meta name="description" content="{{ $seo['description'] }}">
     <meta name="robots" content="{{ $seo['robots'] }}">
     @if(!empty($seo['canonical']))<link rel="canonical" href="{{ $seo['canonical'] }}">@endif
-    <meta property="og:site_name" content="TRETA Lab">
+    <meta property="og:site_name" content="TRETA">
     <meta property="og:title" content="{{ $seo['title'] }}">
     <meta property="og:description" content="{{ $seo['description'] }}">
     @if(!empty($seo['canonical']))<meta property="og:url" content="{{ $seo['canonical'] }}">@endif
