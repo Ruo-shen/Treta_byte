@@ -111,7 +111,8 @@ body {
 .on-dark :focus-visible { outline-color: #fff; }
 html { scroll-padding-top: 88px; }
 html.lenis { scroll-padding-top: 0; }
-.site-header[data-open] { max-height: 100dvh; overflow-y: auto; border-bottom: 1px solid var(--color-line); background: color-mix(in srgb, var(--color-paper) 95%, transparent); backdrop-filter: blur(12px); }
+.site-header[data-open] { height: 100dvh; overflow-y: auto; overscroll-behavior: contain; background: var(--color-paper); }
+html:has(.site-header[data-open]) { overflow: hidden; }
 .header-shell { max-width: 1320px; height: 72px; transform: translateY(0); }
 .site-header[data-compact] .header-shell { max-width: 500px; height: 50px; transform: translateY(10px); padding-inline: 6px; border-color: var(--color-line); background: rgb(255 255 255 / 90%); box-shadow: 0 10px 30px -18px rgb(23 25 27 / 35%); backdrop-filter: blur(12px); }
 .site-header[data-compact] .header-brand { width: 36px; }

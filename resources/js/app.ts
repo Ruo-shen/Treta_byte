@@ -87,6 +87,7 @@ function closeMenu(restoreFocus = false) {
   toggle.setAttribute("aria-expanded", "false")
   toggle.setAttribute("aria-label", "Open menu")
   header?.removeAttribute("data-open")
+  lenis?.start()
   syncHeader()
   if (restoreFocus) toggle.focus()
 }
@@ -98,6 +99,8 @@ toggle?.addEventListener("click", () => {
   toggle.setAttribute("aria-expanded", String(open))
   toggle.setAttribute("aria-label", open ? "Close menu" : "Open menu")
   header?.toggleAttribute("data-open", open)
+  if (open) lenis?.stop()
+  else lenis?.start()
   syncHeader()
 })
 menu?.addEventListener("click", (event) => {
