@@ -336,7 +336,7 @@ class SiteContractTest extends TestCase
         Post::factory()->published()->create(['content' => '<p>SECRETBODY</p>']);
         $queries = [];
         DB::listen(function ($q) use (&$queries) {
-            $queries[] = $q->sql;
+            $queries[] = str_replace('`', '"', $q->sql); // MySQL quotes identifiers with backticks
         });
 
         $this->get('/sitemap.xml')->assertOk();
