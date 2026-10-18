@@ -8,7 +8,9 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 use Mockery;
-use RuntimeException;
+use Symfony\Component\Mailer\Exception\TransportException;
+use Symfony\Component\Mailer\SentMessage;
+use Symfony\Component\Mailer\Transport\AbstractTransport;
 use Tests\TestCase;
 
 class ContactTest extends TestCase
@@ -71,7 +73,20 @@ class ContactTest extends TestCase
 
     public function test_mail_failure_keeps_the_inquiry_and_logs_without_content(): void
     {
-        Mail::shouldReceive('raw')->once()->andThrow(new RuntimeException('SMTP down'));
+        // A real mailer whose transport fails, so the whole send path is exercised.
+        Mail::extend('failing', fn () => new class extends AbstractTransport
+        {
+            protected function doSend(SentMessage $message): void
+            {
+                throw new TransportException('SMTP down');
+            }
+
+            public function __toString(): string
+            {
+                return 'failing://';
+            }
+        });
+        config(['mail.mailers.failing' => ['transport' => 'failing'], 'mail.default' => 'failing']);
         Log::spy();
 
         $this->post('/contact', $this->valid)->assertSessionHas('inquiry_sent', true);
@@ -106,5 +121,20 @@ class ContactTest extends TestCase
             ->assertSessionMissing('inquiry_sent');
 
         $this->assertSame(3, Inquiry::count());
+    }
+
+    public function test_daily_cap_blocks_the_21st_submission(): void
+    {
+        for ($i = 0; $i < 20; $i++) {
+            if ($i > 0 && $i % 3 === 0) {
+                $this->travel(61)->seconds();
+            }
+            $this->post('/contact', $this->valid)->assertSessionHas('inquiry_sent');
+        }
+
+        $this->travel(61)->seconds();
+        $this->post('/contact', $this->valid)->assertSessionHasErrors('message');
+
+        $this->assertSame(20, Inquiry::count());
     }
 }

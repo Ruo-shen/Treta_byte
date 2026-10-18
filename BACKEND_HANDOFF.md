@@ -15,7 +15,7 @@ php artisan make:filament-user  # staff accounts; there is no registration
 php artisan test
 ```
 
-Production `.env`: `APP_ENV=production`, `APP_DEBUG=false`, `APP_URL=https://<domain>`, `DB_CONNECTION=mysql` plus the DB block, SMTP `MAIL_*`, `MAIL_TIMEOUT` (default 10 s), `INQUIRY_NOTIFY_ADDRESS` (empty means no mail; inquiries are still saved). `QUEUE_CONNECTION=sync`.
+Production `.env`: `APP_ENV=production`, `APP_DEBUG=false`, `APP_URL=https://<domain>`, `DB_CONNECTION=mysql` plus the DB block, `MAIL_MAILER=smtp` (the default `log` mailer delivers nothing yet still marks inquiries notified) with SMTP `MAIL_*`, `MAIL_TIMEOUT` (default 10 s), `INQUIRY_NOTIFY_ADDRESS` (empty means no mail; inquiries are still saved). `QUEUE_CONNECTION=sync`.
 
 ## Routes → views → data
 
@@ -66,7 +66,7 @@ The skeleton's `package.json`, `vite.config.js` and `resources/{css,js}` are com
 - **Install and checks:** clean `composer install` from the lockfile; `composer audit` finds no advisories; `check-platform-reqs` passes; Pint passes.
 - **Database:** `migrate:fresh` works on an empty SQLite file, and rollback works.
 - **Routes:** `route:cache` works; there is no registration route.
-- **Tests:** `php artisan test` passes 37 tests. They cover:
+- **Tests:** `php artisan test` passes 39 tests on SQLite and on MySQL 8.4.3 (Laragon). They cover:
   - admin access (guests, staff, registration 404)
   - draft, scheduled and unpublished visibility
   - slug validation
@@ -78,12 +78,15 @@ The skeleton's `package.json`, `vite.config.js` and `resources/{css,js}` are com
   - sanitized article body
   - preview access
   - sitemap contents
-  - contact persistence, validation, honeypot, rate limit, mail failure and same-site redirect
+  - contact persistence, validation, honeypot, rate limit including the daily cap, mail failure through a real failing transport, and same-site redirect
+  - image files removed when replaced or when the post is deleted
 
 ## Not verified / deferred
 
-- MySQL 8 migrations (no local MySQL), real SMTP delivery and the production host itself.
+- Real SMTP delivery and the production host itself. MySQL 8.4.3: migrate:fresh, rollback and the full suite pass locally.
 - `robots.txt` still uses Laravel's default (allow all, no sitemap line). Add the sitemap reference once the production domain is set.
 - Category archives have no route in docs §4 and stay out of the sitemap.
 - Staff 2FA is not enabled. Filament supports it when wanted.
+- No `trustProxies` configured: rate limiting keys on the client IP. If Babal.Host or a CDN sits in front, configure trusted proxies or every visitor shares one limit.
+- `db:seed` seeds nothing on purpose (every user is an admin).
 - Docs say `feat/backend`; this branch and worktree are named `first-backend` at the user's request.

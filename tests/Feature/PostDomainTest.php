@@ -9,6 +9,7 @@ use App\Models\Inquiry;
 use App\Models\Post;
 use Illuminate\Database\QueryException;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Storage;
 use Tests\TestCase;
 
 class PostDomainTest extends TestCase
@@ -92,6 +93,24 @@ class PostDomainTest extends TestCase
         $this->assertStringNotContainsString('<script', $html);
         $this->assertStringNotContainsString('javascript:', $html);
         $this->assertStringNotContainsString('onerror', $html);
+    }
+
+    public function test_replaced_and_deleted_images_are_removed_from_disk(): void
+    {
+        Storage::fake('public');
+        Storage::disk('public')->put('posts/old.jpg', 'x');
+        Storage::disk('public')->put('posts/new.jpg', 'x');
+        Storage::disk('public')->put('posts/social/s.jpg', 'x');
+
+        $post = Post::factory()->create(['featured_image_path' => 'posts/old.jpg', 'social_image_path' => 'posts/social/s.jpg']);
+        $post->update(['featured_image_path' => 'posts/new.jpg']);
+
+        Storage::disk('public')->assertMissing('posts/old.jpg');
+        Storage::disk('public')->assertExists('posts/new.jpg');
+
+        $post->delete();
+        Storage::disk('public')->assertMissing('posts/new.jpg');
+        Storage::disk('public')->assertMissing('posts/social/s.jpg');
     }
 
     public function test_inquiry_defaults_to_new_status(): void

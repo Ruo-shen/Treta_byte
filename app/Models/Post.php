@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 class Post extends Model
@@ -64,7 +65,22 @@ class Post extends Model
                 $post->robots = null;
             }
         });
+
+        // Replaced or removed images must not linger as public files.
+        static::updated(function (Post $post) {
+            foreach (self::IMAGE_COLUMNS as $column) {
+                if ($post->wasChanged($column) && filled($old = $post->getOriginal($column))) {
+                    Storage::disk('public')->delete($old);
+                }
+            }
+        });
+
+        static::deleted(function (Post $post) {
+            Storage::disk('public')->delete(array_filter($post->only(self::IMAGE_COLUMNS)));
+        });
     }
+
+    private const IMAGE_COLUMNS = ['featured_image_path', 'social_image_path'];
 
     /** Publicly visible: published and its publication time has arrived. */
     #[Scope]
