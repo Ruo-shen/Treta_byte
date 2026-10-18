@@ -1,4 +1,20 @@
 @extends('layouts.app')
 @section('content')
-<div class="inner-site error-page"><section class="inner-shell error-workbench"><div class="error-code" aria-hidden="true">4<span>0</span>4</div><div class="error-message"><p class="kicker">Route not found / Let’s reconnect</p><h1 class="inner-title">A wrong turn.<br>Not a dead end.</h1><p class="inner-lede">That address doesn’t lead to a page here. The link may have changed, or there may be a typo.</p><a href="{{ route('home') }}" class="inner-button">Return to the homepage ↗</a></div><div class="error-paths"><p class="kicker">Useful connections</p><a href="{{ route('services.index') }}"><span>Find help with a website or system</span> Services ↗</a><a href="{{ route('blog.index') }}"><span>Read something useful</span> Blog ↗</a><a href="{{ route('contact.show') }}"><span>Explain what you were looking for</span> Contact ↗</a></div></section></div>
+<div class="inner-site error-page">
+    <section class="inner-shell error-workbench">
+        <div class="error-code" aria-hidden="true">
+            4<span>0</span>4
+        </div>
+        <div class="error-message">
+            <p class="kicker">Route not found / Let’s reconnect</p>
+            <h1 class="inner-title">A wrong turn.<br>Not a dead end.</h1>
+            <p class="inner-lede">That address doesn’t lead to a page here. The link may have changed, or there may be a typo.</p>
+            <a href="{{ route('home') }}" class="inner-button">Return to the homepage ↗</a>
+        </div>
+        <div class="error-paths">
+            <p class="kicker">Useful connections</p>
+            <a href="{{ route('services.index') }}"><span>Find help with a website or system</span> Services ↗</a><a href="{{ route('blog.index') }}"><span>Read something useful</span> Blog ↗</a><a href="{{ route('contact.show') }}"><span>Explain what you were looking for</span> Contact ↗</a>
+        </div>
+    </section>
+</div>
 @endsection

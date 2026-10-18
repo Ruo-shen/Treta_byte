@@ -1,3 +1,55 @@
-<section class="inner-shell apps-intro"><div class="apps-head"><p class="kicker">Build / Web applications</p><h1 class="inner-title">Less copying.<br>More <span class="text-moss">getting things done.</span></h1><p class="inner-lede">When the work lives between spreadsheets, inboxes and disconnected tools, a useful application can bring it together.</p></div><div class="workflow-map" aria-label="Illustration of a connected business workflow"><div><span class="flow-number">01</span><h2>Request comes in</h2><p>One place to capture the information.</p></div><span class="flow-connector" aria-hidden="true">→</span><div class="flow-focus"><span class="flow-number">02</span><h2>The team acts</h2><p>A clear next step, with the right context.</p></div><span class="flow-connector" aria-hidden="true">→</span><div><span class="flow-number">03</span><h2>Systems stay aligned</h2><p>Less re-entry. Fewer loose ends.</p></div><p class="illustration-label">Concept workflow — shaped around your actual process</p></div></section>
-<section class="inner-shell section-space two-column"><div><p class="kicker">Before writing code</p><h2 class="inner-heading">Map the work.<br>Find the friction.</h2><p class="hand-note">The best feature might be one less step.</p></div><div><p class="inner-body">We start with how your team works today: what comes in, where information moves, who needs to act, and where things get stuck.</p><div class="process-questions"><p>What gets typed twice?</p><p>Where does work wait?</p><p>What do people work around?</p><p>What needs a human decision?</p></div></div></section>
-<section class="apps-comparison section-space"><div class="inner-shell two-column"><div><p class="kicker">Build only what helps</p><h2 class="inner-heading">A focused tool.<br>A useful first version.</h2></div><div><p class="inner-body">Sometimes the answer is connecting existing tools. Sometimes it’s a small internal application. We agree a focused scope, test it against real tasks, and leave room to learn.</p><p class="inner-body mt-5">Access controls, validation, error states and handover are part of the conversation — not details to discover at the end.</p></div></div></section>
+<section class="inner-shell apps-intro">
+    <div class="apps-head">
+        <p class="kicker">Build / Web applications</p>
+        <h1 class="inner-title">Less copying.<br>More <span class="text-moss">getting things done.</span></h1>
+        <p class="inner-lede">When the work lives between spreadsheets, inboxes and disconnected tools, a useful application can bring it together.</p>
+    </div>
+    <div class="workflow-map" aria-label="Illustration of a connected business workflow">
+        <div>
+            <span class="flow-number">01</span>
+            <h2>Request comes in</h2>
+            <p>One place to capture the information.</p>
+        </div>
+        <span class="flow-connector" aria-hidden="true">→</span>
+        <div class="flow-focus">
+            <span class="flow-number">02</span>
+            <h2>The team acts</h2>
+            <p>A clear next step, with the right context.</p>
+        </div>
+        <span class="flow-connector" aria-hidden="true">→</span>
+        <div>
+            <span class="flow-number">03</span>
+            <h2>Systems stay aligned</h2>
+            <p>Less re-entry. Fewer loose ends.</p>
+        </div>
+        <p class="illustration-label">Concept workflow — shaped around your actual process</p>
+    </div>
+</section>
+<section class="inner-shell section-space two-column">
+    <div>
+        <p class="kicker">Before writing code</p>
+        <h2 class="inner-heading">Map the work.<br>Find the friction.</h2>
+        <p class="hand-note">The best feature might be one less step.</p>
+    </div>
+    <div>
+        <p class="inner-body">We start with how your team works today: what comes in, where information moves, who needs to act, and where things get stuck.</p>
+        <div class="process-questions">
+            <p>What gets typed twice?</p>
+            <p>Where does work wait?</p>
+            <p>What do people work around?</p>
+            <p>What needs a human decision?</p>
+        </div>
+    </div>
+</section>
+<section class="apps-comparison section-space">
+    <div class="inner-shell two-column">
+        <div>
+            <p class="kicker">Build only what helps</p>
+            <h2 class="inner-heading">A focused tool.<br>A useful first version.</h2>
+        </div>
+        <div>
+            <p class="inner-body">Sometimes the answer is connecting existing tools. Sometimes it’s a small internal application. We agree a focused scope, test it against real tasks, and leave room to learn.</p>
+            <p class="inner-body mt-5">Access controls, validation, error states and handover are part of the conversation — not details to discover at the end.</p>
+        </div>
+    </div>
+</section>

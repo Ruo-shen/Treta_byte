@@ -1,5 +1,60 @@
 @extends('layouts.app')
 @php($seo = array_merge($seo ?? [], ['robots' => 'noindex,follow']))
 @section('content')
-<div class="inner-site privacy-page"><header class="inner-shell privacy-opening"><p class="kicker">Privacy / Information, plainly</p><h1 class="inner-title">Your information.<br>Handled <span class="text-moss">with care.</span></h1><p class="inner-lede">This notice is being prepared alongside the inquiry service. It is prelaunch information, with the remaining decisions stated openly.</p><p class="policy-status"><span aria-hidden="true"></span>Prelaunch notice · final practices pending confirmation</p></header><div class="inner-shell privacy-document"><nav aria-label="Privacy sections"><p class="kicker">On this page</p><a href="#information">What the form asks for</a><a href="#purpose">Why it is requested</a><a href="#decisions">What remains to be confirmed</a><a href="#external-services">External services</a></nav><div><section id="information"><span class="index-number">01 / Information</span><h2>What the form asks for.</h2><p>The inquiry form asks for your name, email address, an optional company name, a topic and your message. These details help explain the request and provide a way to respond.</p><p>Please leave out passwords, payment details and sensitive personal information.</p></section><section id="purpose"><span class="index-number">02 / Purpose</span><h2>A conversation about your request.</h2><p>The intended purpose of an inquiry is to understand the work you need and follow up with you. The completed notice will describe the actual storage, email delivery and access practices used by the service.</p></section><section id="decisions"><span class="index-number">03 / Before launch</span><h2>The details still being confirmed.</h2><dl class="policy-ledger"><div><dt>Storage & access</dt><dd>Where inquiries are stored and who can access them.</dd></div><div><dt>Retention</dt><dd>How long information is kept and when it is deleted.</dd></div><div><dt>Your requests</dt><dd>A verified contact method for questions, corrections or deletion requests.</dd></div><div><dt>Email delivery</dt><dd>The provider and handling of inquiry notifications.</dd></div></dl></section><section id="external-services"><span class="index-number">04 / External services</span><h2>Fonts, analytics and future changes.</h2><p>This frontend requests fonts from Google Fonts. Your browser contacts that service to load them. Analytics identifiers and any consent requirements remain pending review; no analytics service is enabled by this frontend.</p><p>The notice must be updated to reflect the actual service before launch. This page is excluded from indexing while those details remain unresolved.</p></section><a href="{{ route('contact.show') }}" class="inner-link">Back to the inquiry page ↗</a></div></div></div>
+<div class="inner-site privacy-page">
+    <header class="inner-shell privacy-opening">
+        <p class="kicker">Privacy / Information, plainly</p>
+        <h1 class="inner-title">Your information.<br>Handled <span class="text-moss">with care.</span></h1>
+        <p class="inner-lede">This notice is being prepared alongside the inquiry service. It is prelaunch information, with the remaining decisions stated openly.</p>
+        <p class="policy-status"><span aria-hidden="true"></span>Prelaunch notice · final practices pending confirmation</p>
+    </header>
+    <div class="inner-shell privacy-document">
+        <nav aria-label="Privacy sections">
+            <p class="kicker">On this page</p>
+            <a href="#information">What the form asks for</a><a href="#purpose">Why it is requested</a><a href="#decisions">What remains to be confirmed</a><a href="#external-services">External services</a>
+        </nav>
+        <div>
+            <section id="information">
+                <span class="index-number">01 / Information</span>
+                <h2>What the form asks for.</h2>
+                <p>The inquiry form asks for your name, email address, an optional company name, a topic and your message. These details help explain the request and provide a way to respond.</p>
+                <p>Please leave out passwords, payment details and sensitive personal information.</p>
+            </section>
+            <section id="purpose">
+                <span class="index-number">02 / Purpose</span>
+                <h2>A conversation about your request.</h2>
+                <p>The intended purpose of an inquiry is to understand the work you need and follow up with you. The completed notice will describe the actual storage, email delivery and access practices used by the service.</p>
+            </section>
+            <section id="decisions">
+                <span class="index-number">03 / Before launch</span>
+                <h2>The details still being confirmed.</h2>
+                <dl class="policy-ledger">
+                    <div>
+                        <dt>Storage & access</dt>
+                        <dd>Where inquiries are stored and who can access them.</dd>
+                    </div>
+                    <div>
+                        <dt>Retention</dt>
+                        <dd>How long information is kept and when it is deleted.</dd>
+                    </div>
+                    <div>
+                        <dt>Your requests</dt>
+                        <dd>A verified contact method for questions, corrections or deletion requests.</dd>
+                    </div>
+                    <div>
+                        <dt>Email delivery</dt>
+                        <dd>The provider and handling of inquiry notifications.</dd>
+                    </div>
+                </dl>
+            </section>
+            <section id="external-services">
+                <span class="index-number">04 / External services</span>
+                <h2>Fonts, analytics and future changes.</h2>
+                <p>This frontend requests fonts from Google Fonts. Your browser contacts that service to load them. Analytics identifiers and any consent requirements remain pending review; no analytics service is enabled by this frontend.</p>
+                <p>The notice must be updated to reflect the actual service before launch. This page is excluded from indexing while those details remain unresolved.</p>
+            </section>
+            <a href="{{ route('contact.show') }}" class="inner-link">Back to the inquiry page ↗</a>
+        </div>
+    </div>
+</div>
 @endsection

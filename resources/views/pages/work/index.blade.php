@@ -1,7 +1,70 @@
 @extends('layouts.app')
 @section('content')
-<div class="inner-site work-page"><section class="inner-shell work-opening"><div><p class="kicker">Work / The project files</p><h1 class="inner-title">The thinking<br><span class="text-moss">behind the work.</span></h1></div><p class="inner-lede">A useful case study explains the problem, the decisions and what actually changed. We share the detail with the people involved.</p></section>
-<section class="inner-shell work-archive"><div class="archive-label"><span class="kicker">Project archive</span><span class="index-number">{{ count($projects) }} {{ count($projects) === 1 ? 'story' : 'stories' }}</span></div>@forelse($projects as $projectSlug => $project)<article class="archive-entry"><div class="archive-number">{{ str_pad((string) $loop->iteration, 2, '0', STR_PAD_LEFT) }}</div><div><p class="kicker">{{ isset($project['service']) ? str_replace('-', ' ', $project['service']) : 'Project story' }}</p><h2><a href="{{ route('work.show', $projectSlug) }}">{{ $project['title'] }} <span aria-hidden="true">↗</span></a></h2><p>{{ $project['summary'] }}</p></div>@if(!empty($project['image']))<img src="{{ asset($project['image']) }}" alt="{{ $project['image_alt'] ?? '' }}" width="1200" height="750" loading="lazy">@endif</article>@empty<div class="archive-empty"><div class="folder-sketch" aria-hidden="true"><span></span><i></i><b>PROJECT NOTES</b><small>Ready when the story is.</small></div><div><p class="hand-note">The story matters<br>as much as the screenshot.</p><h2 class="inner-heading">Our project files<br>are being prepared.</h2><p class="inner-body">Nothing to publish here just yet. We’ll share work once the details and permission are ready. In the meantime, we can talk about what your project needs.</p><a href="{{ route('contact.show') }}" class="inner-link">Discuss a project ↗</a></div></div>@endforelse</section>
-<section class="inner-shell work-reading section-space"><div><p class="kicker">What you’ll find in a story</p><h2 class="inner-heading">More than<br>a finished screen.</h2></div><ol><li><span>01</span><div><h3>The situation</h3><p>What needed to work, and what was getting in the way.</p></div></li><li><span>02</span><div><h3>The decisions</h3><p>What we chose to do, and the tradeoffs behind it.</p></div></li><li><span>03</span><div><h3>The result</h3><p>What was delivered, with only outcomes we can verify.</p></div></li></ol></section>
+<div class="inner-site work-page">
+    <section class="inner-shell work-opening">
+        <div>
+            <p class="kicker">Work / The project files</p>
+            <h1 class="inner-title">The thinking<br><span class="text-moss">behind the work.</span></h1>
+        </div>
+        <p class="inner-lede">A useful case study explains the problem, the decisions and what actually changed. We share the detail with the people involved.</p>
+    </section>
+    <section class="inner-shell work-archive">
+        <div class="archive-label">
+            <span class="kicker">Project archive</span><span class="index-number">{{ count($projects) }} {{ count($projects) === 1 ? 'story' : 'stories' }}</span>
+        </div>
+        @forelse($projects as $projectSlug => $project)
+            <article class="archive-entry">
+                <div class="archive-number">
+                    {{ str_pad((string) $loop->iteration, 2, '0', STR_PAD_LEFT) }}
+                </div>
+                <div>
+                    <p class="kicker">{{ isset($project['service']) ? str_replace('-', ' ', $project['service']) : 'Project story' }}</p>
+                    <h2><a href="{{ route('work.show', $projectSlug) }}">{{ $project['title'] }} <span aria-hidden="true">↗</span></a></h2>
+                    <p>{{ $project['summary'] }}</p>
+                </div>
+                @if(!empty($project['image']))
+                    <img src="{{ asset($project['image']) }}" alt="{{ $project['image_alt'] ?? '' }}" width="1200" height="750" loading="lazy">
+                @endif
+            </article>
+        @empty
+            <div class="archive-empty">
+                <div class="folder-sketch" aria-hidden="true">
+                    <span></span><i></i><b>PROJECT NOTES</b><small>Ready when the story is.</small>
+                </div>
+                <div>
+                    <p class="hand-note">The story matters<br>as much as the screenshot.</p>
+                    <h2 class="inner-heading">Our project files<br>are being prepared.</h2>
+                    <p class="inner-body">Nothing to publish here just yet. We’ll share work once the details and permission are ready. In the meantime, we can talk about what your project needs.</p>
+                    <a href="{{ route('contact.show') }}" class="inner-link">Discuss a project ↗</a>
+                </div>
+            </div>
+        @endforelse
+    </section>
+    <section class="inner-shell work-reading section-space">
+        <div>
+            <p class="kicker">What you’ll find in a story</p>
+            <h2 class="inner-heading">More than<br>a finished screen.</h2>
+        </div>
+        <ol>
+            <li><span>01</span>
+            <div>
+                <h3>The situation</h3>
+                <p>What needed to work, and what was getting in the way.</p>
+            </div>
+            </li>
+            <li><span>02</span>
+            <div>
+                <h3>The decisions</h3>
+                <p>What we chose to do, and the tradeoffs behind it.</p>
+            </div>
+            </li>
+            <li><span>03</span>
+            <div>
+                <h3>The result</h3>
+                <p>What was delivered, with only outcomes we can verify.</p>
+            </div>
+            </li>
+        </ol>
+    </section>
 </div>
 @endsection
