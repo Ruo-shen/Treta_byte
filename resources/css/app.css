@@ -20,6 +20,8 @@
   --font-sans: 'Inter Tight', ui-sans-serif, system-ui, sans-serif;
   --color-moss: #4c6656;
   --color-danger: #a63326;
+  --color-dark: #1b1c1e;
+  --color-note: #fbf8ec;
   --font-hand: 'Caveat', cursive;
   --font-mono: 'JetBrains Mono', ui-monospace, monospace;
 }
@@ -106,6 +108,7 @@ body {
 .reveal { opacity: 1; transform: none; }
 [hidden] { display: none !important; }
 :focus-visible { outline: 2px solid var(--color-accent); outline-offset: 5px; }
+.on-dark :focus-visible { outline-color: #fff; }
 html { scroll-padding-top: 88px; }
 html.lenis { scroll-padding-top: 0; }
 .site-header[data-open] { max-height: 100dvh; overflow-y: auto; border-bottom: 1px solid var(--color-line); background: color-mix(in srgb, var(--color-paper) 95%, transparent); backdrop-filter: blur(12px); }
