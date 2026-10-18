@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500;600;700&family=Caveat:wght@500&family=JetBrains+Mono:wght@400;500&display=swap');
 @import 'tailwindcss';
+@import 'lenis/dist/lenis.css';
 @source '../views/**/*.blade.php';
 @source '../../config/services.php';
 
@@ -18,7 +19,7 @@
 }
 
 html {
-  scroll-behavior: smooth;
+  scroll-behavior: auto;
 }
 
 body {
@@ -100,6 +101,7 @@ body {
 [hidden] { display: none !important; }
 :focus-visible { outline: 2px solid var(--color-accent); outline-offset: 5px; }
 html { scroll-padding-top: 88px; }
+html.lenis { scroll-padding-top: 0; }
 .site-header[data-open] { max-height: 100dvh; overflow-y: auto; border-bottom: 1px solid var(--color-line); background: color-mix(in srgb, var(--color-paper) 95%, transparent); backdrop-filter: blur(12px); }
 .header-shell { max-width: 1320px; height: 72px; transform: translateY(0); }
 .site-header[data-compact] .header-shell { max-width: 500px; height: 50px; transform: translateY(10px); padding-inline: 6px; border-color: var(--color-line); background: rgb(255 255 255 / 90%); box-shadow: 0 10px 30px -18px rgb(23 25 27 / 35%); backdrop-filter: blur(12px); }

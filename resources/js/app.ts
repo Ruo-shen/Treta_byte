@@ -1,6 +1,82 @@
+import Lenis from "lenis"
+
 const header = document.querySelector("header")
 const toggle = document.querySelector<HTMLButtonElement>("[data-menu-toggle]")
 const menu = document.querySelector<HTMLElement>("#mobile-navigation")
+const reducedMotion = matchMedia("(prefers-reduced-motion: reduce)")
+let lenis: Lenis | undefined
+const configureScrolling = () => {
+  lenis?.destroy()
+  if (reducedMotion.matches) {
+    document.getAnimations().forEach((animation) => animation.cancel())
+  }
+  lenis = reducedMotion.matches
+    ? undefined
+    : new Lenis({
+        duration: 1.1,
+        easing: (t) => 1 - Math.pow(1 - t, 4),
+        autoRaf: true,
+        prevent: (node) =>
+          node === header || node instanceof HTMLTextAreaElement,
+      })
+}
+configureScrolling()
+reducedMotion.addEventListener("change", configureScrolling)
+
+// Keep native link/history/focus semantics while Lenis owns only the movement.
+document.addEventListener("click", (event) => {
+  if (
+    !lenis ||
+    event.defaultPrevented ||
+    event.button !== 0 ||
+    event.metaKey ||
+    event.ctrlKey ||
+    event.shiftKey ||
+    event.altKey
+  )
+    return
+  const link = (event.target as Element).closest<HTMLAnchorElement>("a[href]")
+  if (
+    !link ||
+    link.hasAttribute("download") ||
+    (link.target && link.target !== "_self")
+  )
+    return
+  const url = new URL(link.href)
+  if (
+    url.origin !== location.origin ||
+    url.pathname !== location.pathname ||
+    url.search !== location.search ||
+    !url.hash
+  )
+    return
+  let id: string
+  try {
+    id = decodeURIComponent(url.hash.slice(1))
+  } catch {
+    return
+  }
+  const target = document.getElementById(id)
+  if (!target) return
+  event.preventDefault()
+  if (location.hash !== url.hash) history.pushState(null, "", url.hash)
+  lenis.scrollTo(target, {
+    offset: link.classList.contains("skip-link") ? 0 : -80,
+    immediate: link.classList.contains("skip-link"),
+    onComplete: () => {
+      if (!target.hasAttribute("tabindex")) {
+        target.setAttribute("tabindex", "-1")
+        target.addEventListener(
+          "blur",
+          () => target.removeAttribute("tabindex"),
+          { once: true },
+        )
+      }
+      target.focus({ preventScroll: true })
+    },
+  })
+})
+
 let scrolled = false
 const syncHeader = () =>
   header?.toggleAttribute("data-compact", scrolled && !!menu?.hidden)
@@ -61,23 +137,24 @@ document
     fit()
   })
 
-if (!matchMedia("(prefers-reduced-motion: reduce)").matches) {
+if (!reducedMotion.matches) {
   const observer = new IntersectionObserver(
     (entries) => {
       for (const entry of entries) {
         if (!entry.isIntersecting) continue
         const element = entry.target as HTMLElement
-        element.animate(
-          [
-            { opacity: 0, transform: "translateY(18px)" },
-            { opacity: 1, transform: "none" },
-          ],
-          {
-            duration: 800,
-            delay: parseFloat(element.style.transitionDelay) || 0,
-            easing: "cubic-bezier(0.2, 0.7, 0.2, 1)",
-          },
-        )
+        if (!reducedMotion.matches)
+          element.animate(
+            [
+              { opacity: 0, transform: "translateY(18px)" },
+              { opacity: 1, transform: "none" },
+            ],
+            {
+              duration: 800,
+              delay: parseFloat(element.style.transitionDelay) || 0,
+              easing: "cubic-bezier(0.2, 0.7, 0.2, 1)",
+            },
+          )
         observer.unobserve(element)
       }
     },
