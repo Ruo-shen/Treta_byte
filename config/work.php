@@ -17,7 +17,9 @@
 |       'seo_title' => '...',
 |       'meta_description' => '...',
 |       'service' => 'web-development',   // optional related service slug
-|       'image' => 'images/work/x.webp', 'image_alt' => '...', 'image_caption' => '...', // optional
+|       'image' => 'images/work/x.webp', 'image_alt' => '...', 'image_caption' => '...', // optional cover
+|       'image_width' => 1600, 'image_height' => 1000,   // optional; read from the file when omitted
+|       'gallery' => [['image' => 'images/work/y.webp', 'alt' => '...', 'caption' => '...']], // optional
 |       'facts' => ['Client' => '...'],    // optional label => value
 |       'chapters' => [['id' => 'problem', 'title' => '...', 'paragraphs' => ['...'], 'points' => ['...']]],
 |       'outcomes' => ['...'],             // optional
