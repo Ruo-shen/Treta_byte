@@ -34,9 +34,6 @@
                 </div>
             </div>
         </div>
-        <div class="mt-5 flex flex-col gap-3 text-[15px] text-muted sm:flex-row sm:flex-wrap sm:items-center sm:gap-x-8">
-            <p>Based in Nepal. Working worldwide.</p>
-            <x-inner.placeholder what="contact details: public email, phone or WhatsApp, working hours (owner to supply, approved)" />
-        </div>
+        <x-inner.placeholder class="mt-5" what="contact details: public email, phone or WhatsApp, working hours (owner to supply, approved)" />
     </div>
 </section>
