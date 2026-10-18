@@ -22,7 +22,7 @@
     <ul class="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         @foreach([
             ['Clear.', 'Plain language, useful questions and a scope you can understand.', 'border border-line bg-white'],
-            ['Considered.', 'Choices shaped around the business and the people using the system.', 'bg-[#e4e8df]'],
+            ['Considered.', 'Choices shaped around the business and the people using the system.', 'bg-mist'],
             ['Accountable.', 'Visible progress, honest tradeoffs and responsibility for the work.', 'border border-line bg-white'],
             ['Human.', 'A conversation with the people involved, without the unnecessary layers.', 'on-dark bg-dark text-white'],
         ] as $n => [$value, $text, $tone])
@@ -49,6 +49,6 @@
 @endif
 
 <x-inner.cta label="Let’s talk" body="Tell us what you’re working on.">
-    <x-slot:heading>Good collaboration starts<br><span class="text-[#a7b3a6]">with a conversation.</span></x-slot:heading>
+    <x-slot:heading>Good collaboration starts<br><span class="text-sage">with a conversation.</span></x-slot:heading>
 </x-inner.cta>
 @endsection

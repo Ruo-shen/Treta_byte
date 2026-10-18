@@ -19,7 +19,7 @@
             <div class="relative max-w-[640px]">
                 <x-inner.kicker dark>{{ $kicker }}</x-inner.kicker>
                 <h2 class="mt-6 text-[clamp(2.1rem,6vw,3.05rem)] font-medium leading-[1.12] tracking-[-0.035em]">
-                    @isset($heading){{ $heading }}@else Have something that needs<br><span class="text-[#a7b3a6]">fixing or building?</span>@endisset
+                    @isset($heading){{ $heading }}@else Have something that needs<br><span class="text-sage">fixing or building?</span>@endisset
                 </h2>
                 <p class="mt-6 max-w-[480px] text-[16.5px] leading-[1.55] text-white/70">{{ $body }}</p>
                 <div class="mt-8 flex flex-wrap items-center gap-x-9 gap-y-5">

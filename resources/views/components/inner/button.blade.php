@@ -2,7 +2,7 @@
 @php
     $styles = [
         'ink' => 'min-h-[52px] rounded-[8px] bg-ink px-6 text-white hover:bg-accent',
-        'accent' => 'min-h-[52px] rounded-[8px] bg-accent px-6 text-white hover:bg-[#2a4fd0]',
+        'accent' => 'min-h-[52px] rounded-[8px] bg-accent px-6 text-white hover:bg-accent-hover',
         'link' => 'min-h-11 border-b border-current/40 pb-0.5 hover:border-current',
     ][$variant] ?? '';
 @endphp

@@ -64,6 +64,6 @@
 </x-inner.band>
 
 <x-inner.cta label="Discuss a project" body="Start with what you know. We’ll ask the useful questions.">
-    <x-slot:heading>Let’s talk about<br><span class="text-[#a7b3a6]">what your project needs.</span></x-slot:heading>
+    <x-slot:heading>Let’s talk about<br><span class="text-sage">what your project needs.</span></x-slot:heading>
 </x-inner.cta>
 @endsection

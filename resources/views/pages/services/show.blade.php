@@ -15,7 +15,7 @@
                 @foreach($service['deliverables'] as $item)
                     <li class="flex gap-4 py-5 first:pt-0 last:pb-0">
                         <span class="mt-1 grid h-6 w-6 shrink-0 place-items-center rounded-[5px] border border-moss/50 text-moss" aria-hidden="true">
-                            <svg viewBox="0 0 12 12" class="h-3 w-3" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2.5 6.5l2.2 2.2L9.5 3.5" /></svg>
+                            <x-inner.check />
                         </span>
                         <div>
                             <h3 class="text-[19px] font-medium leading-snug tracking-[-0.01em]">{{ $item['name'] }}</h3>

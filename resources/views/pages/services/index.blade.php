@@ -54,6 +54,6 @@
 </x-inner.band>
 
 <x-inner.cta label="Help me find a starting point" body="Start with what you know. We’ll ask the useful questions.">
-    <x-slot:heading>Same team.<br><span class="text-[#a7b3a6]">Different starting points.</span></x-slot:heading>
+    <x-slot:heading>Same team.<br><span class="text-sage">Different starting points.</span></x-slot:heading>
 </x-inner.cta>
 @endsection
