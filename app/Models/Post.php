@@ -7,6 +7,7 @@ use Database\Factories\PostFactory;
 use Filament\Forms\Components\RichEditor\RichContentRenderer;
 use Illuminate\Database\Eloquent\Attributes\Scope;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -132,6 +133,16 @@ class Post extends Model
         }
 
         return ['url' => $disk->url($path), 'width' => $size[0], 'height' => $size[1]];
+    }
+
+    /** Whole minutes to read the article at ~220 words per minute (minimum 1): $post->reading_time. */
+    protected function readingTime(): Attribute
+    {
+        return Attribute::get(function (): int {
+            $words = preg_split('/\s+/u', trim(strip_tags($this->contentHtml())), -1, PREG_SPLIT_NO_EMPTY);
+
+            return max(1, (int) ceil(count($words) / 220));
+        });
     }
 
     public function author(): BelongsTo
