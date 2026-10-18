@@ -15,7 +15,7 @@ class PublicSiteTest extends TestCase
     public function test_static_and_service_routes_render_server_side(): void
     {
         foreach (['/', '/services', '/work', '/about', '/contact', '/blog', '/privacy'] as $url) {
-            $this->get($url)->assertOk()->assertSee('<h1>', false)->assertSee('rel="canonical"', false);
+            $this->get($url)->assertOk()->assertSee('<h1', false)->assertSee('rel="canonical"', false);
         }
 
         foreach (['web-development', 'website-repair', 'website-maintenance', 'web-applications'] as $slug) {
@@ -106,8 +106,10 @@ class PublicSiteTest extends TestCase
             $this->assertStringNotContainsString("/blog/{$hidden->slug}<", $xml);
         }
 
-        // Incomplete pages stay out: no approved service copy, no enabled projects, privacy unapproved, no admin.
-        $this->assertStringNotContainsString('/services/', $xml);
+        // Services with approved SEO copy are listed; no enabled projects, privacy unapproved, no admin.
+        foreach (array_keys(config('services.offerings')) as $slug) {
+            $this->assertStringContainsString("<loc>https://tretalab.com/services/{$slug}</loc>", $xml);
+        }
         $this->assertStringNotContainsString('/work/', $xml);
         $this->assertStringNotContainsString('/privacy', $xml);
         $this->assertStringNotContainsString('/admin', $xml);
@@ -115,13 +117,12 @@ class PublicSiteTest extends TestCase
         $this->assertNotFalse(simplexml_load_string($xml));
     }
 
-    public function test_service_enters_sitemap_once_its_seo_copy_exists(): void
+    public function test_service_without_approved_seo_copy_stays_out_of_the_sitemap(): void
     {
-        config([
-            'services.offerings.website-repair.seo_title' => 'Website repair',
-            'services.offerings.website-repair.meta_description' => 'Approved description',
-        ]);
+        config(['services.offerings.website-repair.meta_description' => null]);
 
-        $this->get('/sitemap.xml')->assertSee('/services/website-repair</loc>', false);
+        $this->get('/sitemap.xml')
+            ->assertDontSee('/services/website-repair</loc>', false)
+            ->assertSee('/services/web-development</loc>', false);
     }
 }

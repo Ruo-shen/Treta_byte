@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
@@ -66,6 +67,22 @@ class Post extends Model
             }
         });
 
+        // A live post whose slug changes keeps answering at its old URL (301 to the new one).
+        static::updated(function (Post $post) {
+            if (! $post->wasChanged('slug')) {
+                return;
+            }
+
+            DB::table('post_slug_redirects')->where('old_slug', $post->slug)->delete();
+
+            if ($post->getOriginal('status') === PostStatus::Published && $post->getOriginal('published_at') !== null) {
+                DB::table('post_slug_redirects')->updateOrInsert(
+                    ['old_slug' => $post->getOriginal('slug')],
+                    ['post_id' => $post->id, 'created_at' => now(), 'updated_at' => now()],
+                );
+            }
+        });
+
         // Replaced or removed images must not linger as public files.
         static::updated(function (Post $post) {
             foreach (self::IMAGE_COLUMNS as $column) {
@@ -102,6 +119,19 @@ class Post extends Model
     public function contentHtml(): string
     {
         return blank($this->content) ? '' : RichContentRenderer::make($this->content)->toHtml();
+    }
+
+    /** Featured image for Blade: url plus intrinsic size from the public-disk file, or null when absent or unreadable. */
+    public function featuredImage(): ?array
+    {
+        $path = $this->featured_image_path;
+        $disk = Storage::disk('public');
+
+        if (blank($path) || ! $disk->exists($path) || ! $size = @getimagesize($disk->path($path))) {
+            return null;
+        }
+
+        return ['url' => $disk->url($path), 'width' => $size[0], 'height' => $size[1]];
     }
 
     public function author(): BelongsTo
