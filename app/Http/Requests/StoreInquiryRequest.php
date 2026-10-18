@@ -20,7 +20,7 @@ class StoreInquiryRequest extends FormRequest
     {
         return [
             'name' => ['required', 'string', 'max:100'],
-            'email' => ['required', 'string', 'email:rfc', 'max:255'],
+            'email' => ['required', 'string', 'email:rfc', 'max:255', 'regex:/^[^?&=%]+@[^@]+$/'],
             'company' => ['nullable', 'string', 'max:150'],
             'topic' => ['required', Rule::enum(InquiryTopic::class)],
             'message' => ['required', 'string', 'min:10', 'max:5000'],

@@ -24,7 +24,7 @@ class PostsTable
             ->defaultSort('created_at', 'desc')
             ->columns([
                 ImageColumn::make('featured_image_path')
-                    ->label('')
+                    ->label('Image')
                     ->disk('public')
                     ->imageSize(48)
                     ->extraImgAttributes(['class' => 'rounded-md object-cover'])

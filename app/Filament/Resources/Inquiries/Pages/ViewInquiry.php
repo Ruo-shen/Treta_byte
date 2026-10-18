@@ -32,7 +32,7 @@ class ViewInquiry extends ViewRecord
             Action::make('reply')
                 ->label('Reply by email')
                 ->icon(Heroicon::OutlinedEnvelope)
-                ->url(fn (Inquiry $record) => 'mailto:'.$record->email.'?subject='.rawurlencode('Re: your message to TRETA Lab')),
+                ->url(fn (Inquiry $record) => 'mailto:'.rawurlencode($record->email).'?subject='.rawurlencode('Re: your message to TRETA Lab')),
             ActionGroup::make([
                 self::statusAction('markRead', 'Mark as read', InquiryStatus::Read, Heroicon::OutlinedEye),
                 self::statusAction('markReplied', 'Mark as replied', InquiryStatus::Replied, Heroicon::OutlinedCheckCircle),

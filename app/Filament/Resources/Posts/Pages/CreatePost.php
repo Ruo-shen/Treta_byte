@@ -9,7 +9,7 @@ class CreatePost extends CreateRecord
 {
     protected static string $resource = PostResource::class;
 
-    public static bool $formActionsAreSticky = true;
+    public static bool $formActionsAreSticky = false;
 
     protected function mutateFormDataBeforeCreate(array $data): array
     {

@@ -39,7 +39,7 @@ class InquiryInfolist
                                 ->icon(Heroicon::OutlinedEnvelope)
                                 ->copyable()
                                 ->copyMessage('Email copied')
-                                ->url(fn ($record) => 'mailto:'.$record->email),
+                                ->url(fn ($record) => 'mailto:'.rawurlencode($record->email)),
                             TextEntry::make('company')->placeholder('Not provided'),
                         ]),
                         Section::make('Details')->schema([

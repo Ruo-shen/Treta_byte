@@ -39,6 +39,16 @@ class AdminInquiryViewTest extends TestCase
             ->assertActionExists('reply');
     }
 
+    public function test_reply_link_encodes_the_address(): void
+    {
+        $inquiry = Inquiry::factory()->create(['email' => 'bob?bcc=evil@evil.tld']);
+
+        $html = $this->actingAs(User::factory()->create())->get("/admin/inquiries/{$inquiry->id}")->assertOk()->getContent();
+
+        $this->assertStringContainsString('mailto:bob%3Fbcc%3Devil%40evil.tld', $html);
+        $this->assertStringNotContainsString('mailto:bob?', $html);
+    }
+
     public function test_status_actions_update_only_the_status(): void
     {
         $this->actingAs(User::factory()->create());

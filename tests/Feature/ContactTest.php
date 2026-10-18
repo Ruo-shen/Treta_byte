@@ -59,6 +59,27 @@ class ContactTest extends TestCase
         $this->assertSame(0, Inquiry::count());
     }
 
+    #[DataProvider('mailtoPayloads')]
+    public function test_email_local_part_cannot_carry_mailto_parameters(string $email): void
+    {
+        $this->from('/contact')->post('/contact', [...$this->valid, 'email' => $email])
+            ->assertSessionHasErrors('email');
+
+        $this->assertSame(0, Inquiry::count());
+    }
+
+    public static function mailtoPayloads(): array
+    {
+        return [['bob?bcc=evil@evil.tld'], ['a&b@example.com'], ['a=b@example.com'], ['a%20b@example.com']];
+    }
+
+    public function test_plus_addressing_is_still_accepted(): void
+    {
+        $this->from('/contact')->post('/contact', [...$this->valid, 'email' => 'asha+news@example.com'])
+            ->assertSessionHasNoErrors();
+        $this->assertSame(1, Inquiry::count());
+    }
+
     public function test_redirect_never_leaves_the_site(): void
     {
         $this->post('/contact', $this->valid, ['Referer' => 'https://evil.test/phish'])
