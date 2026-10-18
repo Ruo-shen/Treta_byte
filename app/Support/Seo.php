@@ -36,10 +36,10 @@ class Seo
         return self::make(config("seo.titles.{$key}"), config("seo.descriptions.{$key}"), $path, $extra);
     }
 
-    /** Organization from facts the site already states: name and URL only. */
+    /** Organization from facts the site already states: name, URL and the logo file we ship. */
     public static function organization(): array
     {
-        return ['@type' => 'Organization', '@id' => self::absolute('/').'#organization', 'name' => config('app.name'), 'url' => self::absolute('/')];
+        return ['@type' => 'Organization', '@id' => self::absolute('/').'#organization', 'name' => config('app.name'), 'url' => self::absolute('/'), 'logo' => self::absolute('/images/brand/treta-mark-512.png')];
     }
 
     /** @param  list<array{0: string, 1: string}>  $crumbs  [name, absolute url] pairs, in order */

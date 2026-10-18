@@ -3,7 +3,7 @@
 <div class="mx-auto w-full max-w-[1300px] px-5 sm:px-8">
 <div class="grid gap-12 border-t border-line pt-14 md:grid-cols-[1.47fr_1fr_1.1fr_0.85fr] md:pt-14 max-md:gap-y-1 max-md:pt-4">
 <div>
-<p class="text-[20px] font-medium tracking-[0.5em]">TRETA</p>
+<p class="flex items-center gap-3 text-[20px] font-medium tracking-[0.5em]"><img src="/images/brand/treta-mark-96.png" alt="" width="28" height="28" class="h-7 w-7" aria-hidden="true" loading="lazy">TRETA</p>
 <p class="mt-9 text-[17px] leading-[1.55] text-ink/75 max-md:mt-2 max-md:text-[15px]">Technology should work for you.<br>Independent digital solutions studio.</p>
 </div>
 <nav aria-label="Studio">

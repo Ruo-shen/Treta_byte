@@ -33,7 +33,7 @@ class AdminPanelProvider extends PanelProvider
             ->path('admin')
             ->login(Login::class)
             ->brandName('TRETA')
-            ->brandLogo(new HtmlString('<span class="treta-logo">TRETA</span>'))
+            ->brandLogo(new HtmlString('<span class="treta-logo"><img src="'.e(asset('images/brand/treta-mark-96.png')).'" alt="" width="24" height="24" class="treta-logo-mark">TRETA</span>'))
             ->favicon(asset('favicon.ico'))
             ->font('Inter Tight')
             ->monoFont('JetBrains Mono')

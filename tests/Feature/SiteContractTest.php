@@ -50,7 +50,7 @@ class SiteContractTest extends TestCase
 
         $draft = Post::factory()->create(['featured_image_path' => 'posts/missing.png']);
         $this->actingAs(User::factory()->create())->get("/admin/preview/posts/{$draft->id}")
-            ->assertOk()->assertSee('Preview — not published')->assertDontSee('<img', false);
+            ->assertOk()->assertSee('Preview — not published')->assertDontSee('class="h-auto w-full rounded-[14px]"', false);
     }
 
     public function test_blog_pagination_renders_project_markup(): void
@@ -106,8 +106,9 @@ class SiteContractTest extends TestCase
         $this->assertSame(['Organization', 'WebSite'], array_column($graph, '@type'));
         $this->assertSame('TRETA', $graph[0]['name']);
         $this->assertSame('https://tretabyte.com/', $graph[0]['url']);
-        $this->assertEqualsCanonicalizing(['@type', '@id', 'name', 'url'], array_keys($graph[0]));
-        foreach (['logo', 'sameAs', 'address', 'telephone', 'email', 'contactPoint'] as $invented) {
+        $this->assertEqualsCanonicalizing(['@type', '@id', 'name', 'url', 'logo'], array_keys($graph[0]));
+        $this->assertSame('https://tretabyte.com/images/brand/treta-mark-512.png', $graph[0]['logo']);
+        foreach (['sameAs', 'address', 'telephone', 'email', 'contactPoint'] as $invented) {
             $this->assertArrayNotHasKey($invented, $graph[0]);
         }
     }

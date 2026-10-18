@@ -8,14 +8,14 @@
     href="/"
     aria-label="TRETA home"
     class="relative flex h-11 shrink-0 items-center md:h-[36px] transition-[width] duration-500
-        ease-[cubic-bezier(0.22,1,0.36,1)] w-[120px] header-brand">
+        ease-[cubic-bezier(0.22,1,0.36,1)] w-[156px] header-brand">
 <span
-    class="absolute left-0 text-[19px] font-medium tracking-[0.42em] transition-all duration-500
-        ease-[cubic-bezier(0.22,1,0.36,1)] opacity-100 header-wordmark">TRETA</span>
+    class="absolute left-0 flex items-center gap-3 text-[19px] font-medium tracking-[0.42em] transition-all duration-500
+        ease-[cubic-bezier(0.22,1,0.36,1)] opacity-100 header-wordmark"><img src="/images/brand/treta-mark-96.png" alt="" width="26" height="26" class="h-[26px] w-[26px]" aria-hidden="true">TRETA</span>
 <span
     class="absolute left-0 flex h-[36px] w-[36px] items-center justify-center rounded-[10px] border
         border-line bg-paper text-[14px] font-semibold tracking-[-0.02em] transition-all
-        duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] scale-75 opacity-0 header-monogram">T<span class="text-accent">.</span>
+        duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] scale-75 opacity-0 header-monogram"><img src="/images/brand/treta-mark-96.png" alt="" width="20" height="20" class="h-5 w-5" aria-hidden="true">
 </span>
 </a>
 <nav class="hidden items-center md:flex header-links" aria-label="Primary">
