@@ -1,4 +1,4 @@
-# TRETA Lab agent instructions
+# TRETA agent instructions
 
 This file is the operating contract for every coding agent working in this repository.
 
@@ -14,7 +14,7 @@ Repository documents are authoritative. A task prompt may narrow the work, but i
 
 ## Product rule
 
-TRETA Lab V1 is a customer-acquisition website, not a software platform. Build the smallest reliable implementation that produces an excellent public website, publishes articles, and stores inquiries.
+TRETA V1 is a customer-acquisition website, not a software platform. Build the smallest reliable implementation that produces an excellent public website, publishes articles, and stores inquiries.
 
 Do not add a client portal, customer accounts, payments, CRM, page builder, public API, multi-tenancy, Redis, queues, WebSockets, Node production server, or speculative infrastructure.
 

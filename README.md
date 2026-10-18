@@ -1,6 +1,6 @@
-# TRETA Lab
+# TRETA
 
-TRETA Lab is a small technology studio offering **Fix**, **Build**, and **Care** services. This repository will contain one Laravel application for its public website, blog, inquiry form, and staff administration.
+TRETA is a small technology studio offering **Fix**, **Build**, and **Care** services. This repository will contain one Laravel application for its public website, blog, inquiry form, and staff administration.
 
 Canonical GitHub repository: [Ruo-shen/treta_labs](https://github.com/Ruo-shen/treta_labs)
 

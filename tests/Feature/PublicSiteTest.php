@@ -33,10 +33,10 @@ class PublicSiteTest extends TestCase
 
     public function test_canonical_uses_app_url_not_request_host(): void
     {
-        config(['app.url' => 'https://tretalab.com']);
+        config(['app.url' => 'https://tretabyte.com']);
 
         $this->get('http://evil.test/about')
-            ->assertSee('<link rel="canonical" href="https://tretalab.com/about">', false);
+            ->assertSee('<link rel="canonical" href="https://tretabyte.com/about">', false);
     }
 
     public function test_blog_shows_only_live_posts(): void
@@ -86,7 +86,7 @@ class PublicSiteTest extends TestCase
 
     public function test_sitemap_lists_only_canonical_live_urls(): void
     {
-        config(['app.url' => 'https://tretalab.com']);
+        config(['app.url' => 'https://tretabyte.com']);
         $live = Post::factory()->published()->create();
         $draft = Post::factory()->create();
         $future = Post::factory()->scheduled()->create();
@@ -98,9 +98,9 @@ class PublicSiteTest extends TestCase
             ->assertHeader('Content-Type', 'application/xml; charset=UTF-8')
             ->getContent();
 
-        $this->assertStringContainsString('<loc>https://tretalab.com/</loc>', $xml);
-        $this->assertStringContainsString('<loc>https://tretalab.com/blog</loc>', $xml);
-        $this->assertStringContainsString("<loc>https://tretalab.com/blog/{$live->slug}</loc>", $xml);
+        $this->assertStringContainsString('<loc>https://tretabyte.com/</loc>', $xml);
+        $this->assertStringContainsString('<loc>https://tretabyte.com/blog</loc>', $xml);
+        $this->assertStringContainsString("<loc>https://tretabyte.com/blog/{$live->slug}</loc>", $xml);
 
         foreach ([$draft, $future, $noindex, $elsewhere] as $hidden) {
             $this->assertStringNotContainsString("/blog/{$hidden->slug}<", $xml);
@@ -108,7 +108,7 @@ class PublicSiteTest extends TestCase
 
         // Services with approved SEO copy are listed; no enabled projects, privacy unapproved, no admin.
         foreach (array_keys(config('services.offerings')) as $slug) {
-            $this->assertStringContainsString("<loc>https://tretalab.com/services/{$slug}</loc>", $xml);
+            $this->assertStringContainsString("<loc>https://tretabyte.com/services/{$slug}</loc>", $xml);
         }
         $this->assertStringNotContainsString('/work/', $xml);
         $this->assertStringNotContainsString('/privacy', $xml);

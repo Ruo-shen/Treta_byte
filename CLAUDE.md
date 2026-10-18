@@ -1,4 +1,4 @@
-# TRETA Lab — Claude backend entrypoint
+# TRETA — Claude backend entrypoint
 
 Read `AGENTS.md`, `docs/PRODUCT.md`, and `docs/ARCHITECTURE.md` before changing code.
 

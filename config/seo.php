@@ -7,14 +7,14 @@ return [
 
     // Approved page titles (mirrors the approved copy in the frontend preview router).
     'titles' => [
-        'home' => 'TRETA Lab — Fix. Build. Care.',
-        'services' => 'Services — TRETA Lab',
-        'work' => 'Selected work — TRETA Lab',
-        'about' => 'About the studio — TRETA Lab',
-        'contact' => 'Start a conversation — TRETA Lab',
-        'blog' => 'The journal — TRETA Lab',
-        'privacy' => 'Privacy information — TRETA Lab',
-        'not_found' => 'Page not found — TRETA Lab',
+        'home' => 'TRETA — Fix. Build. Care.',
+        'services' => 'Services — TRETA',
+        'work' => 'Selected work — TRETA',
+        'about' => 'About the studio — TRETA',
+        'contact' => 'Start a conversation — TRETA',
+        'blog' => 'The journal — TRETA',
+        'privacy' => 'Privacy information — TRETA',
+        'not_found' => 'Page not found — TRETA',
     ],
 
     // Unique meta descriptions, each taken from approved copy already on that page (no new claims).
@@ -22,7 +22,7 @@ return [
         'home' => 'We came together to fix what’s broken, build what’s needed, and care for what matters. You talk directly to the people doing the work.',
         'services' => 'A one-off repair, a new website, or someone to keep things running. Start with the problem; we’ll work out the right next step together.',
         'work' => 'Project stories should show what actually happened: the problem, the work, and what changed. We publish them with the people involved.',
-        'about' => 'We started TRETA Lab around a simple idea: technology should work for the people who depend on it.',
+        'about' => 'We started TRETA around a simple idea: technology should work for the people who depend on it.',
         'contact' => 'A broken website, an idea for something new, or a system that needs care. You don’t need a technical brief to get started.',
         'blog' => 'Notes on websites, systems, and the practical work of keeping technology useful.',
         'privacy' => 'This page is being prepared alongside the inquiry service. Final storage, retention, email delivery, and contact details must be confirmed before launch.',

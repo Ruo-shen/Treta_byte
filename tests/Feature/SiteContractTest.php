@@ -68,13 +68,13 @@ class SiteContractTest extends TestCase
     public function test_pages_use_approved_titles_and_default_description(): void
     {
         $titles = [
-            '/' => 'TRETA Lab — Fix. Build. Care.',
-            '/services' => 'Services — TRETA Lab',
-            '/work' => 'Selected work — TRETA Lab',
-            '/about' => 'About the studio — TRETA Lab',
-            '/contact' => 'Start a conversation — TRETA Lab',
-            '/blog' => 'The journal — TRETA Lab',
-            '/privacy' => 'Privacy information — TRETA Lab',
+            '/' => 'TRETA — Fix. Build. Care.',
+            '/services' => 'Services — TRETA',
+            '/work' => 'Selected work — TRETA',
+            '/about' => 'About the studio — TRETA',
+            '/contact' => 'Start a conversation — TRETA',
+            '/blog' => 'The journal — TRETA',
+            '/privacy' => 'Privacy information — TRETA',
         ];
 
         foreach ($titles as $url => $title) {
@@ -91,7 +91,7 @@ class SiteContractTest extends TestCase
     {
         foreach (['/nope', '/blog/missing', '/services/missing'] as $url) {
             $this->get($url)->assertNotFound()
-                ->assertSee('<title>Page not found — TRETA Lab</title>', false)
+                ->assertSee('<title>Page not found — TRETA</title>', false)
                 ->assertSee('content="noindex,follow"', false);
         }
     }
@@ -100,12 +100,12 @@ class SiteContractTest extends TestCase
 
     public function test_home_has_organization_and_website_with_only_known_facts(): void
     {
-        config(['app.url' => 'https://tretalab.com', 'app.name' => 'TRETA Lab']);
+        config(['app.url' => 'https://tretabyte.com', 'app.name' => 'TRETA']);
         $graph = $this->jsonLd($this->get('/')->getContent())['@graph'];
 
         $this->assertSame(['Organization', 'WebSite'], array_column($graph, '@type'));
-        $this->assertSame('TRETA Lab', $graph[0]['name']);
-        $this->assertSame('https://tretalab.com/', $graph[0]['url']);
+        $this->assertSame('TRETA', $graph[0]['name']);
+        $this->assertSame('https://tretabyte.com/', $graph[0]['url']);
         $this->assertEqualsCanonicalizing(['@type', '@id', 'name', 'url'], array_keys($graph[0]));
         foreach (['logo', 'sameAs', 'address', 'telephone', 'email', 'contactPoint'] as $invented) {
             $this->assertArrayNotHasKey($invented, $graph[0]);
@@ -114,12 +114,12 @@ class SiteContractTest extends TestCase
 
     public function test_service_page_has_service_with_provider_and_breadcrumbs(): void
     {
-        config(['app.url' => 'https://tretalab.com']);
+        config(['app.url' => 'https://tretabyte.com']);
         $graph = $this->jsonLd($this->get('/services/web-development')->getContent())['@graph'];
 
         $this->assertSame(['Service', 'BreadcrumbList'], array_column($graph, '@type'));
         $this->assertSame('Organization', $graph[0]['provider']['@type']);
-        $this->assertSame('https://tretalab.com/services/web-development', $graph[0]['url']);
+        $this->assertSame('https://tretabyte.com/services/web-development', $graph[0]['url']);
         $this->assertSame(['Home', 'Services', 'Web development'], array_column($graph[1]['itemListElement'], 'name'));
     }
 
@@ -199,14 +199,14 @@ class SiteContractTest extends TestCase
 
     public function test_robots_in_production_allows_site_blocks_admin_and_lists_sitemap(): void
     {
-        config(['app.url' => 'https://tretalab.com']);
+        config(['app.url' => 'https://tretabyte.com']);
         $this->app['env'] = 'production';
 
         $body = $this->get('/robots.txt')->assertOk()->getContent();
 
         $this->assertStringContainsString("Disallow: /admin\n", $body);
         $this->assertStringNotContainsString("Disallow: /\n", $body);
-        $this->assertStringContainsString('Sitemap: https://tretalab.com/sitemap.xml', $body);
+        $this->assertStringContainsString('Sitemap: https://tretabyte.com/sitemap.xml', $body);
         $this->assertFileDoesNotExist(public_path('robots.txt'));
     }
 
@@ -299,15 +299,15 @@ class SiteContractTest extends TestCase
 
     public function test_blog_pagination_seo(): void
     {
-        config(['app.url' => 'https://tretalab.com']);
+        config(['app.url' => 'https://tretabyte.com']);
         Post::factory()->published()->count(13)->create();
 
-        $this->get('/blog')->assertSee('<link rel="canonical" href="https://tretalab.com/blog">', false)
-            ->assertSee('<title>The journal — TRETA Lab</title>', false);
+        $this->get('/blog')->assertSee('<link rel="canonical" href="https://tretabyte.com/blog">', false)
+            ->assertSee('<title>The journal — TRETA</title>', false);
 
         $page2 = $this->get('/blog?page=2')->assertOk()
-            ->assertSee('<link rel="canonical" href="https://tretalab.com/blog?page=2">', false)
-            ->assertSee('<title>The journal — TRETA Lab — Page 2</title>', false)
+            ->assertSee('<link rel="canonical" href="https://tretabyte.com/blog?page=2">', false)
+            ->assertSee('<title>The journal — TRETA — Page 2</title>', false)
             ->assertDontSee('?page=1', false);
         $page2->assertSee('href="'.route('blog.index').'"', false);
 
@@ -360,9 +360,9 @@ class SiteContractTest extends TestCase
 
         $this->assertNull($problem('http://localhost', 'testing'));
         $this->assertNotNull($problem('http://localhost', 'production'));
-        $this->assertNotNull($problem('http://tretalab.com', 'production'));
+        $this->assertNotNull($problem('http://tretabyte.com', 'production'));
         $this->assertNotNull($problem('https://127.0.0.1', 'production'));
-        $this->assertNull($problem('https://tretalab.com', 'production'));
+        $this->assertNull($problem('https://tretabyte.com', 'production'));
     }
 
     public function test_enabled_project_renders_case_study_template_and_enters_sitemap(): void

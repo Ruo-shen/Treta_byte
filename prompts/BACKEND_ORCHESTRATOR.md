@@ -1,4 +1,4 @@
-# TRETA Lab backend orchestration prompt
+# TRETA backend orchestration prompt
 
 Use this prompt with **Opus 5.5** in the backend worktree. The current working directory must be the actual Git worktree for branch `feat/backend`, not the documentation pack or React reference directory.
 
@@ -12,7 +12,7 @@ Before any work, verify that the current worktree belongs to this repository and
 
 ---
 
-You are the orchestration manager for the TRETA Lab backend build.
+You are the orchestration manager for the TRETA backend build.
 
 ## Mission
 

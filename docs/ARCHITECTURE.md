@@ -1,8 +1,8 @@
-# TRETA Lab V1 architecture
+# TRETA V1 architecture
 
 ## 1. System boundary
 
-TRETA Lab is one Laravel monolith containing:
+TRETA is one Laravel monolith containing:
 
 - Server-rendered public pages
 - A small blog

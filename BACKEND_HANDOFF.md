@@ -50,7 +50,7 @@ Every public view receives `$seo` = `title, description, canonical, robots, og_i
 | `sitemap` | `/sitemap.xml` | XML | none |
 | `robots` | `/robots.txt` | text | production: allow all, `Disallow: /admin`, sitemap line; any other env: `Disallow: /` |
 
-Unknown service, work and blog slugs and unknown paths return a real 404 rendered by `errors/404.blade.php` with title "Page not found — TRETA Lab" and `noindex,follow`. Configured redirects (`config/redirects.php`, 301, empty by default) are registered before the public routes.
+Unknown service, work and blog slugs and unknown paths return a real 404 rendered by `errors/404.blade.php` with title "Page not found — TRETA" and `noindex,follow`. Configured redirects (`config/redirects.php`, 301, empty by default) are registered before the public routes.
 
 - **Article body:** render it only with `{!! $contentHtml !!}` (sanitized by `$post->contentHtml()`). Every other field uses `{{ }}`.
 - **SEO:** page titles come from `config/seo.php` `titles` (the approved copy); services use their own `seo_title`/`meta_description`; description defaults to `seo.default_description`, the same text as the layout's fallback.

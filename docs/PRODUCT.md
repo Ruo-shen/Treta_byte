@@ -1,10 +1,10 @@
-# TRETA Lab V1 product specification
+# TRETA V1 product specification
 
 ## 1. Product summary
 
-TRETA Lab is a technology solutions studio founded by three friends working as one accountable team. It helps businesses fix technical problems, build useful digital systems, and care for the systems they depend on.
+TRETA is a technology solutions studio founded by three friends working as one accountable team. It helps businesses fix technical problems, build useful digital systems, and care for the systems they depend on.
 
-TRETA Lab is not a freelancer marketplace, a large agency, or a SaaS product.
+TRETA is not a freelancer marketplace, a large agency, or a SaaS product.
 
 Primary brand statement:
 
@@ -126,7 +126,7 @@ Expected narrative:
 2. Problems the studio solves
 3. Fix / Build / Care services
 4. Selected approved work
-5. Why TRETA Lab exists
+5. Why TRETA exists
 6. Working process
 7. Human studio story
 8. Contact call to action
@@ -225,7 +225,7 @@ Use existing local illustrations where approved. Optimize them without changing 
 - Only index complete, approved pages.
 - Use a direct, capable, approachable tone.
 - Explain outcomes in plain language.
-- Treat `tretalab.com` as the intended domain, but enforce canonical production behavior only after domain and HTTPS configuration are confirmed.
+- Treat `tretabyte.com` as the intended domain, but enforce canonical production behavior only after domain and HTTPS configuration are confirmed.
 
 ## 10. Acceptance criteria
 

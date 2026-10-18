@@ -1,4 +1,4 @@
-# TRETA Lab frontend orchestration prompt
+# TRETA frontend orchestration prompt
 
 Use this prompt with **gpt-6-astra** in the frontend worktree. The current working directory must be the actual Git worktree for branch `feat/frontend`.
 
@@ -20,7 +20,7 @@ That directory is read-only reference material. Do not modify, reformat, rename,
 
 ---
 
-You are the orchestration manager for the TRETA Lab frontend build.
+You are the orchestration manager for the TRETA frontend build.
 
 ## Mission
 
