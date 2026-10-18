@@ -10,7 +10,7 @@ class WorkController extends Controller
     public function index(): View
     {
         return view('pages.work.index', [
-            'seo' => Seo::make('Work | '.config('app.name')),
+            'seo' => Seo::forPage('work', '/work'),
             'projects' => self::enabledProjects(),
         ]);
     }

@@ -10,7 +10,7 @@ class ServiceController extends Controller
     public function index(): View
     {
         return view('pages.services.index', [
-            'seo' => Seo::make('Services | '.config('app.name')),
+            'seo' => Seo::forPage('services', '/services'),
             'services' => config('services.offerings'),
         ]);
     }
@@ -20,7 +20,7 @@ class ServiceController extends Controller
         $service = config('services.offerings')[$slug] ?? abort(404);
 
         return view('pages.services.show', [
-            'seo' => Seo::make($service['seo_title'] ?: $service['name'].' | '.config('app.name'), $service['meta_description']),
+            'seo' => Seo::forService($slug, $service),
             'slug' => $slug,
             'service' => $service,
             'projects' => array_filter(WorkController::enabledProjects(), fn ($p) => ($p['service'] ?? null) === $slug),

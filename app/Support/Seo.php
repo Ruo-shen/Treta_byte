@@ -30,6 +30,60 @@ class Seo
         return self::make($title, $description, route($name, $params, false), $extra);
     }
 
+    /** SEO for a static page whose approved title lives in config/seo.php `titles`. */
+    public static function forPage(string $key, string $path, array $extra = []): array
+    {
+        return self::make(config("seo.titles.{$key}"), null, $path, $extra);
+    }
+
+    /** Organization from facts the site already states: name and URL only. */
+    public static function organization(): array
+    {
+        return ['@type' => 'Organization', '@id' => self::absolute('/').'#organization', 'name' => config('app.name'), 'url' => self::absolute('/')];
+    }
+
+    /** @param  list<array{0: string, 1: string}>  $crumbs  [name, absolute url] pairs, in order */
+    public static function breadcrumbs(array $crumbs): array
+    {
+        return [
+            '@type' => 'BreadcrumbList',
+            'itemListElement' => array_map(
+                fn (array $c, int $i) => ['@type' => 'ListItem', 'position' => $i + 1, 'name' => $c[0], 'item' => $c[1]],
+                $crumbs,
+                array_keys($crumbs),
+            ),
+        ];
+    }
+
+    /** One JSON-LD document holding several nodes; null values are dropped. */
+    public static function graph(array ...$nodes): array
+    {
+        return ['@context' => 'https://schema.org', '@graph' => array_map(fn (array $n) => array_filter($n, fn ($v) => $v !== null), $nodes)];
+    }
+
+    public static function home(): array
+    {
+        $org = self::organization();
+
+        return self::forPage('home', '/', ['json_ld' => self::graph(
+            $org,
+            ['@type' => 'WebSite', 'name' => config('app.name'), 'url' => self::absolute('/'), 'publisher' => ['@id' => $org['@id']]],
+        )]);
+    }
+
+    /** @param  array<string, mixed>  $service  an entry of config('services.offerings') */
+    public static function forService(string $slug, array $service): array
+    {
+        $url = self::absolute(route('services.show', $slug, false));
+        $title = $service['seo_title'] ?: $service['name'].' | '.config('app.name');
+        $description = $service['meta_description'] ?: null;
+
+        return self::make($title, $description, $url, ['json_ld' => self::graph(
+            ['@type' => 'Service', 'name' => $service['name'], 'description' => $description ?: ($service['summary'] ?? null), 'url' => $url, 'provider' => self::organization()],
+            self::breadcrumbs([['Home', self::absolute('/')], ['Services', self::absolute('/services')], [$service['name'], $url]]),
+        )]);
+    }
+
     public static function forPost(Post $post, bool $preview = false): array
     {
         $canonical = self::absolute(route('blog.show', $post->slug, false));
@@ -42,17 +96,19 @@ class Seo
                 'type' => 'article',
                 'og_image' => $ogImage,
                 'robots' => $preview ? 'noindex,nofollow' : ($post->robots ?: 'index,follow'),
-                'json_ld' => [
-                    '@context' => 'https://schema.org',
-                    '@type' => 'BlogPosting',
-                    'headline' => $post->title,
-                    'description' => $description,
-                    'datePublished' => $post->published_at?->toAtomString(),
-                    'dateModified' => $post->updated_at?->toAtomString(),
-                    'mainEntityOfPage' => $canonical,
-                    'image' => $ogImage,
-                    'publisher' => ['@type' => 'Organization', 'name' => config('app.name')],
-                ],
+                'json_ld' => self::graph(
+                    [
+                        '@type' => 'BlogPosting',
+                        'headline' => $post->title,
+                        'description' => $description,
+                        'datePublished' => $post->published_at?->toAtomString(),
+                        'dateModified' => $post->updated_at?->toAtomString(),
+                        'mainEntityOfPage' => $canonical,
+                        'image' => $ogImage,
+                        'publisher' => ['@type' => 'Organization', 'name' => config('app.name')],
+                    ],
+                    self::breadcrumbs([['Home', self::absolute('/')], ['The journal', self::absolute('/blog')], [$post->title, $canonical]]),
+                ),
             ]),
             'canonical' => self::isHttpUrl($post->canonical_url) ? $post->canonical_url : $canonical,
         ];

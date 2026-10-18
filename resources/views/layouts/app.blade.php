@@ -27,6 +27,13 @@
     @if(!empty($seo['json_ld']))
         <script type="application/ld+json">{!! json_encode($seo['json_ld'], JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_UNESCAPED_SLASHES) !!}</script>
     @endif
+    @if(filled(config('seo.google_site_verification')))
+        <meta name="google-site-verification" content="{{ config('seo.google_site_verification') }}">
+    @endif
+    @if(app()->isProduction() && empty($preview) && !request()->is('admin', 'admin/*') && preg_match('/^G-[A-Z0-9]{4,20}$/', (string) config('seo.ga4_measurement_id')))
+        <script async src="https://www.googletagmanager.com/gtag/js?id={{ config('seo.ga4_measurement_id') }}"></script>
+        <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','{{ config('seo.ga4_measurement_id') }}');</script>
+    @endif
     @vite(['resources/css/app.css', 'resources/js/app.ts'])
 </head>
 <body id="page-top">
