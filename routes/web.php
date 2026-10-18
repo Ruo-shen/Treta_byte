@@ -19,6 +19,9 @@ foreach (Redirects::valid(config('redirects', [])) as $from => $to) {
 
 // Public route contract: docs/ARCHITECTURE.md §4.
 Route::get('/', [PageController::class, 'home'])->name('home');
+if (app()->environment('local')) {
+    Route::get('/home-next', [PageController::class, 'homeNext'])->name('home.next');
+}
 Route::get('/services', [ServiceController::class, 'index'])->name('services.index');
 Route::get('/services/{slug}', [ServiceController::class, 'show'])->name('services.show');
 Route::get('/work', [WorkController::class, 'index'])->name('work.index');

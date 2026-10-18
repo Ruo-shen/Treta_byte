@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Enums\InquiryTopic;
 use App\Support\Seo;
+use Illuminate\Http\Response;
 use Illuminate\View\View;
 
 class PageController extends Controller
@@ -15,6 +16,16 @@ class PageController extends Controller
             'services' => config('services.offerings'),
             'projects' => WorkController::enabledProjects(),
         ]);
+    }
+
+    /** Local-only preview of the next homepage (routes/web.php registers it only when APP_ENV=local). */
+    public function homeNext(): Response
+    {
+        return response()->view('pages.home-next', [
+            'seo' => array_merge(Seo::home(), ['robots' => 'noindex,nofollow']),
+            'services' => config('services.offerings'),
+            'projects' => WorkController::enabledProjects(),
+        ])->header('X-Robots-Tag', 'noindex, nofollow');
     }
 
     public function about(): View
