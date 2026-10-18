@@ -1,9 +1,9 @@
-# Backend handoff (branch `first-backend`)
+# Backend handoff (branch `feat/backend`, integrated with the frontend)
 
 Laravel 12.70 · Filament 5.10 · PHP platform pinned to 8.4.0 (`composer.json`).
-**Hosting is UNVERIFIED:** Babal.Host PHP 8.4, extensions, MySQL 8 and the `public/` document root are assumed, not confirmed.
+**Hosting is UNVERIFIED:** Babal.Host PHP 8.4, extensions, MySQL 8, the `public/` document root and symlink support are assumed, not confirmed.
 
-## Setup
+## Setup (local)
 
 ```powershell
 composer install
@@ -12,10 +12,22 @@ php artisan key:generate
 php artisan migrate
 php artisan storage:link        # featured/social images live on the public disk
 php artisan make:filament-user  # staff accounts; there is no registration
+npm ci; npm run build           # Vite manifest (the test suite does NOT need it: TestCase uses withoutVite())
 php artisan test
 ```
 
-Production `.env`: `APP_ENV=production`, `APP_DEBUG=false`, `APP_URL=https://<domain>`, `DB_CONNECTION=mysql` plus the DB block, `MAIL_MAILER=smtp` (the default `log` mailer delivers nothing yet still marks inquiries notified) with SMTP `MAIL_*`, `MAIL_TIMEOUT` (default 10 s), `INQUIRY_NOTIFY_ADDRESS` (empty means no mail; inquiries are still saved). `QUEUE_CONNECTION=sync`.
+## DEPLOY (shared hosting, no Node at runtime)
+
+1. **Build assets off the server** (local machine or CI): `npm ci && npm run build`, then upload `public/build/` (gitignored, so it must be uploaded or built in CI).
+2. On the server (SSH or the host's Composer tool): `composer install --no-dev -o`. Its `post-autoload-dump` script runs `filament:upgrade`, which publishes Filament assets to `public/css/filament`, `public/js/filament`, `public/fonts/filament` (all gitignored). If Composer cannot run on the host, run `composer install --no-dev -o` locally and upload `vendor/` plus those three folders.
+3. `.env` (never committed): `APP_ENV=production`, `APP_DEBUG=false`, `APP_URL=https://<domain>`, `APP_KEY` (`php artisan key:generate --show` locally), `DB_CONNECTION=mysql` plus the DB block, `SESSION_SECURE_COOKIE=true` once HTTPS-only, `QUEUE_CONNECTION=sync`, `MAIL_MAILER=smtp` with `MAIL_*`, **`MAIL_FROM_ADDRESS` set to a real sender** (empty makes every notification fail; the inquiry is still saved), `INQUIRY_NOTIFY_ADDRESS` (empty = no mail). `TRUSTED_PROXIES` only if behind a proxy/CDN.
+4. `php artisan migrate --force`
+5. `php artisan storage:link`. If the host forbids symlinks, create the link `public/storage -> ../storage/app/public` in the host panel; without it uploaded images 404 (and post pages simply omit the image).
+6. `php artisan optimize` (config, route, event and view caches; verified working). After any `.env` or deploy change run `php artisan optimize:clear && php artisan optimize`. Re-run `php artisan filament:upgrade` after updating Filament.
+7. Document root must be `public/`. Make `storage/` and `bootstrap/cache/` writable.
+8. Post-deploy checks: `/robots.txt` (production shows `Disallow: /admin` and the sitemap line), `/sitemap.xml`, `/admin/login`, a 404 URL, submit the contact form.
+
+No cron and no queue worker are needed: scheduled posts go live by themselves because the `published` scope compares `published_at` to the current time on each request (verified by tests). Nothing is scheduled in `routes/console.php`. `CACHE_STORE=database` and `SESSION_DRIVER=database` use the same MySQL database.
 
 ## Routes → views → data
 
@@ -28,65 +40,66 @@ Every public view receives `$seo` = `title, description, canonical, robots, og_i
 | `services.show` | `/services/{slug}` | `pages.services.show` | `$slug`, `$service`, `$projects` (related) |
 | `work.index` | `/work` | `pages.work.index` | `$projects` (enabled only) |
 | `work.show` | `/work/{slug}` | `pages.work.{slug}` | `$slug`, `$project` |
-| `about` | `/about` | `pages.about` | — |
+| `about` | `/about` | `pages.about` | none |
 | `contact.show` | `/contact` | `pages.contact` | `$topics` (value => label) |
-| `contact.store` | `POST /contact` | redirect | — |
-| `blog.index` | `/blog` | `blog.index` | `$posts` (paginator, 12 per page), `$categories` (with live posts) |
-| `blog.show` | `/blog/{slug}` | `blog.show` | `$post`, `$preview` (false) |
-| `posts.preview` | `/admin/preview/posts/{id}` | `blog.show` | `$preview` = true; staff only; `noindex` header |
-| `privacy` | `/privacy` | `pages.privacy` | — |
-| `sitemap` | `/sitemap.xml` | XML | — |
+| `contact.store` | `POST /contact` | redirect | none |
+| `blog.index` | `/blog` | `blog.index` | `$posts` (paginator, 12 per page, project pagination view), `$categories` |
+| `blog.show` | `/blog/{slug}` | `blog.show` | `$post`, `$preview` (false), `$contentHtml`, `$featuredImage` (`null` or `{url,width,height}`); a changed slug of a live post 301s to the new one |
+| `posts.preview` | `/admin/preview/posts/{id}` | `blog.show` | same, `$preview` = true; staff only; `noindex` header; the view shows "Preview — not published" |
+| `privacy` | `/privacy` | `pages.privacy` | none |
+| `sitemap` | `/sitemap.xml` | XML | none |
+| `robots` | `/robots.txt` | text | production: allow all, `Disallow: /admin`, sitemap line; any other env: `Disallow: /` |
 
-Unknown service, work and blog slugs return a real 404. Laravel uses `errors/404.blade.php` once the frontend adds it.
+Unknown service, work and blog slugs and unknown paths return a real 404 rendered by `errors/404.blade.php` with title "Page not found — TRETA Lab" and `noindex,follow`. Configured redirects (`config/redirects.php`, 301, empty by default) are registered before the public routes.
 
-- **Article body:** render it only with `{!! $post->contentHtml() !!}`, which is sanitized. Every other field uses `{{ }}`.
-- **Image URLs:** `Storage::url($post->featured_image_path)`, with alt text from `$post->featured_image_alt`.
+- **Article body:** render it only with `{!! $contentHtml !!}` (sanitized by `$post->contentHtml()`). Every other field uses `{{ }}`.
+- **SEO:** page titles come from `config/seo.php` `titles` (the approved copy); services use their own `seo_title`/`meta_description`; description defaults to `seo.default_description`, the same text as the layout's fallback.
+- **Structured data** (`$seo['json_ld']`, one `@graph` per page, JSON-safe): home = Organization + WebSite (name and URL only); service = Service (provider Organization) + BreadcrumbList; article = BlogPosting + BreadcrumbList.
 
 ## Contact form contract
 
-- **Fields:** `name` (required, 100 max), `email` (required, RFC), `company` (optional, 150 max), `topic` (`fix|build|care|general`), `message` (required, 10–5000 chars), plus `@csrf`.
-- **Honeypot:** a field named `website`. Keep it hidden and empty: visually hidden, `tabindex="-1"`, `autocomplete="off"`. A filled honeypot gets the normal success response but nothing is stored.
+- **Fields:** `name` (required, 100 max), `email` (required, RFC), `company` (optional, 150 max), `topic` (`fix|build|care|general`), `message` (required, 10–5000 chars), plus `@csrf`. The view's `maxlength` values match.
+- **Honeypot:** a field named `website`, inside an `aria-hidden` container, `tabindex="-1"`, `autocomplete="off"`, positioned off-screen. A filled honeypot gets the normal success response but nothing is stored.
 - **Success:** a redirect back to the same-site previous page, flashing `session('inquiry_sent') === true`.
 - **Errors:** Laravel's `$errors` bag plus `old()`. The rate limit (3 per minute, 20 per day per IP) reports as an error on `message`.
 
+## Environment variables added
+
+| Variable | Purpose |
+| --- | --- |
+| `TRUSTED_PROXIES` | Comma list of proxy IPs/CIDRs (or `*`), read by `config/trustedproxy.php`. Default empty = trust none |
+| `GA4_MEASUREMENT_ID` | GA4 `G-XXXX`. The gtag snippet renders only when set, valid, `APP_ENV=production`, and never on admin or preview pages |
+| `GOOGLE_SITE_VERIFICATION` | Search Console meta token; rendered only when set |
+
+Both analytics values stay empty until the IDs and the privacy/consent wording are approved. That is an open launch decision, and `/privacy` must describe analytics before enabling it.
+
+## Security
+
+`App\Http\Middleware\SecurityHeaders` (web group): `X-Content-Type-Options: nosniff`, `Referrer-Policy: strict-origin-when-cross-origin`, `X-Frame-Options: SAMEORIGIN`, a minimal `Permissions-Policy`, and HSTS (1 year, no `includeSubDomains`/preload) only for secure requests in production. There is **no CSP**: Filament and the GA4/Google Fonts snippets need inline scripts and third-party origins, so a CSP needs real browser verification first. Requests that match no route (plain 404 paths) skip the web group and get no extra headers.
+
 ## Content config (frontend-owned)
 
-- `config/services.php` → `offerings`: the four slugs. They currently hold only `pillar` and `name`; `summary`, `seo_title`, `meta_description`, `problems` and `deliverables` are still null or empty. A service enters the sitemap only once `seo_title` and `meta_description` are set. The Laravel credential keys in the same file are untouched.
-- `config/work.php`: empty. Its shape is documented in the file. An entry is public only with `'enabled' => true` and an existing view at `pages/work/{slug}.blade.php`.
-- `config/seo.php` (backend): `default_description` and `sitemap_static_routes`. `privacy` is left out until its content is approved.
+- `config/services.php` → `offerings`: four services with approved `seo_title`/`meta_description`, so they are in the sitemap.
+- `config/work.php`: empty. An entry is public only with `'enabled' => true` and an existing view at `pages/work/{slug}.blade.php`.
+- `config/seo.php` (backend): `default_description`, `titles`, `sitemap_static_routes` (`privacy` stays out until its content is approved), GA4/verification keys.
+- `config/redirects.php` (backend): `'/old-path' => '/new-path'`. Loops, chains into another entry's source, and off-site targets are silently ignored (`App\Support\Redirects`); point each entry at the final URL.
 
-## Blade stubs to replace
+## Frontend-owned files touched by the backend (coordinated)
 
-These are unstyled, contain no final copy, and sit under `resources/views/`: `_stubs/layout.blade.php`, `pages/{home,about,contact,privacy}.blade.php`, `pages/services/{index,show}.blade.php`, `pages/work/index.blade.php`, `blog/{index,show}.blade.php`. Delete `_stubs/` once `layouts/app.blade.php` exists.
+`resources/views/blog/show.blade.php` (`$featuredImage`, null-safe date, preview notice), `resources/views/pages/contact.blade.php` (honeypot, maxlength alignment), `resources/views/layouts/app.blade.php` (GA4 snippet and verification meta, both conditional), new `resources/views/pagination/default.blade.php`. No design tokens, classes or layout were added beyond existing ones.
 
-The skeleton's `package.json`, `vite.config.js` and `resources/{css,js}` are committed unmodified for the frontend owner to take over. `welcome.blade.php` was removed.
+## Verified (local Windows, PHP 8.4.23, SQLite)
 
-## Verified (2026-10-18, local Windows, PHP 8.4.23, SQLite)
-
-- **Install and checks:** clean `composer install` from the lockfile; `composer audit` finds no advisories; `check-platform-reqs` passes; Pint passes.
-- **Database:** `migrate:fresh` works on an empty SQLite file, and rollback works.
-- **Routes:** `route:cache` works; there is no registration route.
-- **Tests:** `php artisan test` passes 39 tests on SQLite and on MySQL 8.4.3 (Laragon). They cover:
-  - admin access (guests, staff, registration 404)
-  - draft, scheduled and unpublished visibility
-  - slug validation
-  - publishing and unpublishing
-  - upload limits (rejects SVG, PHP-as-PNG and files over 2 MB; requires alt text)
-  - inquiry fields locked against edits
-  - 404s
-  - canonical host
-  - sanitized article body
-  - preview access
-  - sitemap contents
-  - contact persistence, validation, honeypot, rate limit including the daily cap, mail failure through a real failing transport, and same-site redirect
-  - image files removed when replaced or when the post is deleted
+- `php artisan test`: 57 passed. Added: view contracts, approved titles, 404, structured data, redirects, old-slug 301, robots, GA4 gating, headers, trusted proxies.
+- `vendor/bin/pint --test` passes; `npm run build` and `npm run check` pass.
+- `migrate:fresh` and `migrate:rollback` on an empty SQLite file; `php artisan optimize` (config, events, routes, views) and `filament:assets` work.
+- Earlier, on the first-backend branch: MySQL 8.4.3 suite, `composer audit`, upload limits, preview access, rate limits.
 
 ## Not verified / deferred
 
-- Real SMTP delivery and the production host itself. MySQL 8.4.3: migrate:fresh, rollback and the full suite pass locally.
-- `robots.txt` still uses Laravel's default (allow all, no sitemap line). Add the sitemap reference once the production domain is set.
+- Real SMTP delivery, the production host, symlink support, and a MySQL re-run of the new migration and tests.
+- CSRF enforcement: the form carries `@csrf`, but Laravel skips CSRF checks under test, so the 419 path is not exercised.
+- Staff 2FA is not enabled. Filament supports it.
 - Category archives have no route in docs §4 and stay out of the sitemap.
-- Staff 2FA is not enabled. Filament supports it when wanted.
-- No `trustProxies` configured: rate limiting keys on the client IP. If Babal.Host or a CDN sits in front, configure trusted proxies or every visitor shares one limit.
 - `db:seed` seeds nothing on purpose (every user is an admin).
-- Docs say `feat/backend`; this branch and worktree are named `first-backend` at the user's request.
+- The Vite manifest is not required by tests (`withoutVite()`); real asset loading is checked only by `npm run build`.
