@@ -1,4 +1,4 @@
-<section id="why" class="on-dark relative overflow-hidden bg-[#141517] text-white">
+<section class="relative overflow-hidden bg-[#141517] text-white">
 <div class="relative mx-auto grid w-full max-w-[1440px] gap-14 px-5 py-16 sm:px-8 lg:grid-cols-[0.93fr_1.07fr] lg:gap-0 lg:py-[72px] lg:pl-[108px] lg:pr-[64px]">
 <div class="reveal is-in lg:pb-[300px]" style="transition-delay:0ms">
 <p class="flex items-center gap-3 font-mono text-[10.5px] uppercase tracking-[0.24em] text-white/65">
