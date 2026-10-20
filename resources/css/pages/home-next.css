@@ -472,34 +472,7 @@
   border: 1.5px solid rgb(23 25 27 / 75%);
 }
 
-/* about: a plain flow list joined by one connector (replaces the scaled diagram) */
-.hn .hx-team {
-  display: grid;
-  gap: 1.75rem;
-}
-.hn .hx-team-item::before {
-  content: '';
-  position: absolute;
-  left: 0.3125rem;
-  top: 0.45rem;
-  width: 10px;
-  height: 10px;
-  border-radius: 999px;
-  background: var(--color-moss);
-  box-shadow: 0 0 0 4px #fff;
-}
-.hn .hx-team-item::after {
-  content: '';
-  position: absolute;
-  left: calc(0.3125rem + 4px);
-  top: calc(0.45rem + 10px);
-  bottom: calc(-1.75rem + 0.45rem);
-  width: 2px;
-  background: rgb(76 102 86 / 25%);
-}
-.hn .hx-team-item:last-child::after {
-  display: none;
-}
+
 
 /* faq (shared inner component, restyled by scope) */
 .hn #faq {

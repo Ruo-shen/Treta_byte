@@ -13,11 +13,11 @@
             <p class="mt-6 max-w-[40ch] text-[16.5px] leading-[1.6] text-muted sm:text-[17px]">A small team taking responsibility from the first conversation onward.</p>
         </div>
         <div class="hx-reveal lg:col-span-7" style="--i:1">
-            <ul class="hx-card hx-team p-6 sm:p-8" aria-label="How our disciplines work together">
+            <ul class="grid gap-x-10 sm:grid-cols-2" aria-label="How our disciplines work together">
                 @foreach($disciplines as [$name, $text])
-                    <li class="hx-team-item relative pl-9">
+                    <li class="border-t border-ink/15 py-6">
                         <p class="text-[19px] font-semibold leading-tight tracking-[-0.015em]">{{ $name }}</p>
-                        <p class="mt-1 text-[16px] leading-[1.5] text-muted">{{ $text }}</p>
+                        <p class="mt-2 max-w-[32ch] text-[16px] leading-[1.5] text-muted">{{ $text }}</p>
                     </li>
                 @endforeach
             </ul>
