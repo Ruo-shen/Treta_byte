@@ -595,3 +595,8 @@
 .hn h2 {
   word-spacing: 0.06em;
 }
+
+/* rhythm: Problems and Services read as one chapter (64px instead of 192px between them) */
+.hn #services {
+  padding-top: clamp(2.5rem, 5vw, 4rem);
+}
