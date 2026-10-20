@@ -354,7 +354,7 @@
   letter-spacing: -0.045em;
 }
 .hn .hx-service-copy {
-  max-width: 34ch;
+  max-width: 38ch;
   margin-top: 1rem;
   font-size: 16.5px;
   line-height: 1.55;
@@ -597,4 +597,17 @@
 }
 .hn #contact p[class*='uppercase'] {
   font-size: 12px;
+}
+
+/* services: flat soft plates (replace the grained olive gradient) */
+.hn .hx-plate,
+.hn .hx-plate-bg {
+  background: #e9ece4;
+  border-radius: var(--hx-r-card);
+}
+.hn .hx-plate-bg {
+  position: absolute;
+}
+.hn .hx-sample {
+  margin-top: 1px;
 }

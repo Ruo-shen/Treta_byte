@@ -28,8 +28,8 @@
 
         <div class="mt-12 space-y-14 sm:space-y-20 lg:mt-16 lg:space-y-20">
             {{-- Fix --}}
-            <div class="grid items-center gap-8 lg:grid-cols-12 lg:gap-10">
-                <div class="hx-reveal relative z-10 lg:col-span-5">
+            <div class="grid items-center gap-8 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)] lg:gap-12">
+                <div class="hx-reveal relative z-10">
                     <span class="hx-chip">One-off fix</span>
                     <h3 class="hx-service">Fix</h3>
                     <p class="hx-service-copy">Diagnose, repair and stabilise what's not working — from bugs and performance issues to failing deployments.</p>
@@ -37,11 +37,11 @@
                         <li><a href="{{ route('services.show', 'website-repair') }}" class="hx-link">Website repair <x-inner.icon name="arrow" class="h-4 w-4" /></a></li>
                     </ul>
                 </div>
-                <div class="hx-reveal relative lg:col-span-7" style="--i:1">
-                    <div aria-hidden="true" class="hn-tint absolute -right-3 -top-5 hidden h-[88%] w-[72%] sm:block"></div>
-                    <div class="hx-card hx-mock relative sm:ml-6">
-                        <div class="flex items-center justify-between gap-3 px-1 pb-3">
-                            <p class="text-[14px] font-medium">Site audit</p>
+                <div class="hx-reveal relative" style="--i:1">
+                    <div aria-hidden="true" class="hx-plate-bg -right-3 -top-4 hidden h-[88%] w-[70%] sm:block"></div>
+                    <div class="hx-card hx-mock relative">
+                        <div class="flex items-start justify-between gap-3 px-1 pb-3">
+                            <div><p class="text-[14px] font-medium">Site audit</p><p class="hx-sample">Sample interface</p></div>
                             <span class="{{ $pill }} bg-[#efeeea] text-[#5b5953]">Review</span>
                         </div>
                         <ul class="rounded-[8px] ring-1 ring-ink/[0.08]">
@@ -54,13 +54,12 @@
                             @endforeach
                         </ul>
                     </div>
-                    <p class="hx-sample sm:ml-6">Sample interface</p>
                 </div>
             </div>
 
             {{-- Build --}}
-            <div class="grid items-center gap-8 lg:grid-cols-12 lg:gap-10">
-                <div class="hx-reveal relative z-10 lg:order-2 lg:col-span-5">
+            <div class="hx-plate grid items-center gap-8 p-5 sm:p-8 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)] lg:gap-12 lg:p-12">
+                <div class="hx-reveal relative z-10">
                     <span class="hx-chip">Project</span>
                     <h3 class="hx-service">Build</h3>
                     <p class="hx-service-copy">End-to-end websites, tools or platforms, built for performance and built to last beyond launch.</p>
@@ -69,15 +68,14 @@
                         <li><a href="{{ route('services.show', 'web-applications') }}" class="hx-link">Web applications <x-inner.icon name="arrow" class="h-4 w-4" /></a></li>
                     </ul>
                 </div>
-                <div class="hx-reveal relative lg:order-1 lg:col-span-7" style="--i:1">
-                    <div aria-hidden="true" class="hn-tint absolute -left-3 -top-5 hidden h-[88%] w-[72%] sm:block"></div>
-                    <div class="hx-card hx-mock relative sm:ml-6">
+                <div class="hx-reveal relative" style="--i:1">
+                    <div class="hx-card hx-mock relative">
                         <div class="flex items-center gap-3 border-b border-ink/[0.08] pb-3">
-                            <span class="grid h-6 w-6 shrink-0 place-items-center rounded-[8px] bg-ink text-white" aria-hidden="true"><x-inner.icon name="build" class="h-3.5 w-3.5" /></span>
-                            <p class="text-[14px] font-medium">Website build</p>
-                            <nav aria-hidden="true" class="ml-auto hidden gap-5 text-[12px] text-muted sm:flex">
+                            <span class="grid h-8 w-8 shrink-0 place-items-center rounded-[8px] bg-ink text-white" aria-hidden="true"><x-inner.icon name="build" class="h-4 w-4" /></span>
+                            <div><p class="text-[14px] font-medium">Website build</p><p class="hx-sample">Sample interface</p></div>
+                            <div aria-hidden="true" class="ml-auto hidden gap-5 text-[12px] text-muted md:flex">
                                 <span class="font-medium text-ink">Plan</span><span>Design</span><span>Build</span><span>Launch</span>
-                            </nav>
+                            </div>
                         </div>
                         <ul class="mt-3 rounded-[8px] ring-1 ring-ink/[0.08]">
                             @foreach($build as [$state, $title, $label, $tone])
@@ -89,13 +87,12 @@
                             @endforeach
                         </ul>
                     </div>
-                    <p class="hx-sample sm:ml-6">Sample interface</p>
                 </div>
             </div>
 
             {{-- Care --}}
-            <div class="grid items-center gap-8 lg:grid-cols-12 lg:gap-10">
-                <div class="hx-reveal relative z-10 lg:col-span-5">
+            <div class="grid items-center gap-8 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,0.85fr)] lg:gap-12">
+                <div class="hx-reveal relative z-10 lg:order-2">
                     <span class="hx-chip">Ongoing care</span>
                     <h3 class="hx-service">Care</h3>
                     <p class="hx-service-copy">Ongoing support, monitoring, updates and improvements so everything keeps running smoothly.</p>
@@ -103,11 +100,11 @@
                         <li><a href="{{ route('services.show', 'website-maintenance') }}" class="hx-link">Website maintenance <x-inner.icon name="arrow" class="h-4 w-4" /></a></li>
                     </ul>
                 </div>
-                <div class="hx-reveal relative lg:col-span-7" style="--i:1">
-                    <div aria-hidden="true" class="hn-tint absolute -right-3 -top-5 hidden h-[88%] w-[72%] sm:block"></div>
-                    <div class="hx-card hx-mock relative sm:ml-6">
-                        <div class="flex items-center justify-between gap-3 pb-3">
-                            <p class="flex items-center gap-2.5 text-[14px] font-medium"><span class="hx-ring h-2.5 w-2.5 rounded-full bg-moss" aria-hidden="true"></span>System health</p>
+                <div class="hx-reveal relative lg:order-1" style="--i:1">
+                    <div aria-hidden="true" class="hx-plate-bg -left-3 -top-4 hidden h-[88%] w-[70%] sm:block"></div>
+                    <div class="hx-card hx-mock relative">
+                        <div class="flex items-start justify-between gap-3 pb-3">
+                            <div><p class="flex items-center gap-2.5 text-[14px] font-medium"><span class="hx-ring h-2.5 w-2.5 rounded-full bg-moss" aria-hidden="true"></span>System health</p><p class="hx-sample pl-5">Sample interface</p></div>
                             <span class="{{ $pill }} bg-[#e6eee8] text-[#3b5a47]">Monitored</span>
                         </div>
                         <div class="grid grid-cols-2 gap-2.5 sm:grid-cols-4">
@@ -124,7 +121,6 @@
                             @endforeach
                         </div>
                     </div>
-                    <p class="hx-sample sm:ml-6">Sample interface</p>
                 </div>
             </div>
         </div>
