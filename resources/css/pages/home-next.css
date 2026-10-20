@@ -79,3 +79,195 @@
   line-height: 1.05;
   letter-spacing: -0.04em;
 }
+
+/* ===== Round 4: /home-next finish system. Everything below is scoped to .hn (the page wrapper). ===== */
+.hn {
+  /* shape: 3 (paper notes) / 8 (buttons, chips) / 14 (cards, mockups, panels) / full */
+  --hx-r-note: 3px;
+  --hx-r-btn: 8px;
+  --hx-r-card: 14px;
+  /* surfaces: paper (page), soft (bands), white (cards), one dark */
+  --hx-soft: #efede7;
+  --hx-dark: #1b1c1e;
+  /* elevation: rest / raised / overlay, each with a 1px contact layer */
+  --hx-sh-rest: 0 0 0 1px rgb(23 25 27 / 6%), 0 1px 2px rgb(23 25 27 / 4%), 0 12px 24px -18px rgb(23 25 27 / 18%);
+  --hx-sh-raised: 0 0 0 1px rgb(23 25 27 / 8%), 0 2px 4px rgb(23 25 27 / 4%), 0 24px 44px -26px rgb(23 25 27 / 28%);
+  --hx-sh-overlay: 0 0 0 1px rgb(23 25 27 / 8%), 0 4px 8px rgb(23 25 27 / 5%), 0 40px 80px -40px rgb(23 25 27 / 34%);
+  /* motion */
+  --hx-out: cubic-bezier(0.23, 1, 0.32, 1);
+  /* layout */
+  --hx-w: 1200px;
+  --hx-gutter: 1.25rem;
+  --hx-y: 4rem;
+  /* type */
+  --hx-h1: clamp(2.5rem, 5.4vw, 4.75rem);
+  --hx-h2: clamp(1.85rem, 3.3vw, 2.75rem);
+  --hx-dim: rgb(23 25 27 / 62%);
+}
+@media (min-width: 640px) {
+  .hn {
+    --hx-gutter: 2rem;
+    --hx-y: 5.5rem;
+  }
+}
+@media (min-width: 1024px) {
+  .hn {
+    --hx-gutter: 2.5rem;
+    --hx-y: 7rem;
+  }
+}
+
+/* type: ONE H1, ONE H2 for the whole page; the grey half of a headline stays readable (>= 4.5:1) */
+.hn h1 {
+  font-size: var(--hx-h1);
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: -0.04em;
+  text-wrap: balance;
+}
+.hn h2 {
+  font-size: var(--hx-h2);
+  font-weight: 600;
+  line-height: 1.08;
+  letter-spacing: -0.035em;
+  text-wrap: balance;
+}
+.hn .on-dark h2,
+.hn #contact h2 {
+  font-weight: 500;
+}
+.hn .hx-dim {
+  color: var(--hx-dim);
+}
+.hn p {
+  text-wrap: pretty;
+}
+
+/* layout primitives */
+.hn .hx-wrap {
+  width: 100%;
+  max-width: var(--hx-w);
+  margin-inline: auto;
+  padding-inline: var(--hx-gutter);
+}
+.hn .hx-section {
+  padding-block: var(--hx-y);
+}
+.hn .hx-soft {
+  background: var(--hx-soft);
+}
+
+/* ONE kicker (mono, >= 12px), used sparingly */
+.hn .hx-kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.625rem;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  line-height: 1.4;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+}
+.hn .hx-kicker::before {
+  content: '';
+  width: 8px;
+  height: 8px;
+  background: var(--color-accent);
+}
+.hn .on-dark .hx-kicker {
+  color: rgb(255 255 255 / 70%);
+}
+
+/* ONE button system: ink primary, outline secondary, text link; accent only on the closing CTA (live partial) */
+.hn .hx-btn {
+  display: inline-flex;
+  min-height: 48px;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding-inline: 1.375rem;
+  border-radius: var(--hx-r-btn);
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 1;
+  transition:
+    background-color 160ms var(--hx-out),
+    color 160ms var(--hx-out),
+    border-color 160ms var(--hx-out),
+    transform 120ms var(--hx-out);
+}
+.hn .hx-btn:active {
+  transform: scale(0.97);
+}
+.hn .hx-btn--ink {
+  background: var(--color-ink);
+  color: #fff;
+}
+.hn .hx-btn--line {
+  background: #fff;
+  box-shadow: inset 0 0 0 1px var(--color-line);
+}
+@media (hover: hover) and (pointer: fine) {
+  .hn .hx-btn--ink:hover {
+    background: var(--color-moss);
+  }
+  .hn .hx-btn--line:hover {
+    box-shadow: inset 0 0 0 1px rgb(23 25 27 / 35%);
+  }
+}
+.hn .hx-link {
+  display: inline-flex;
+  min-height: 44px;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--color-accent);
+  background: linear-gradient(currentColor, currentColor) 0 calc(100% - 0.7rem) / 0 1px no-repeat;
+  transition: background-size 220ms var(--hx-out);
+}
+@media (hover: hover) and (pointer: fine) {
+  .hn .hx-link:hover {
+    background-size: 100% 1px;
+  }
+}
+
+/* ONE card: white, 14px, contact ring + soft shadow; raised state fades in on a pseudo-element (no box-shadow transition) */
+.hn .hx-card {
+  position: relative;
+  border-radius: var(--hx-r-card);
+  background: #fff;
+  box-shadow: var(--hx-sh-rest);
+}
+.hn .hx-lift::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  box-shadow: var(--hx-sh-raised);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 180ms var(--hx-out);
+}
+@media (hover: hover) and (pointer: fine) {
+  .hn .hx-lift {
+    transition: transform 180ms var(--hx-out);
+  }
+  .hn .hx-lift:hover {
+    transform: translateY(-2px);
+  }
+  .hn .hx-lift:hover::after {
+    opacity: 1;
+  }
+}
+
+/* consistent focus: accent ring on paper, white on dark */
+.hn :focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 3px;
+}
+.hn .on-dark :focus-visible,
+.hn #contact :focus-visible {
+  outline-color: #fff;
+}
