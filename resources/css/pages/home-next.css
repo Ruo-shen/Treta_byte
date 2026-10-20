@@ -332,3 +332,67 @@
   animation: hx-rise 560ms var(--hx-out) both;
   animation-delay: calc(var(--i, 0) * 70ms);
 }
+
+/* services */
+.hn .hx-chip {
+  display: inline-flex;
+  padding: 0.25rem 0.7rem;
+  border-radius: 999px;
+  background: #fff;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  line-height: 1.4;
+  letter-spacing: 0.04em;
+  color: var(--color-muted);
+  box-shadow: inset 0 0 0 1px var(--color-line);
+}
+.hn .hx-service {
+  margin-top: 1rem;
+  font-size: clamp(2.5rem, 4.6vw, 3.75rem);
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: -0.045em;
+}
+.hn .hx-service-copy {
+  max-width: 34ch;
+  margin-top: 1rem;
+  font-size: 16.5px;
+  line-height: 1.55;
+  color: var(--color-muted);
+}
+.hn .hx-mock {
+  overflow: hidden;
+  padding: 1rem;
+  box-shadow: var(--hx-sh-raised);
+}
+@media (min-width: 640px) {
+  .hn .hx-mock {
+    padding: 1.25rem;
+  }
+}
+.hn .hx-mock::before {
+  content: '';
+  position: absolute;
+  inset: 0 0 auto;
+  height: 2px;
+  background: var(--color-moss);
+}
+.hn .hx-sample {
+  margin-top: 0.75rem;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  line-height: 1.4;
+  letter-spacing: 0.04em;
+  color: var(--color-muted);
+}
+.hn .hx-ring {
+  position: relative;
+}
+.hn .hx-ring::after {
+  content: '';
+  position: absolute;
+  inset: -4px;
+  border-radius: 999px;
+  border: 1.5px solid var(--color-moss);
+  opacity: 0;
+}
