@@ -359,3 +359,71 @@
   white-space: nowrap;
 }
 
+/* why: inset dark band, calmer edges */
+.hn #why {
+  padding-block: 0;
+}
+@media (min-width: 640px) {
+  .hn #why {
+    margin-inline: 0.75rem;
+    border-radius: 22px;
+    box-shadow: inset 0 1px 0 rgb(255 255 255 / 7%);
+  }
+}
+.hn #why > div {
+  max-width: none;
+  padding-block: var(--hn-y);
+}
+@media (min-width: 1024px) {
+  .hn #why > div {
+    padding-left: max(2.5rem, calc((100% - 1200px) / 2 + 2.5rem));
+    padding-right: 0;
+    gap: 3rem;
+  }
+  .hn #why ul {
+    margin-right: 0;
+  }
+}
+.hn #why h2 {
+  margin-top: 1.25rem;
+}
+.hn #why h2 + p {
+  margin-top: 1rem;
+  font-size: 16px;
+  color: rgb(255 255 255 / 76%);
+}
+.hn #why a[href='#process'] {
+  min-height: 46px;
+  border-radius: 10px;
+}
+.hn #why li h3 {
+  font-size: 21px;
+}
+.hn #why li h3 + p {
+  font-size: 15.5px;
+  line-height: 1.5;
+  color: rgb(255 255 255 / 72%);
+}
+.hn #why li span[class*='font-mono'] {
+  color: rgb(255 255 255 / 68%);
+}
+.hn #why li a {
+  min-height: 44px;
+  align-items: center;
+}
+.hn #why li a:hover {
+  border-color: rgb(255 255 255 / 55%);
+}
+
+/* why: phone rhythm for the art tiles */
+@media (max-width: 639px) {
+  .hn #why li > div {
+    gap: 1rem;
+    padding-block: 1.5rem;
+  }
+  .hn #why li div[class*='aspect-'] {
+    aspect-ratio: 16 / 8;
+    border-radius: 8px;
+  }
+}
+
