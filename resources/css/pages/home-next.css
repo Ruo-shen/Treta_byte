@@ -500,3 +500,28 @@
 .hn .hx-team-item:last-child::after {
   display: none;
 }
+
+/* faq (shared inner component, restyled by scope) */
+.hn #faq {
+  padding-block: var(--hx-y);
+  background: var(--hx-soft);
+}
+.hn #faq > div {
+  max-width: var(--hx-w);
+  padding-inline: var(--hx-gutter);
+}
+.hn #faq summary {
+  min-height: 56px;
+  border-radius: var(--hx-r-btn);
+}
+.hn #faq summary > span:last-child {
+  transition: transform 160ms var(--hx-out);
+}
+.hn #faq details > p {
+  animation: hx-fade 200ms var(--hx-out) both;
+}
+@keyframes hx-fade {
+  from {
+    opacity: 0;
+  }
+}

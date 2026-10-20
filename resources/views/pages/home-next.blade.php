@@ -8,6 +8,7 @@
 @include('components.home-next.why')
 @include('components.home-next.work')
 @include('components.home-next.about')
+<x-inner.faq group="home" id="faq" tone="soft" :kicker="null" />
 @include('components.cta')
 </div>
 @endsection

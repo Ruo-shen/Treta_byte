@@ -11,8 +11,8 @@
     <x-inner.band :tone="$tone" {{ $attributes }}>
         <div class="grid gap-8 lg:grid-cols-[0.8fr_1.2fr] lg:gap-16">
             <div>
-                <x-inner.kicker>{{ $kicker }}</x-inner.kicker>
-                <h2 class="mt-5 text-[clamp(1.9rem,5.5vw,3.2rem)] font-medium leading-[1.1] tracking-[-0.035em]">Common questions.</h2>
+                @if($kicker)<x-inner.kicker>{{ $kicker }}</x-inner.kicker>@endif
+                <h2 class="{{ $kicker ? 'mt-5' : '' }} text-[clamp(1.9rem,5.5vw,3.2rem)] font-medium leading-[1.1] tracking-[-0.035em]">Common questions.</h2>
             </div>
             <div class="border-t border-ink/15">
                 @foreach($items as $item)
