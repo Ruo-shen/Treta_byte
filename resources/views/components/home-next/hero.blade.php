@@ -11,7 +11,7 @@
         <div class="relative mx-auto max-w-[760px] pb-14 pt-12 text-center sm:pb-20 sm:pt-20">
             <p class="hx-load hx-pill" style="--i:0">Based in Nepal <span aria-hidden="true">·</span> Working worldwide</p>
             <h1 class="hx-load mt-6 sm:mt-7" style="--i:1">Technology should<br>work <span class="text-moss">for you.</span></h1>
-            <p class="hx-load mx-auto mt-6 max-w-[540px] text-[17px] leading-[1.6] text-muted sm:mt-7 sm:text-[18px]" style="--i:2">We fix what's broken, build what's needed, and care for what matters — so your business can move forward without technical headaches.</p>
+            <p class="hx-load mx-auto mt-6 max-w-[540px] text-[17px] leading-[1.6] text-muted sm:mt-7 sm:text-[18px]" style="--i:2">We fix what's broken, build what's needed, and care for what matters — so your business can move forward without technical headaches.</p>
             <div class="hx-load mt-8 flex flex-col items-stretch justify-center gap-3 sm:mt-9 sm:flex-row sm:items-center" style="--i:3">
                 <a href="{{ route('contact.show') }}" class="hx-btn hx-btn--ink">Tell us your problem <x-inner.icon name="arrow" class="h-4 w-4" /></a>
                 <a href="#process" class="hx-btn hx-btn--line">Explore our approach</a>

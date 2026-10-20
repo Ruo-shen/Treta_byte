@@ -9,7 +9,7 @@
 <section id="about" class="hx-section scroll-mt-16 overflow-x-clip bg-paper">
     <div class="hx-wrap grid items-start gap-10 lg:grid-cols-12 lg:gap-16">
         <div class="hx-reveal lg:col-span-5">
-            <h2>A small studio. <span class="hx-dim">You talk directly to the people doing the work.</span></h2>
+            <h2>A small studio. <span class="hx-dim block">You talk directly to the people doing the work.</span></h2>
             <p class="mt-6 max-w-[40ch] text-[16.5px] leading-[1.6] text-muted sm:text-[17px]">A small team taking responsibility from the first conversation onward.</p>
         </div>
         <div class="hx-reveal lg:col-span-7" style="--i:1">

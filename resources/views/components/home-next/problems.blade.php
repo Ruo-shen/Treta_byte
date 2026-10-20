@@ -1,17 +1,17 @@
 @php
     // [image, title, text, linked service name, service slug, image height attr, object-position]
     $problems = [
-        ['4', 'A website that<br class="hidden lg:inline"> keeps breaking', 'Slow pages, failing forms, errors after updates — problems that come back no matter how often they are patched.', 'Website repair', 'website-repair', 530, '50% 50%'],
+        ['4', 'A website that<br class="hidden lg:inline"> keeps breaking', 'Slow pages, failing forms, errors after updates — problems that come back no matter how often they are patched.', 'Website repair', 'website-repair', 530, '50% 50%'],
         ['3', 'Too much<br class="hidden lg:inline"> manual work', 'Spreadsheets, copy-paste and repeated tasks that take your team away from the work that matters.', 'Web applications', 'web-applications', 529, '50% 60%'],
         ['1', 'Tools that<br class="hidden lg:inline"> do not connect', 'Payments, bookings, email and records living in separate places that never quite match.', 'Web applications', 'web-applications', 532, '50% 50%'],
-        ['2', 'Nobody responsible<br class="hidden lg:inline"> for upkeep', 'No updates, no backups and no one to call when something goes wrong — often after a developer has moved on.', 'Website maintenance', 'website-maintenance', 533, '50% 50%'],
+        ['2', 'Nobody responsible<br class="hidden lg:inline"> for upkeep', 'No updates, no backups and no one to call when something goes wrong — often after a developer has moved on.', 'Website maintenance', 'website-maintenance', 533, '50% 50%'],
     ];
 @endphp
 <section id="problems" class="hx-section scroll-mt-16 overflow-x-clip bg-paper">
     <div class="hx-wrap">
         <div class="hx-reveal relative max-w-[660px]">
             <h2>Common problems,<br>practical <span class="text-moss">fixes.</span></h2>
-            <p class="mt-5 max-w-[52ch] text-[16.5px] leading-[1.6] text-muted sm:text-[17px]">Most businesses do not need more technology. They need the technology they already have to work — reliably, and without constant firefighting.</p>
+            <p class="mt-5 max-w-[52ch] text-[16.5px] leading-[1.6] text-muted sm:text-[17px]">Most businesses do not need more technology. They need the technology they already have to work — reliably, and without constant firefighting.</p>
             <p aria-hidden="true" class="absolute -right-[230px] top-1 hidden -rotate-3 font-hand text-[24px] leading-[1.1] text-ink/60 xl:block">Real problems.<br>Practical fixes.</p>
         </div>
         <ol class="mt-8 sm:mt-12 sm:grid sm:grid-cols-2 sm:gap-x-8 sm:gap-y-12 lg:grid-cols-4 lg:gap-x-0 lg:gap-y-0">

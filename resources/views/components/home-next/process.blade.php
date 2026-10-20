@@ -2,7 +2,7 @@
     $steps = [
         ['Listen', 'We start with a conversation about what is working, what is not, and what success should look like.'],
         ['Diagnose', 'A focused technical review turns symptoms into causes, and causes into a plan you can actually read.'],
-        ['Deliver', 'We build in short, visible steps — shipping early, testing properly and keeping you in the loop.'],
+        ['Deliver', 'We build in short, visible steps — shipping early, testing properly and keeping you in the loop.'],
         ['Maintain', 'After launch we stay close: monitoring, improving and fixing before small issues become big ones.'],
     ];
 @endphp

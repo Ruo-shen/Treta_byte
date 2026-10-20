@@ -2,7 +2,7 @@
     $items = [
         ['Better support', 'Someone who answers, understands your setup and stays involved.'],
         ['Clearer communication', 'Plain language, honest estimates and no hidden surprises.'],
-        ['Accountable delivery', 'We own the work we do — before, during and after launch.'],
+        ['Accountable delivery', 'We own the work we do — before, during and after launch.'],
     ];
 @endphp
 <section id="why" class="hx-why on-dark relative overflow-hidden text-white">

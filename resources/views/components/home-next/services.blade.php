@@ -22,7 +22,7 @@
 <section id="services" class="hx-section scroll-mt-16 overflow-x-clip bg-paper">
     <div class="hx-wrap">
         <div class="hx-reveal max-w-[720px]">
-            <h2>Three disciplines. <span class="hx-dim">One accountable team.</span></h2>
+            <h2>Three disciplines. <span class="hx-dim block">One accountable team.</span></h2>
             <p class="mt-5 max-w-[52ch] text-[16.5px] leading-[1.6] text-muted sm:text-[17px]">Engage us for a single fix, a full build, or ongoing care. Same team, same standards, from quick wins to long-term partnerships.</p>
         </div>
 
@@ -32,7 +32,7 @@
                 <div class="hx-reveal relative z-10">
                     <span class="hx-chip">One-off fix</span>
                     <h3 class="hx-service">Fix</h3>
-                    <p class="hx-service-copy">Diagnose, repair and stabilise what's not working — from bugs and performance issues to failing deployments.</p>
+                    <p class="hx-service-copy">Diagnose, repair and stabilise what's not working — from bugs and performance issues to failing deployments.</p>
                     <ul class="mt-4 flex flex-wrap gap-x-6">
                         <li><a href="{{ route('services.show', 'website-repair') }}" class="hx-link">Website repair <x-inner.icon name="arrow" class="h-4 w-4" /></a></li>
                     </ul>

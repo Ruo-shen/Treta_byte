@@ -611,3 +611,9 @@
 .hn .hx-sample {
   margin-top: 1px;
 }
+
+/* type: slightly open word spacing on display headings */
+.hn h1,
+.hn h2 {
+  word-spacing: 0.06em;
+}
