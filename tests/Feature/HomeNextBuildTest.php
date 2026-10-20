@@ -97,4 +97,17 @@ class HomeNextBuildTest extends TestCase
         $this->assertStringNotContainsString('hx-', $live);
         $this->assertStringContainsString('Have something that needs', $live);
     }
+
+    public function test_round_five_polish_contracts(): void
+    {
+        $html = $this->page();
+
+        $this->assertStringContainsString('aria-describedby="problem-0"', $html);
+        $this->assertStringContainsString('id="problem-3"', $html);
+        $this->assertStringNotContainsString('<nav aria-hidden', $html);
+        $this->assertStringNotContainsString('Real problems.', $html);
+        $this->assertStringNotContainsString('hx-team', $html);
+        $this->assertStringContainsString('hx-dim block', $html);
+        $this->assertStringContainsString("\u{00A0}—", $html);
+    }
 }
