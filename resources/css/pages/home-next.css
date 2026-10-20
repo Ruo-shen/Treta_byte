@@ -290,3 +290,72 @@
   }
 }
 
+/* services */
+.hn #services > div > div:not(:first-child) {
+  margin-top: clamp(2.5rem, 5vw, 3.5rem);
+}
+.hn #services > div > div:first-child {
+  gap: 2.5rem;
+}
+.hn #services h2 + p {
+  margin-top: 1.25rem;
+  font-size: 16px;
+  line-height: 1.5;
+}
+.hn #services h3 {
+  margin-top: 0.75rem;
+  font-size: clamp(1.75rem, 2.6vw, 2rem);
+}
+.hn #services h3 + p {
+  max-width: 280px;
+  margin-top: 0.875rem;
+  font-size: 15.5px;
+  line-height: 1.45;
+}
+.hn #services a[href^='/services'] {
+  min-height: 44px;
+  margin-top: 0.25rem;
+  font-size: 15px;
+}
+.hn #services a[href^='/services']:hover {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+.hn #services div[class*='rounded-[14px]'] {
+  padding: 0.875rem;
+  border-radius: 12px;
+  box-shadow: var(--hn-shadow);
+  transition:
+    transform 220ms ease,
+    box-shadow 220ms ease;
+}
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .hn #services div[class*='rounded-[14px]']:hover {
+    transform: translateY(-2px);
+  }
+}
+.hn #services li {
+  padding-block: 0.5rem;
+}
+.hn #services [class*='text-[10.5px]'],
+.hn #services [class*='text-[10px]'],
+.hn #services [class*='text-[11px]'] {
+  font-size: 12px;
+}
+.hn #services li span[class*='text-[12px]'] {
+  font-size: 13px;
+}
+
+/* services: keep the copy above the tint and the build title on one line */
+.hn #services div[aria-hidden='true'][class*='-left-[26%]'] {
+  left: -6%;
+  width: 60%;
+}
+.hn #services div[class*='sm:pt-[42px]'] {
+  position: relative;
+  z-index: 2;
+}
+.hn #services p[class*='mb-3'] {
+  white-space: nowrap;
+}
+
