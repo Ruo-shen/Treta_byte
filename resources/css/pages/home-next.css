@@ -271,3 +271,64 @@
 .hn #contact :focus-visible {
   outline-color: #fff;
 }
+
+/* hero */
+.hn .hx-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.4rem 0.875rem;
+  border-radius: 999px;
+  background: #fff;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  line-height: 1.3;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgb(23 25 27 / 78%);
+  box-shadow: inset 0 0 0 1px var(--color-line);
+}
+.hn #top h1 {
+  font-size: var(--hx-h1);
+}
+.hn .hx-note {
+  min-height: 44px;
+  padding: 0.8rem 1.1rem 0.7rem;
+  border-radius: var(--hx-r-note);
+  background: var(--color-note);
+  box-shadow: var(--hx-sh-rest);
+  font-family: var(--font-hand);
+  font-size: 23px;
+  line-height: 1.1;
+  color: rgb(23 25 27 / 85%);
+}
+.hn .hx-note small {
+  display: block;
+  margin-top: 0.35rem;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  line-height: 1.3;
+  letter-spacing: 0.02em;
+  color: var(--color-moss);
+}
+.hn .hx-note::after {
+  border-radius: var(--hx-r-note);
+}
+.hn .hx-caret {
+  animation: hx-caret 1.1s steps(1) 8;
+}
+@keyframes hx-caret {
+  50% {
+    opacity: 0;
+  }
+}
+@keyframes hx-rise {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+}
+.hn .hx-load {
+  animation: hx-rise 560ms var(--hx-out) both;
+  animation-delay: calc(var(--i, 0) * 70ms);
+}
