@@ -32,7 +32,7 @@
             <a href="{{ route('services.show', $notes[0][2]) }}" class="hx-note hx-lift pointer-events-auto absolute block left-[6%] top-[84px] w-[190px] -rotate-[5deg]">{{ $notes[0][0] }}<small>{{ $notes[0][1] }} →</small></a>
             <a href="{{ route('services.show', $notes[1][2]) }}" class="hx-note hx-lift pointer-events-auto absolute block right-[7%] top-[70px] w-[190px] rotate-[4deg]">{{ $notes[1][0] }}<small>{{ $notes[1][1] }} →</small></a>
             <a href="{{ route('services.show', $notes[2][2]) }}" class="hx-note hx-lift pointer-events-auto absolute block left-[11%] top-[262px] w-[200px] -rotate-[2deg]">{{ $notes[2][0] }}<small>{{ $notes[2][1] }} →</small></a>
-            <div aria-hidden="true" class="on-dark absolute right-[9%] top-[290px] w-[270px] -rotate-3 rounded-[14px] bg-ink p-4 font-mono text-[12px] leading-[1.7] text-white/75 shadow-[0_18px_34px_-20px_rgba(23,25,27,0.6)]">
+            <div aria-hidden="true" class="on-dark absolute right-[5%] hidden min-[1360px]:block top-[290px] w-[270px] -rotate-3 rounded-[14px] bg-ink p-4 font-mono text-[12px] leading-[1.7] text-white/75 shadow-[0_18px_34px_-20px_rgba(23,25,27,0.6)]">
                 <p class="flex items-center gap-2 text-white/90"><span class="h-1.5 w-1.5 rounded-full bg-sage"></span>issue: checkout form failing</p>
                 <p><span class="text-sage">›</span> reproduce on staging</p>
                 <p><span class="text-sage">›</span> trace error in logs</p>
