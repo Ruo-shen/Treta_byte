@@ -79,3 +79,77 @@
   line-height: 1.05;
   letter-spacing: -0.04em;
 }
+
+/* ===== Round 3 stage B: compact polish of the homepage replica. Everything is scoped to .hn; unlayered rules beat Tailwind utilities. ===== */
+.hn {
+  --hn-y: 3rem;
+  --hn-h1: clamp(2.25rem, 5vw, 4.25rem);
+  --hn-h2: clamp(1.75rem, 3.3vw, 2.6rem);
+  --hn-shadow: 0 1px 2px rgb(23 25 27 / 4%), 0 18px 36px -26px rgb(23 25 27 / 30%);
+  --hn-gutter: 1.25rem;
+}
+@media (min-width: 640px) {
+  .hn {
+    --hn-y: 4rem;
+    --hn-gutter: 2rem;
+  }
+}
+@media (min-width: 1024px) {
+  .hn {
+    --hn-y: 5rem;
+    --hn-gutter: 2.5rem;
+  }
+}
+
+/* type: one H1, one H2, one kicker size */
+.hn h1 {
+  font-size: var(--hn-h1);
+  line-height: 1;
+  letter-spacing: -0.04em;
+}
+.hn h2 {
+  margin-top: 1rem;
+  font-size: var(--hn-h2);
+  font-weight: 500;
+  line-height: 1.08;
+  letter-spacing: -0.035em;
+}
+.hn p[class*='font-mono'][class*='uppercase'],
+.hn #contact p[class*='uppercase'] {
+  font-size: 12px;
+  letter-spacing: 0.2em;
+}
+
+/* rhythm and grid: one section padding, one container */
+.hn > section {
+  position: relative;
+}
+.hn > section:not(#top):not(#why):not(#contact) {
+  padding-block: var(--hn-y);
+}
+.hn > section:not(#top):not(#why):not(#contact)::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: min(1160px, calc(100% - 2.5rem));
+  height: 1px;
+  transform: translateX(-50%);
+  background: linear-gradient(90deg, transparent, var(--color-line) 15%, var(--color-line) 85%, transparent);
+}
+.hn #problems > div,
+.hn #services > div,
+.hn #process > div,
+.hn #about > div,
+.hn #contact > div {
+  max-width: 1200px;
+  padding-inline: var(--hn-gutter);
+}
+.hn a {
+  transition:
+    color 180ms ease,
+    background-color 180ms ease,
+    border-color 180ms ease,
+    transform 180ms ease;
+}
+
