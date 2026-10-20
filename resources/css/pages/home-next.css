@@ -463,3 +463,35 @@
   font-size: 16.5px;
 }
 
+/* closing panel (live cta partial, restyled by scope) */
+.hn #contact {
+  padding-top: 0;
+  padding-bottom: 2.5rem;
+}
+.hn #contact > div > div {
+  padding: 2.75rem 1.5rem;
+  border-radius: 14px;
+}
+@media (min-width: 640px) {
+  .hn #contact > div > div {
+    padding: 3rem 3.5rem;
+  }
+}
+@media (min-width: 1024px) {
+  .hn #contact > div > div {
+    padding: 3.25rem 4rem;
+  }
+}
+.hn #contact h2 + p {
+  margin-top: 1rem;
+  font-size: 16px;
+}
+.hn #contact a {
+  min-height: 48px;
+  border-radius: 8px;
+  font-size: 15px;
+}
+.hn #contact a:hover {
+  transform: translateY(-1px);
+}
+
