@@ -565,3 +565,33 @@
 .hn #contact a:active {
   transform: scale(0.97);
 }
+
+/* motion: bounded only. Scoped reveal (12px rise, once), caret blinks 8x, status ring pulses 3x. Reduced motion: none of it. */
+.hn .hx-reveal {
+  transition:
+    opacity 560ms var(--hx-out),
+    transform 560ms var(--hx-out);
+  transition-delay: calc(var(--i, 0) * 60ms);
+}
+.hn.hx-js .hx-reveal:not(.is-in) {
+  opacity: 0;
+  transform: translateY(12px);
+}
+@media (max-width: 767px) {
+  .hn.hx-js .hx-reveal:not(.is-in) {
+    transform: none;
+  }
+}
+.hn .is-in .hx-ring::after {
+  animation: hx-ring 1.6s var(--hx-out) 3;
+}
+@keyframes hx-ring {
+  from {
+    opacity: 0.55;
+    transform: scale(0.6);
+  }
+  to {
+    opacity: 0;
+    transform: scale(1.7);
+  }
+}
