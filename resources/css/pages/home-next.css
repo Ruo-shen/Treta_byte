@@ -525,3 +525,43 @@
     opacity: 0;
   }
 }
+
+/* closing panel: the live cta partial, aligned to the finish system by scope (partial untouched) */
+.hn #contact {
+  padding-block: 3.5rem;
+}
+.hn #contact > div {
+  max-width: var(--hx-w);
+  padding-inline: var(--hx-gutter);
+}
+.hn #contact > div > div {
+  padding: 3rem 1.5rem;
+  border-radius: var(--hx-r-card);
+  background: var(--hx-dark);
+  box-shadow: inset 0 1px 0 rgb(255 255 255 / 6%);
+}
+@media (min-width: 640px) {
+  .hn #contact > div > div {
+    padding: 4rem 3.5rem;
+  }
+}
+@media (min-width: 1024px) {
+  .hn #contact > div > div {
+    padding: 4.5rem 5rem;
+  }
+}
+.hn #contact h2 + p {
+  margin-top: 1.25rem;
+  font-size: 17px;
+  color: rgb(255 255 255 / 75%);
+}
+.hn #contact a {
+  min-height: 52px;
+  border-radius: var(--hx-r-btn);
+  transition:
+    background-color 160ms var(--hx-out),
+    transform 120ms var(--hx-out);
+}
+.hn #contact a:active {
+  transform: scale(0.97);
+}
