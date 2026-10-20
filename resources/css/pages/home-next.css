@@ -495,3 +495,26 @@
   transform: translateY(-1px);
 }
 
+/* legibility floor: nothing under 12px, links 44px tall */
+.hn [class*='text-[11px]'],
+.hn [class*='text-[11.5px]'],
+.hn [class*='text-[10.5px]'],
+.hn [class*='text-[10px]'],
+.hn [class*='text-[9px]'],
+.hn [class*='text-[7px]'] {
+  font-size: 12px;
+}
+.hn #services span[class*='h-[16px]'],
+.hn #services span[class*='h-[18px]'] {
+  width: 20px;
+  height: 20px;
+}
+.hn #why [class*='text-[clamp(11px']{
+  font-size: clamp(12px, 1.05vw, 14px);
+}
+.hn #work a[href='/work'],
+.hn #problems a[href='#work'] {
+  display: inline-flex;
+  min-height: 44px;
+  align-items: center;
+}
