@@ -12,18 +12,17 @@
         <div class="hx-reveal relative max-w-[660px]">
             <h2>Common problems,<br>practical <span class="text-moss">fixes.</span></h2>
             <p class="mt-5 max-w-[52ch] text-[16.5px] leading-[1.6] text-muted sm:text-[17px]">Most businesses do not need more technology. They need the technology they already have to work — reliably, and without constant firefighting.</p>
-            <p aria-hidden="true" class="absolute -right-[230px] top-1 hidden -rotate-3 font-hand text-[24px] leading-[1.1] text-ink/60 xl:block">Real problems.<br>Practical fixes.</p>
         </div>
         <ol class="mt-8 sm:mt-12 sm:grid sm:grid-cols-2 sm:gap-x-8 sm:gap-y-12 lg:grid-cols-4 lg:gap-x-0 lg:gap-y-0">
             @foreach($problems as $i => [$img, $title, $text, $service, $slug, $h, $pos])
-                <li class="hx-reveal hx-prob group relative grid grid-cols-[92px_1fr] items-center gap-x-4 border-t border-line py-5 sm:block sm:border-t-0 sm:py-0 lg:px-8 lg:first:pl-0 lg:last:pr-0 {{ $loop->first ? '' : 'lg:border-l' }}" style="--i:{{ $i }}">
-                    <div class="aspect-[960/530] overflow-hidden sm:mx-auto sm:aspect-auto sm:h-[130px] sm:max-w-[300px]">
+                <li class="hx-reveal hx-prob group relative grid grid-cols-[76px_1fr] items-center gap-x-4 border-t border-line py-5 sm:block sm:border-t-0 sm:py-0 lg:px-8 lg:first:pl-0 lg:last:pr-0 {{ $loop->first ? '' : 'lg:border-l' }}" style="--i:{{ $i }}">
+                    <div class="aspect-square overflow-hidden sm:mx-auto sm:aspect-auto sm:h-[130px] sm:max-w-[300px]">
                         <img src="/images/problems/{{ $img }}.webp" width="960" height="{{ $h }}" alt="" loading="lazy" decoding="async" class="hn-fade h-full w-full object-cover transition-transform duration-[600ms] ease-[cubic-bezier(0.23,1,0.32,1)] group-hover:scale-[1.03]" style="object-position:{{ $pos }}">
                     </div>
                     <div class="sm:mt-6">
-                        <h3 class="text-[18px] font-medium leading-[1.2] tracking-[-0.02em] sm:text-[20px]">{!! $title !!}</h3>
+                        <h3 id="problem-{{ $i }}" class="text-[18px] font-medium leading-[1.2] tracking-[-0.02em] sm:text-[20px]">{!! $title !!}</h3>
                         <p class="mt-2 text-[15px] leading-[1.45] text-muted sm:mt-3 sm:text-[16px] sm:leading-[1.5] lg:max-w-[250px]">{{ $text }}</p>
-                        <a href="{{ route('services.show', $slug) }}" class="hx-link mt-1 after:absolute after:inset-0 after:content-[''] sm:mt-2">{{ $service }} <x-inner.icon name="arrow" class="h-4 w-4" /></a>
+                        <a href="{{ route('services.show', $slug) }}" aria-describedby="problem-{{ $i }}" class="hx-link mt-1 after:absolute after:inset-0 after:content-[''] sm:mt-2">{{ $service }} <x-inner.icon name="arrow" class="h-4 w-4" /></a>
                     </div>
                 </li>
             @endforeach
