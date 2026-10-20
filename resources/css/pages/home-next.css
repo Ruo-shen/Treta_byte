@@ -230,3 +230,63 @@
   }
 }
 
+/* problems: thumbnail rows on phones, tighter columns above */
+.hn #problems ol {
+  margin-top: 2rem;
+}
+.hn #problems .reveal.grid {
+  gap: 1.25rem;
+}
+.hn #problems .reveal.grid > p {
+  font-size: 16px;
+  line-height: 1.55;
+}
+.hn #problems li div[class*='aspect-'] {
+  max-width: 250px;
+}
+.hn #problems h3 {
+  font-size: 18px;
+  line-height: 1.2;
+}
+.hn #problems li p {
+  max-width: 230px;
+  font-size: 15px;
+  line-height: 1.4;
+}
+.hn #problems div[class*='bg-[#E3E4DE]'] {
+  margin-top: 2rem;
+  padding-block: 1.25rem;
+  border-radius: 14px;
+}
+.hn #problems div[class*='bg-[#E3E4DE]'] span[class*='h-[46px]'] {
+  width: 40px;
+  height: 40px;
+}
+.hn #problems div[class*='bg-[#E3E4DE]'] p[class*='text-[17px]'] {
+  font-size: 16px;
+}
+@media (max-width: 639px) {
+  .hn #problems li {
+    padding: 1rem 0;
+    border-top: 1px solid var(--color-line);
+  }
+  .hn #problems li > div {
+    display: grid;
+    grid-template-columns: 104px 1fr;
+    gap: 0.875rem;
+    align-items: center;
+  }
+  .hn #problems li div[class*='aspect-'] {
+    width: 100%;
+    max-width: none;
+    margin: 0;
+  }
+  .hn #problems li div[class*='mt-6'] {
+    margin-top: 0;
+    padding: 0;
+  }
+  .hn #problems li p {
+    max-width: none;
+  }
+}
+
