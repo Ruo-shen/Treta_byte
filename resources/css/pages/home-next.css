@@ -427,3 +427,25 @@
   }
 }
 
+/* process */
+.hn #process > div {
+  gap: 2rem;
+}
+@media (min-width: 1024px) {
+  .hn #process > div {
+    gap: 4rem;
+  }
+  .hn #process .lg\:sticky {
+    top: 6rem;
+  }
+}
+.hn #process li > div {
+  padding-block: 1.375rem;
+}
+.hn #process li h3 {
+  font-size: 20px;
+}
+.hn #process h2 + p {
+  margin-top: 1rem;
+}
+
