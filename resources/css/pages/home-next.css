@@ -485,7 +485,12 @@
 }
 .hn #faq summary {
   min-height: 56px;
+  margin-inline: -0.75rem;
+  padding-inline: 0.75rem;
   border-radius: var(--hx-r-btn);
+}
+.hn #faq details > p {
+  padding-inline: 0;
 }
 .hn #faq summary > span:last-child {
   transition: transform 160ms var(--hx-out);
