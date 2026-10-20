@@ -6,6 +6,7 @@
 @include('components.home-next.services')
 @include('components.home-next.process')
 @include('components.home-next.why')
+@include('components.home-next.work')
 @include('components.home-next.about')
 @include('components.cta')
 </div>
