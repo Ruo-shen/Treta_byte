@@ -33,32 +33,48 @@ if (root && !matchMedia("(prefers-reduced-motion: reduce)").matches) {
   const steps = process ? [...process.children] as HTMLElement[] : []
 
   if (process && steps.length) {
-    const mark = (active: number) =>
+    // The step nearest the middle of the viewport is active; recomputed on load, resize, entry and (rAF-throttled) scroll while the section is near.
+
+    const compute = () => {
+      const mid = innerHeight * 0.5
+
+      const active = steps.reduce(
+        (n, step, i) => (step.getBoundingClientRect().top < mid ? i : n),
+        -1,
+      )
+
       steps.forEach((step, i) => {
         step.dataset.state =
           i < active ? "past" : i === active ? "active" : "future"
       })
+    }
+
+    let frame = 0
+
+    let near = false
+
+    const queue = () => {
+      if (!frame) frame = requestAnimationFrame(() => ((frame = 0), compute()))
+    }
 
     process.classList.add("hx-live")
 
-    mark(
-      steps.reduce(
-        (n, step, i) => (step.getBoundingClientRect().top < vh * 0.55 ? i : n),
-        -1,
-      ),
-    )
+    compute()
 
-    const spine = new IntersectionObserver(
-      (entries) =>
-        entries.forEach(
-          (entry) =>
-            entry.isIntersecting &&
-            mark(steps.indexOf(entry.target as HTMLElement)),
-        ),
+    new IntersectionObserver(
+      (entries) => {
+        near = entries.some((entry) => entry.isIntersecting)
 
-      { rootMargin: "-45% 0px -45% 0px" },
-    )
+        compute()
+      },
 
-    steps.forEach((step) => spine.observe(step))
+      { rootMargin: "20% 0px" },
+    ).observe(process)
+
+    addEventListener("scroll", () => near && queue(), { passive: true })
+
+    addEventListener("resize", queue)
+
+    addEventListener("load", compute)
   }
 }
