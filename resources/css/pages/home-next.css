@@ -396,3 +396,48 @@
   border: 1.5px solid var(--color-moss);
   opacity: 0;
 }
+
+/* process: a spine that fills as each step passes the middle of the viewport (complete when JS is off) */
+.hn .hx-process {
+  position: relative;
+  padding-left: 1.25rem;
+  border-top: 1px solid var(--color-line);
+}
+.hn .hx-step {
+  position: relative;
+  border-bottom: 1px solid var(--color-line);
+}
+.hn .hx-step::before,
+.hn .hx-step::after {
+  content: '';
+  position: absolute;
+  left: -1.25rem;
+  top: -1px;
+  bottom: -1px;
+  width: 2px;
+}
+.hn .hx-step::before {
+  background: var(--color-line);
+}
+.hn .hx-step::after {
+  background: var(--color-accent);
+  transform-origin: top;
+  transition: transform 520ms var(--hx-out);
+}
+.hn .hx-num {
+  padding-top: 0.5rem;
+  color: var(--color-muted);
+  transition: color 240ms var(--hx-out);
+}
+.hn .hx-live .hx-step::after {
+  transform: scaleY(0);
+}
+.hn .hx-live .hx-step[data-state='past']::after,
+.hn .hx-live .hx-step[data-state='active']::after {
+  transform: scaleY(1);
+}
+.hn .hx-live .hx-step[data-state='active'] .hx-num,
+.hn .hx-process:not(.hx-live) .hx-num {
+  color: var(--color-accent);
+}
+
