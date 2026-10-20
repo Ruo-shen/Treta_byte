@@ -26,7 +26,7 @@
             <p class="mt-5 max-w-[52ch] text-[16.5px] leading-[1.6] text-muted sm:text-[17px]">Engage us for a single fix, a full build, or ongoing care. Same team, same standards, from quick wins to long-term partnerships.</p>
         </div>
 
-        <div class="mt-14 space-y-16 sm:space-y-24 lg:mt-20 lg:space-y-32">
+        <div class="mt-12 space-y-14 sm:space-y-20 lg:mt-16 lg:space-y-20">
             {{-- Fix --}}
             <div class="grid items-center gap-8 lg:grid-cols-12 lg:gap-10">
                 <div class="hx-reveal relative z-10 lg:col-span-5">

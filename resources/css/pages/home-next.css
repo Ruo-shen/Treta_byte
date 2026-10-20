@@ -113,7 +113,7 @@
 @media (min-width: 1024px) {
   .hn {
     --hx-gutter: 2.5rem;
-    --hx-y: 7rem;
+    --hx-y: 6rem;
   }
 }
 
@@ -594,4 +594,7 @@
     opacity: 0;
     transform: scale(1.7);
   }
+}
+.hn #contact p[class*='uppercase'] {
+  font-size: 12px;
 }

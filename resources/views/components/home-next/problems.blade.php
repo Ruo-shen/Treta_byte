@@ -14,10 +14,10 @@
             <p class="mt-5 max-w-[52ch] text-[16.5px] leading-[1.6] text-muted sm:text-[17px]">Most businesses do not need more technology. They need the technology they already have to work — reliably, and without constant firefighting.</p>
             <p aria-hidden="true" class="absolute -right-[230px] top-1 hidden -rotate-3 font-hand text-[24px] leading-[1.1] text-ink/60 xl:block">Real problems.<br>Practical fixes.</p>
         </div>
-        <ol class="mt-10 sm:mt-14 sm:grid sm:grid-cols-2 sm:gap-x-8 sm:gap-y-12 lg:grid-cols-4 lg:gap-x-0 lg:gap-y-0">
+        <ol class="mt-8 sm:mt-12 sm:grid sm:grid-cols-2 sm:gap-x-8 sm:gap-y-12 lg:grid-cols-4 lg:gap-x-0 lg:gap-y-0">
             @foreach($problems as $i => [$img, $title, $text, $service, $slug, $h, $pos])
                 <li class="hx-reveal hx-prob group relative grid grid-cols-[92px_1fr] items-center gap-x-4 border-t border-line py-5 sm:block sm:border-t-0 sm:py-0 lg:px-8 lg:first:pl-0 lg:last:pr-0 {{ $loop->first ? '' : 'lg:border-l' }}" style="--i:{{ $i }}">
-                    <div class="aspect-[960/530] overflow-hidden sm:mx-auto sm:aspect-auto sm:h-[150px] sm:max-w-[300px]">
+                    <div class="aspect-[960/530] overflow-hidden sm:mx-auto sm:aspect-auto sm:h-[130px] sm:max-w-[300px]">
                         <img src="/images/problems/{{ $img }}.webp" width="960" height="{{ $h }}" alt="" loading="lazy" decoding="async" class="hn-fade h-full w-full object-cover transition-transform duration-[600ms] ease-[cubic-bezier(0.23,1,0.32,1)] group-hover:scale-[1.03]" style="object-position:{{ $pos }}">
                     </div>
                     <div class="sm:mt-6">

@@ -15,7 +15,7 @@
         {{-- data-process: a tiny script marks the step nearest the middle of the viewport; without it the spine is simply complete --}}
         <ol class="hx-process" data-process>
             @foreach($steps as $i => [$name, $text])
-                <li class="hx-step hx-reveal grid grid-cols-[2.25rem_1fr] gap-x-3 py-6 sm:grid-cols-[3.5rem_9rem_1fr] sm:gap-x-6 sm:py-9" style="--i:{{ $i }}">
+                <li class="hx-step hx-reveal grid grid-cols-[2.25rem_1fr] gap-x-3 py-5 sm:grid-cols-[3.5rem_9rem_1fr] sm:gap-x-6 sm:py-7" style="--i:{{ $i }}">
                     <span class="hx-num font-mono text-[12px] tabular-nums">0{{ $loop->iteration }}</span>
                     <h3 class="text-[22px] font-medium leading-tight tracking-[-0.02em] sm:text-[28px]">{{ $name }}</h3>
                     <p class="col-start-2 mt-2 text-[16px] leading-[1.6] text-muted sm:col-start-3 sm:mt-1.5">{{ $text }}</p>
