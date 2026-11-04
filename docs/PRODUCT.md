@@ -2,7 +2,7 @@
 
 ## 1. Product summary
 
-TRETA is a technology solutions studio founded by three friends working as one accountable team. It helps businesses fix technical problems, build useful digital systems, and care for the systems they depend on.
+TRETA is a technology solutions studio of specialists in different disciplines (design, technical direction, engineering, and support) working as one coordinated team. It helps businesses fix technical problems, build useful digital systems, and care for the systems they depend on.
 
 TRETA is not a freelancer marketplace, a large agency, or a SaaS product.
 
@@ -13,6 +13,12 @@ Primary brand statement:
 Supporting statement:
 
 > We fix what's broken, build what's needed, and care for what matters.
+
+Positioning statement (homepage hero):
+
+> Different specialists. One coordinated team.
+>
+> Design, engineering and support brought together on every project, so you get one clear conversation instead of handoffs.
 
 ## 2. Business objective
 
@@ -93,12 +99,12 @@ The application contains **11 public page templates**. Four service-detail URLs 
 
 | Template | Route | Instances | Purpose | Content source | Primary action |
 | --- | --- | ---: | --- | --- | --- |
-| Homepage | `/` | 1 | Explain positioning, services, selected work, and the studio story | Code | Start an inquiry |
+| Homepage | `/` | 1 | Explain positioning, services, selected work, and how the specialist team works together | Code | Start an inquiry |
 | Services overview | `/services` | 1 | Explain Fix, Build, and Care | Code | Choose a service |
 | Service detail | `/services/{slug}` | 4 initially | Address a specific customer problem and search intent | Code | Discuss the service |
 | Work index | `/work` | 1 | Present approved real projects | Code | View a case study |
 | Case study | `/work/{slug}` | Variable | Explain the problem, work, solution, and verified outcome | Individually coded | Discuss a similar project |
-| About | `/about` | 1 | Explain the founders' shared philosophy and accountability | Code | Contact the studio |
+| About | `/about` | 1 | Explain how specialists in different disciplines coordinate as one team | Code | Contact the studio |
 | Contact | `/contact` | 1 | Capture qualified inquiries | Code + database | Submit inquiry |
 | Blog index | `/blog` | 1 | List published articles | CMS | Read an article |
 | Article | `/blog/{slug}` | Variable | Provide useful, indexable content | CMS | Contextual service CTA |
@@ -128,7 +134,7 @@ Expected narrative:
 4. Selected approved work
 5. Why TRETA exists
 6. Working process
-7. Human studio story
+7. Specialist team story
 8. Contact call to action
 9. Footer
 
@@ -154,7 +160,7 @@ Case-study layouts may be individually coded. Do not force every project into an
 
 ### About
 
-Tell the genuine story of three friends combining their skills as one responsible studio. Do not invent biographies, job titles, awards, credentials, portraits, or scale.
+Explain how specialists in different disciplines coordinate as one team, and what working with them is like. Do not invent biographies, job titles, awards, credentials, portraits, or scale.
 
 ### Contact
 
@@ -253,7 +259,7 @@ Implementation may proceed around these items, but agents must not guess them:
 - Approved font and image licensing
 - Verified contact email and alternative contact method
 - Approved real projects, permissions, images, and outcomes
-- Final founder information intended for publication
+- Final team information (names and roles) intended for publication
 - GA4 measurement ID, Search Console verification method, and privacy/consent treatment
 - Launch articles and categories
 

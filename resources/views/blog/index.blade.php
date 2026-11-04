@@ -34,7 +34,7 @@
                     <img src="{{ $featuredImage['url'] }}" alt="{{ $featured->featured_image_alt }}" width="{{ $featuredImage['width'] }}" height="{{ $featuredImage['height'] }}" class="aspect-[16/10] h-auto w-full rounded-[14px] border border-line bg-soft object-cover">
                 @else
                     <div class="relative aspect-[16/10] overflow-hidden rounded-[14px] bg-mist p-6 sm:p-8" aria-hidden="true">
-                        <svg class="pointer-events-none absolute bottom-0 right-0 h-[80%] w-auto" viewBox="0 0 360 340" fill="none" preserveAspectRatio="xMaxYMax meet"><path d="M10 340 A170 170 0 0 1 340 160" stroke="#4c6656" stroke-opacity="0.35" /><path d="M145 340 V30 H250 V168 H360" stroke="#4c6656" stroke-opacity="0.35" /><rect x="250" y="0" width="30" height="30" fill="#315ceb" /></svg>
+                        <svg class="pointer-events-none absolute bottom-0 right-0 h-[80%] w-auto" viewBox="0 0 360 340" fill="none" preserveAspectRatio="xMaxYMax meet"><path d="M10 340 A170 170 0 0 1 340 160" stroke="#cd4a42" stroke-opacity="0.35" /><path d="M145 340 V30 H250 V168 H360" stroke="#cd4a42" stroke-opacity="0.35" /><rect x="250" y="0" width="30" height="30" fill="#0b78b8" /></svg>
                         <p class="relative font-mono text-[12px] uppercase tracking-[0.16em] text-moss">{{ $featured->category?->name ?? 'The journal' }}</p>
                         <p class="relative mt-6 text-[clamp(3.5rem,9vw,6rem)] font-light leading-none tracking-[-0.05em] text-ink/80">{{ $featured->published_at->format('j M') }}</p>
                         <p class="relative mt-2 font-mono text-[13px] text-moss">{{ $featured->published_at->format('Y') }}</p>

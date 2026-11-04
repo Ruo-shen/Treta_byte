@@ -7,7 +7,7 @@
         <x-inner.sketch class="mx-auto max-w-[460px] lg:mx-0 lg:ml-auto">
             <div class="relative mx-auto aspect-[1.3] w-full max-w-[340px]" aria-hidden="true">
                 <span class="absolute left-[6%] top-[4%] h-[14%] w-[34%] rounded-t-[10px] border border-b-0 border-[#c9c5b8] bg-[#ddd8c9]"></span>
-                <div class="absolute inset-x-0 bottom-0 top-[16%] -rotate-3 rounded-[10px] rounded-tl-none border border-[#c9c5b8] bg-[#e6e2d5] shadow-[0_28px_38px_-30px_rgba(23,25,27,0.5)]">
+                <div class="absolute inset-x-0 bottom-0 top-[16%] -rotate-3 rounded-[10px] rounded-tl-none border border-[#c9c5b8] bg-[#e6e2d5] shadow-[0_28px_38px_-30px_rgba(9,101,156,0.5)]">
                     <span class="absolute left-5 top-5 font-mono text-[12px] tracking-[0.18em] text-moss">PROJECT NOTES</span>
                     <span class="absolute inset-x-5 top-14 h-px bg-ink/15"></span>
                     <span class="absolute inset-x-5 top-[4.6rem] h-px bg-ink/15"></span>

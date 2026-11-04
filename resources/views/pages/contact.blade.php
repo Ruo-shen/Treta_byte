@@ -10,7 +10,7 @@
 
         <div class="min-w-0 lg:col-start-2 lg:row-span-2 lg:row-start-1">
             @if(session('inquiry_sent'))
-                <div role="status" tabindex="-1" data-focus-on-load class="relative rounded-[14px] border border-line bg-white p-6 shadow-[0_28px_60px_-44px_rgba(23,25,27,0.45)] sm:p-9">
+                <div role="status" tabindex="-1" data-focus-on-load class="relative rounded-[14px] border border-line bg-white p-6 shadow-[0_28px_60px_-44px_rgba(9,101,156,0.45)] sm:p-9">
                     <span class="grid h-14 w-14 place-items-center rounded-full bg-moss text-white" aria-hidden="true">
                         <svg viewBox="0 0 24 24" class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12.5l4.5 4.5L19 7.5" /></svg>
                     </span>
@@ -27,7 +27,7 @@
                     </div>
                 </div>
             @else
-                <div class="rounded-[14px] border border-line bg-white p-5 shadow-[0_28px_60px_-44px_rgba(23,25,27,0.45)] sm:p-9">
+                <div class="rounded-[14px] border border-line bg-white p-5 shadow-[0_28px_60px_-44px_rgba(9,101,156,0.45)] sm:p-9">
                     <div class="mb-6 flex items-center justify-between gap-4 border-b border-line pb-5">
                         <p class="font-mono text-[12px] uppercase tracking-[0.16em] text-muted">A note to TRETA</p>
                         <span class="text-muted" aria-hidden="true">↗</span>

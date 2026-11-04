@@ -2,7 +2,7 @@
 .article-content {
   font-size: 17px;
   line-height: 1.75;
-  color: rgb(23 25 27 / 88%);
+  color: rgb(19 26 33 / 88%);
   overflow-wrap: anywhere;
 }
 @media (min-width: 640px) {

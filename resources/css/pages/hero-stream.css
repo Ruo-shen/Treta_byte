@@ -1,0 +1,149 @@
+/* Home hero photo stream: tiles rise in straight lines at three speeds (depth); the centre fades so the headline stays clear. Transform only; paused off-screen; reduced motion shows a static scatter. */
+@layer components {
+  .sf {
+    container-type: inline-size;
+  }
+  .sf-field {
+    --mw: 46%;
+    --mh: 38%;
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    -webkit-mask-image:
+      radial-gradient(ellipse var(--mw) var(--mh) at 50% 50%, transparent 55%, #000 100%),
+      linear-gradient(to bottom, transparent 0, #000 14%, #000 78%, transparent 100%);
+    -webkit-mask-composite: source-in;
+    mask-image:
+      radial-gradient(ellipse var(--mw) var(--mh) at 50% 50%, transparent 55%, #000 100%),
+      linear-gradient(to bottom, transparent 0, #000 14%, #000 78%, transparent 100%);
+    mask-composite: intersect;
+  }
+  .sf-tile {
+    position: absolute;
+    top: 0;
+    left: var(--x);
+    width: max(calc(100cqw * var(--w) / 1440), calc(var(--w) * 0.6px));
+    aspect-ratio: var(--a, 1);
+    rotate: var(--r, 0deg);
+    translate: 0 var(--y0, 0);
+    overflow: hidden;
+    border-radius: 14px;
+    background: #fff;
+    padding: 3px;
+    box-shadow: 0 14px 28px -18px rgb(9 101 156 / 40%);
+    animation: sf-rise var(--d, 40s) linear infinite;
+    animation-delay: calc(var(--d, 40s) * var(--ph, 0) * -1);
+  }
+  .sf-tile img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 11px;
+  }
+  .sf-far {
+    opacity: 0.7;
+    filter: blur(2px);
+    box-shadow: none;
+  }
+  .sf.is-paused .sf-tile {
+    animation-play-state: paused;
+  }
+  @media (max-width: 767px) {
+    .sf-field {
+      --mw: 78%;
+      --mh: 46%;
+    }
+  }
+  .sf-liquid {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+  }
+  .sf-blob {
+    position: absolute;
+    display: block;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    animation: sf-flow var(--t, 26s) ease-in-out infinite;
+  }
+  .sf-b1 {
+    --t: 28s;
+    top: -22cqw;
+    left: -14cqw;
+    width: 62cqw;
+    background: radial-gradient(circle, rgb(11 120 184 / 0.5), transparent 68%);
+  }
+  .sf-b2 {
+    --t: 34s;
+    top: 6cqw;
+    right: -18cqw;
+    width: 58cqw;
+    background: radial-gradient(circle, rgb(255 255 255 / 0.85), transparent 66%);
+    animation-delay: -9s;
+  }
+  .sf-b3 {
+    --t: 31s;
+    bottom: -26cqw;
+    left: 18cqw;
+    width: 66cqw;
+    background: radial-gradient(circle, rgb(143 205 245 / 0.9), transparent 68%);
+    animation-delay: -15s;
+  }
+  .sf-b4 {
+    --t: 38s;
+    bottom: -14cqw;
+    right: 4cqw;
+    width: 34cqw;
+    background: radial-gradient(circle, rgb(205 74 66 / 0.22), transparent 66%);
+    animation-delay: -21s;
+  }
+  .sf-water {
+    position: absolute;
+    inset: 0;
+    display: none;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+  }
+  .sf-gl .sf-water {
+    display: block;
+  }
+  .sf-gl .sf-liquid,
+  .sf-gl .sf-field {
+    display: none;
+  }
+  .sf-grain {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    background-size: 220px 220px;
+    mix-blend-mode: overlay;
+    opacity: 0.32;
+  }
+  .sf.is-paused .sf-blob {
+    animation-play-state: paused;
+  }
+  @keyframes sf-flow {
+    0%,
+    100% {
+      transform: translate3d(0, 0, 0) rotate(0deg) scale(1);
+    }
+    33% {
+      transform: translate3d(9cqw, -6cqw, 0) rotate(40deg) scale(1.14);
+    }
+    66% {
+      transform: translate3d(-7cqw, 7cqw, 0) rotate(-30deg) scale(0.92);
+    }
+  }
+  @keyframes sf-rise {
+    from {
+      translate: 0 108dvh;
+    }
+    to {
+      translate: 0 -22dvh;
+    }
+  }
+}

@@ -3,24 +3,30 @@
 @import './pages/contact.css';
 @import './pages/blog.css';
 @import './pages/home-next.css';
+@import './pages/hero-stream.css';
 @source '../views/**/*.blade.php';
 @source '../../config/services.php';
 
 @theme {
-  --color-ink: #17191b;
-  --color-accent: #315ceb;
-  --color-soft: #efede7;
-  --color-paper: #f7f6f2;
-  --color-sage: #a7b8ab;
-  --color-line: #e5e4df;
-  --color-muted: #64625d;
+  --color-ink: #131a21;
+  --color-accent: #0b78b8;
+  --color-soft: #eef3f8;
+  --color-paper: #dcebf7;
+  --color-sage: #9cd0f0;
+  --color-line: #b9d3e6;
+  --color-muted: #596570;
   --font-sans: 'Inter Tight', 'Inter Tight Fallback', ui-sans-serif, system-ui, sans-serif;
-  --color-moss: #4c6656;
+  --color-moss: #cd4a42;
   --color-danger: #a63326;
-  --color-dark: #1b1c1e;
-  --color-mist: #e4e8df;
-  --color-accent-hover: #2a4fd0;
-  --color-note: #fbf8ec;
+  --color-dark: #12202d;
+  --color-mist: #e4f1fa;
+  --color-sky-field: #c9e4f7;
+  --color-accent-hover: #09659c;
+  --color-note: #fff4e6;
+  --color-cloud: #f4f8fc;
+  --color-pop: #cd4a42;
+  --color-pop-hover: #b23d36;
+  --font-display: 'Fraunces', 'Fraunces Fallback', Georgia, 'Times New Roman', serif;
   --font-hand: 'Caveat', 'Caveat Fallback', cursive;
   --font-mono: 'JetBrains Mono', 'JetBrains Mono Fallback', ui-monospace, monospace;
 }
@@ -49,6 +55,23 @@
   font-display: swap;
   src: url('/fonts/caveat/Caveat-latin.woff2') format('woff2');
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: 'Fraunces';
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url('/fonts/fraunces/Fraunces-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Fraunces Fallback';
+  src: local('Georgia'), local('Times New Roman');
+  size-adjust: 98%;
+  ascent-override: 96%;
+  descent-override: 24%;
+  line-gap-override: 0%;
 }
 
 /* Metric-matched local fallbacks (measured against the web fonts) so the font swap does not reflow text. */
@@ -81,16 +104,23 @@
 }
 
 html {
+  overflow-x: clip;
   scroll-behavior: auto;
 }
 
 body {
+  overflow-x: clip;
   margin: 0;
-  background: #f7f6f2;
+  background: var(--color-paper);
   color: var(--color-ink);
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
+}
+
+@layer base {
+  h1, h2, h3 { text-wrap: balance; }
+  p { text-wrap: pretty; }
 }
 
 ::selection {
@@ -136,14 +166,14 @@ html.lenis { scroll-padding-top: 0; }
 .site-header[data-open] { height: 100dvh; overflow-y: auto; overscroll-behavior: contain; background: var(--color-paper); }
 html:has(.site-header[data-open]) { overflow: hidden; }
 .header-shell { max-width: 1320px; height: 72px; transform: translateY(0); }
-.site-header[data-compact] .header-shell { max-width: 500px; height: 50px; transform: translateY(10px); padding-inline: 6px; border-color: var(--color-line); background: rgb(255 255 255 / 90%); box-shadow: 0 10px 30px -18px rgb(23 25 27 / 35%); backdrop-filter: blur(12px); }
+.site-header[data-compact] .header-shell { max-width: 500px; height: 50px; transform: translateY(10px); padding-inline: 6px; border-color: var(--color-line); background: rgb(255 255 255 / 90%); box-shadow: 0 10px 30px -18px rgb(9 101 156 / 35%); backdrop-filter: blur(12px); }
 .site-header[data-compact] .header-brand { width: 36px; }
 .site-header[data-compact] .header-wordmark { transform: translateX(-8px); opacity: 0; }
 .site-header[data-compact] .header-monogram { scale: 1; opacity: 1; }
 .site-header[data-compact] .header-links a { padding-inline: 10px; font-size: 13.5px; }
 .site-header[data-compact] .header-contact { width: auto; }
 .site-header[data-compact] .header-divider { opacity: 1; }
-.site-header[data-compact] .header-cta { height: 36px; border-radius: 10px; padding-inline: 12px; font-size: 13px; border-color: rgb(49 92 235 / 20%); background: #e6ecfd; color: var(--color-accent); }
+.site-header[data-compact] .header-cta { height: 36px; border-radius: 10px; padding-inline: 12px; font-size: 13px; border-color: rgb(11 120 184 / 22%); background: #e4f3fc; color: var(--color-accent); }
 .site-header[data-compact] .header-cta:hover { background: var(--color-accent); color: white; }
 .site-header[data-open] [data-menu-toggle] > span > span:first-child { top: 6px; transform: rotate(45deg); }
 .site-header[data-open] [data-menu-toggle] > span > span:last-child { top: 6px; transform: rotate(-45deg); }

@@ -2,6 +2,8 @@ import Lenis from "lenis"
 
 import "./home-next"
 
+import "./hero-water"
+
 const header = document.querySelector("header")
 
 const toggle = document.querySelector<HTMLButtonElement>("[data-menu-toggle]")
@@ -231,17 +233,17 @@ if (!reducedMotion.matches) {
         if (!reducedMotion.matches)
           element.animate(
             [
-              { opacity: 0, transform: "translateY(18px)" },
+              { opacity: 0, transform: "translateY(12px)" },
 
               { opacity: 1, transform: "none" },
             ],
 
             {
-              duration: 800,
+              duration: 560,
 
               delay: parseFloat(element.style.transitionDelay) || 0,
 
-              easing: "cubic-bezier(0.2, 0.7, 0.2, 1)",
+              easing: "cubic-bezier(0.22, 1, 0.36, 1)",
             },
           )
 
@@ -278,3 +280,11 @@ document
 // After a server-side form response, move focus to the alert summary or the success receipt.
 
 document.querySelector<HTMLElement>("[data-focus-on-load]")?.focus()
+
+// Hero tile field: pause the drift while the hero is off-screen.
+const heroField = document.querySelector<HTMLElement>("[data-hero-field]")
+
+if (heroField)
+  new IntersectionObserver(([entry]) =>
+    heroField.classList.toggle("is-paused", !entry.isIntersecting),
+  ).observe(heroField)

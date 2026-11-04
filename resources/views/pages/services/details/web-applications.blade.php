@@ -11,7 +11,7 @@
                 ['Systems stay aligned', 'Less re-entry. Fewer loose ends.'],
             ] as $n => [$step, $text])
                 <li>
-                    <div class="rounded-[12px] bg-white p-4 ring-1 {{ $n === 1 ? 'shadow-[0_12px_30px_-20px_rgba(49,92,235,0.6)] ring-accent/50' : 'ring-line' }}">
+                    <div class="rounded-[12px] bg-white p-4 ring-1 {{ $n === 1 ? 'shadow-[0_12px_30px_-20px_rgba(11,120,184,0.6)] ring-accent/50' : 'ring-line' }}">
                         <span class="font-mono text-[12px] text-accent">0{{ $n + 1 }}</span>
                         <p class="mt-1 text-[19px] font-medium tracking-[-0.01em]">{{ $step }}</p>
                         <p class="mt-1 text-[15px] leading-[1.5] text-muted">{{ $text }}</p>

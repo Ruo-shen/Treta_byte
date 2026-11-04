@@ -14,7 +14,7 @@
             <svg aria-hidden="true" class="pointer-events-none absolute bottom-0 right-0 hidden h-[86%] w-[360px] md:block" viewBox="0 0 360 340" fill="none" preserveAspectRatio="xMaxYMax meet">
                 <path d="M10 340 A170 170 0 0 1 340 160" stroke="#9a9b9d" stroke-width="1" />
                 <path d="M145 340 V30 H250 V168 H360" stroke="#9a9b9d" stroke-width="1" />
-                <rect x="250" y="0" width="30" height="30" fill="#315ceb" />
+                <rect x="250" y="0" width="30" height="30" fill="#0b78b8" />
             </svg>
             <div class="relative max-w-[640px]">
                 <x-inner.kicker dark>{{ $kicker }}</x-inner.kicker>

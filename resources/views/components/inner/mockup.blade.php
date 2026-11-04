@@ -1,7 +1,7 @@
 {{-- Product-style UI card. Props: label (mono title bar), tilt (left|right, tablet and up only), dark. --}}
 @props(['label' => null, 'tilt' => null, 'dark' => false])
 <div {{ $attributes->class([
-    'overflow-hidden rounded-[12px] border shadow-[0_28px_60px_-40px_rgba(23,25,27,0.45)]',
+    'overflow-hidden rounded-[12px] border shadow-[0_28px_60px_-40px_rgba(9,101,156,0.45)]',
     $dark ? 'on-dark border-white/10 bg-[#25272a] text-white' : 'border-line bg-white',
     match ($tilt) { 'left' => 'md:-rotate-[1.5deg]', 'right' => 'md:rotate-[1.5deg]', default => '' },
 ]) }}>
