@@ -4,6 +4,8 @@ import "./home-next"
 
 import "./hero-water"
 
+import "./problems-scene"
+
 const header = document.querySelector("header")
 
 const toggle = document.querySelector<HTMLButtonElement>("[data-menu-toggle]")

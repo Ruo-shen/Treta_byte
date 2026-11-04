@@ -1,0 +1,397 @@
+/* Problems scene: below lg the four problems stack; from lg (and with JS) the section pins and a dial steps through them as the track scrolls. */
+@layer components {
+  .pb {
+    --pb-ease: cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .pb-items {
+    display: grid;
+    gap: 48px 32px;
+    max-width: 1260px;
+    margin: 48px auto 0;
+    padding: 0 24px;
+    list-style: none;
+  }
+  .pb-pic {
+    margin: 0;
+    max-width: 360px;
+  }
+  .pb-pic img {
+    display: block;
+    width: 100%;
+    height: auto;
+    -webkit-mask-image:
+      linear-gradient(to right, transparent, #000 10%, #000 90%, transparent),
+      linear-gradient(to bottom, transparent, #000 10%, #000 90%, transparent);
+    -webkit-mask-composite: source-in;
+    mask-image:
+      linear-gradient(to right, transparent, #000 10%, #000 90%, transparent),
+      linear-gradient(to bottom, transparent, #000 10%, #000 90%, transparent);
+    mask-composite: intersect;
+  }
+  .pb-num {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--color-accent);
+  }
+  .pb-copy h3 {
+    margin: 0;
+    font-family: var(--font-display);
+    font-size: 28px;
+    font-weight: 400;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+  }
+  .pb-copy p {
+    max-width: 40ch;
+    margin: 16px 0 0;
+    font-size: 16px;
+    line-height: 1.5;
+    color: var(--color-muted);
+  }
+  .pb-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 24px 0 0;
+    padding: 0;
+    list-style: none;
+  }
+  .pb-chips li {
+    padding: 8px 16px;
+    border-radius: 999px;
+    background: #fff;
+    font-size: 13px;
+    line-height: 1.2;
+    box-shadow: 0 0 0 1px var(--color-line);
+  }
+  .pb-arc,
+  .pb-s {
+    display: none;
+  }
+  @media (min-width: 640px) {
+    .pb-items {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      padding: 0 32px;
+    }
+  }
+
+  /* pinned scene */
+  .pb-on .pb-track {
+    position: relative;
+    height: calc(100dvh + 4 * 80dvh);
+    margin-top: 32px;
+  }
+  .pb-on .pb-pin {
+    position: sticky;
+    top: 0;
+    height: 100dvh;
+    overflow: hidden;
+  }
+  .pb-on .pb-items {
+    position: absolute;
+    inset: 0;
+    display: block;
+    max-width: none;
+    margin: 0;
+    padding: 0;
+  }
+  .pb-on .pb-item {
+    position: absolute;
+    inset: 0;
+  }
+  .pb-on .pb-copy,
+  .pb-on .pb-pic {
+    position: absolute;
+    top: 50%;
+    translate: 0 -50%;
+    opacity: 0;
+    transform: translate3d(0, 28px, 0);
+    transition:
+      opacity 600ms var(--pb-ease),
+      transform 700ms var(--pb-ease);
+  }
+  .pb-on .pb-copy {
+    left: 38%;
+    width: min(34vw, 480px);
+  }
+  .pb-on .pb-pic {
+    right: 7%;
+    width: min(30vw, 440px);
+    max-width: none;
+    transition-delay: 120ms;
+  }
+  .pb-on .pb-item[data-on] .pb-copy,
+  .pb-on .pb-item[data-on] .pb-pic {
+    opacity: 1;
+    transform: none;
+  }
+  .pb-on .pb-copy h3 {
+    margin-top: 0;
+    font-size: clamp(2rem, 3.4vw, 3.2rem);
+    line-height: 1.1;
+  }
+  .pb-on .pb-copy p {
+    font-size: 17px;
+    line-height: 1.6;
+  }
+  .pb-on .pb-s {
+    display: block;
+    position: absolute;
+    left: 0;
+    width: 1px;
+    top: calc(var(--k) * 80dvh);
+    height: 80dvh;
+  }
+  .pb-on .pb-arc {
+    --R: min(46dvh, 36vw);
+    position: absolute;
+    inset: 0;
+    display: block;
+    pointer-events: none;
+  }
+  .pb-ring {
+    position: absolute;
+    left: calc(26vw - var(--R));
+    top: 50%;
+    width: 0;
+    height: 0;
+    transform: rotate(var(--rot, 0deg));
+    transition: transform 900ms var(--pb-ease);
+  }
+  .pb-circle {
+    position: absolute;
+    left: calc(var(--R) * -1);
+    top: calc(var(--R) * -1);
+    width: calc(var(--R) * 2);
+    height: calc(var(--R) * 2);
+    border: 1px solid rgb(19 26 33 / 0.12);
+    border-radius: 50%;
+  }
+  .pb-mk,
+  .pb-tick {
+    position: absolute;
+    left: 0;
+    top: 0;
+    transform-origin: 0 0;
+    transform: rotate(var(--a)) translateX(var(--R));
+  }
+  .pb-tick::before {
+    content: '';
+    position: absolute;
+    left: -2px;
+    top: -2px;
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: rgb(19 26 33 / 0.2);
+  }
+  .pb-dot {
+    position: absolute;
+    left: -5px;
+    top: -5px;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--color-moss);
+    box-shadow: 0 0 0 6px rgb(205 74 66 / 0.16);
+    opacity: 0;
+    transition: opacity 400ms var(--pb-ease);
+  }
+  .pb-n {
+    position: absolute;
+    left: 20px;
+    top: 0;
+    font-family: var(--font-display);
+    font-size: 20px;
+    font-variant-numeric: tabular-nums;
+    color: rgb(19 26 33 / 0.4);
+    transform: translateY(-50%) scale(1);
+    transform-origin: 0 50%;
+    transition:
+      color 400ms var(--pb-ease),
+      transform 700ms var(--pb-ease);
+  }
+  .pb-mk[data-on] .pb-dot {
+    opacity: 1;
+  }
+  .pb-mk[data-on] .pb-n {
+    color: var(--color-ink);
+    transform: translateY(-50%) scale(1.25);
+  }
+
+  /* scroll-scrubbed (supported browsers): the dial turns and the text rides up with the scroll itself */
+  @supports (animation-timeline: view()) {
+    .pb-scrub .pb-track {
+      height: calc(100dvh + 3 * 70dvh);
+      view-timeline: --pb block;
+    }
+    .pb-scrub .pb-s {
+      display: none;
+    }
+    .pb-scrub .pb-ring {
+      transition: none;
+      animation: pb-spin linear both;
+      animation-timeline: --pb;
+      animation-range: cover 24.39% cover 75.61%;
+    }
+    .pb-scrub .pb-items {
+      -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 20%, #000 80%, transparent 100%);
+      mask-image: linear-gradient(to bottom, transparent 0, #000 20%, #000 80%, transparent 100%);
+    }
+    .pb-scrub .pb-copy {
+      opacity: 1;
+      transition: none;
+      transform: translate3d(0, calc(var(--i) * 70dvh), 0);
+      animation: pb-slide linear both;
+      animation-timeline: --pb;
+      animation-range: cover 24.39% cover 75.61%;
+    }
+    .pb-scrub .pb-pic {
+      transition: none;
+      animation-timeline: --pb;
+      animation-range: cover var(--r0) cover var(--r1);
+      animation-timing-function: linear;
+      animation-fill-mode: both;
+    }
+    .pb-scrub .pb-item .pb-pic {
+      animation-name: pb-rise-pic;
+    }
+    .pb-scrub .pb-item[data-k='first'] .pb-pic {
+      animation-name: pb-rise-pic-first;
+    }
+    .pb-scrub .pb-item[data-k='last'] .pb-pic {
+      animation-name: pb-rise-pic-last;
+    }
+    .pb-scrub .pb-n,
+    .pb-scrub .pb-dot {
+      transition: none;
+      animation-timeline: --pb;
+      animation-range: cover var(--r0) cover var(--r1);
+      animation-timing-function: linear;
+      animation-fill-mode: both;
+    }
+    .pb-scrub .pb-mk .pb-n {
+      animation-name: pb-n;
+    }
+    .pb-scrub .pb-mk .pb-dot {
+      animation-name: pb-dot;
+    }
+    .pb-scrub .pb-mk[data-k='first'] .pb-n {
+      animation-name: pb-n-first;
+    }
+    .pb-scrub .pb-mk[data-k='first'] .pb-dot {
+      animation-name: pb-dot-first;
+    }
+    .pb-scrub .pb-mk[data-k='last'] .pb-n {
+      animation-name: pb-n-last;
+    }
+    .pb-scrub .pb-mk[data-k='last'] .pb-dot {
+      animation-name: pb-dot-last;
+    }
+  }
+  @keyframes pb-slide {
+    from {
+      transform: translate3d(0, calc(var(--i) * 70dvh), 0);
+    }
+    to {
+      transform: translate3d(0, calc((var(--i) - 3) * 70dvh), 0);
+    }
+  }
+  @keyframes pb-spin {
+    to {
+      transform: rotate(-72deg);
+    }
+  }
+  @keyframes pb-rise-pic {
+    0% {
+      opacity: 0;
+      transform: translate3d(0, 40px, 0) scale(0.95);
+    }
+    35%,
+    65% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+      transform: translate3d(0, -40px, 0) scale(0.95);
+    }
+  }
+  @keyframes pb-rise-pic-first {
+    0%,
+    35% {
+      opacity: 1;
+      transform: none;
+    }
+    100% {
+      opacity: 0;
+      transform: translate3d(0, -40px, 0) scale(0.95);
+    }
+  }
+  @keyframes pb-rise-pic-last {
+    0% {
+      opacity: 0;
+      transform: translate3d(0, 40px, 0) scale(0.95);
+    }
+    65%,
+    100% {
+      opacity: 1;
+      transform: none;
+    }
+  }
+  @keyframes pb-n {
+    0%,
+    100% {
+      color: rgb(19 26 33 / 0.4);
+      transform: translateY(-50%) scale(1);
+    }
+    50% {
+      color: var(--color-ink);
+      transform: translateY(-50%) scale(1.25);
+    }
+  }
+  @keyframes pb-n-first {
+    0% {
+      color: var(--color-ink);
+      transform: translateY(-50%) scale(1.25);
+    }
+    100% {
+      color: rgb(19 26 33 / 0.4);
+      transform: translateY(-50%) scale(1);
+    }
+  }
+  @keyframes pb-n-last {
+    0% {
+      color: rgb(19 26 33 / 0.4);
+      transform: translateY(-50%) scale(1);
+    }
+    100% {
+      color: var(--color-ink);
+      transform: translateY(-50%) scale(1.25);
+    }
+  }
+  @keyframes pb-dot {
+    0%,
+    100% {
+      opacity: 0;
+    }
+    50% {
+      opacity: 1;
+    }
+  }
+  @keyframes pb-dot-first {
+    0% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+    }
+  }
+  @keyframes pb-dot-last {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+}

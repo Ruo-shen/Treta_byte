@@ -3,8 +3,8 @@
 @include('components.home.hero-stream')
 @include('components.home.problems')
 @include('components.home.services')
-@include('components.home.why')
 @include('components.home.process')
+@include('components.home.why')
 @include('components.home.about')
 @include('components.cta')
 @endsection

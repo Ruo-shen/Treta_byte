@@ -4,6 +4,8 @@
 @import './pages/blog.css';
 @import './pages/home-next.css';
 @import './pages/hero-stream.css';
+@import './pages/problems.css';
+@import './pages/footer.css';
 @source '../views/**/*.blade.php';
 @source '../../config/services.php';
 
@@ -24,6 +26,7 @@
   --color-accent-hover: #09659c;
   --color-note: #fff4e6;
   --color-cloud: #f4f8fc;
+  --color-pic: #f7f6f2;
   --color-pop: #cd4a42;
   --color-pop-hover: #b23d36;
   --font-display: 'Fraunces', 'Fraunces Fallback', Georgia, 'Times New Roman', serif;

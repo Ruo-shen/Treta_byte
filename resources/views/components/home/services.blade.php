@@ -1,15 +1,15 @@
 <section id="services" class="scroll-mt-16 overflow-hidden bg-cloud py-16 sm:py-16">
 <div class="mx-auto w-full max-w-[1260px] px-6 sm:px-8">
-<div class="grid gap-16 lg:grid-cols-[1fr_1fr] lg:gap-8">
-<div class="reveal" style="transition-delay:0ms">
-<p class="flex items-center gap-4 text-[13px] font-medium text-ink/80">
+<div class="grid gap-16">
+<div class="reveal text-center" style="transition-delay:0ms">
+<p class="flex items-center justify-center gap-4 text-[13px] font-medium text-ink/80">
 <span class="h-2 w-2 bg-accent">
 </span>Services</p>
 <h2 class="mt-8 text-[clamp(2.4rem,4.4vw,3.6rem)] font-display font-normal leading-[1.1] tracking-[-0.02em]">Three disciplines. <span class="text-ink/55">One accountable team.</span>
 </h2>
-<p class="mt-8 max-w-[62ch] text-[16px] leading-[1.5] text-muted">Engage us for a single fix, a full build, or ongoing care. Same team, same standards, from quick wins to long-term partnerships.</p>
+<p class="mx-auto mt-8 max-w-[62ch] text-[16px] leading-[1.5] text-muted">Engage us for a single fix, a full build, or ongoing care. Same team, same standards, from quick wins to long-term partnerships.</p>
 </div>
-<div class="reveal is-in relative grid gap-8 sm:grid-cols-[210px_1fr] sm:items-start lg:-mr-12" style="transition-delay:0ms">
+<div class="reveal is-in relative grid gap-8 sm:grid-cols-[210px_1fr] sm:items-start lg:grid-cols-[0.7fr_1.3fr] lg:items-center lg:gap-16" style="transition-delay:0ms">
 <div class="sm:pt-12">
 <span class="font-mono text-[12px] text-muted">01</span>
 <h3 class="mt-4 text-[40px] font-medium leading-[1.1] tracking-[-0.04em]">Fix</h3>

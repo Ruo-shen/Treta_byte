@@ -1,0 +1,42 @@
+/* Site footer: link rows, back-to-top button. Colours and fonts come from the @theme tokens. */
+@layer components {
+  .ft-link {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    font-size: 17px;
+    color: rgb(19 26 33 / 0.85);
+    text-decoration: underline;
+    text-decoration-color: transparent;
+    text-underline-offset: 4px;
+    transition:
+      color 200ms var(--ft-ease, ease-out),
+      text-decoration-color 200ms var(--ft-ease, ease-out);
+  }
+  .ft-link--small {
+    font-size: 13px;
+  }
+  .ft-top {
+    display: grid;
+    place-items: center;
+    width: 44px;
+    height: 44px;
+    border-radius: 999px;
+    background: #fff;
+    color: var(--color-ink);
+    box-shadow: 0 10px 20px -12px rgb(9 101 156 / 45%);
+    transition:
+      background-color 200ms var(--ft-ease, ease-out),
+      color 200ms var(--ft-ease, ease-out);
+  }
+  @media (hover: hover) {
+    .ft-link:hover {
+      color: var(--color-accent-hover);
+      text-decoration-color: currentColor;
+    }
+    .ft-top:hover {
+      background: var(--color-pop);
+      color: #fff;
+    }
+  }
+}
