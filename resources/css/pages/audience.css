@@ -1,0 +1,62 @@
+@layer components {
+  .au {
+    mask-image: linear-gradient(to right, transparent, #000 10%, #000 90%, transparent);
+  }
+
+  .au-row {
+    display: flex;
+    width: max-content;
+    animation: au-slide 70s linear infinite;
+  }
+
+  .au-row[data-dir='rev'] {
+    animation-direction: reverse;
+    animation-duration: 80s;
+  }
+
+  .au-group {
+    display: flex;
+    flex-shrink: 0;
+    gap: 48px;
+    padding-right: 48px;
+  }
+
+  .au-item {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    white-space: nowrap;
+  }
+
+  .au-pic {
+    width: 64px;
+    height: 64px;
+    flex-shrink: 0;
+    border-radius: 16px;
+    object-fit: cover;
+    rotate: var(--tilt);
+    box-shadow: 0 12px 24px -12px rgb(9 101 156 / 35%);
+  }
+
+  @keyframes au-slide {
+    to {
+      transform: translateX(-50%);
+    }
+  }
+}
+
+@layer components {
+  /* Oval fade: content thins out and blurs toward the edges of a wide ellipse instead of only the left and right. */
+  .au-oval {
+    mask-image: radial-gradient(ellipse 50% 50% at 50% 50%, #000 55%, transparent 100%);
+  }
+
+  .au-oval::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    backdrop-filter: blur(2px);
+    mask-image: radial-gradient(ellipse 50% 50% at 50% 50%, transparent 72%, #000 100%);
+  }
+}

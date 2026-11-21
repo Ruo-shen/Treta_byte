@@ -1,0 +1,186 @@
+@layer components {
+  /* Deep sky panel: the one dark chapter of the page. Soft light fields stand in for clouds. */
+  .why-field {
+    background:
+      radial-gradient(70% 50% at 0% 0%, #0a6fb0 0%, transparent 60%),
+      radial-gradient(90% 70% at 100% 100%, #074f7c 0%, transparent 70%),
+      var(--color-accent-hover);
+  }
+
+  /* Frosted panel used inside every promise visual (same recipe as the Services mockups). */
+  .why-glass {
+    background: rgb(255 255 255 / 55%);
+    box-shadow:
+      0 24px 48px -24px rgb(9 101 156 / 35%),
+      inset 0 1px 0 rgb(255 255 255 / 80%);
+    outline: 1px solid rgb(255 255 255 / 70%);
+    outline-offset: -1px;
+    backdrop-filter: blur(24px);
+  }
+
+  .why-dot {
+    animation: why-typing 1.2s ease-in-out infinite;
+    animation-delay: var(--d, 0s);
+  }
+
+  .why-ring::after {
+    content: '';
+    position: absolute;
+    inset: -2px;
+    border-radius: inherit;
+    border: 2px solid var(--color-accent);
+    animation: why-ping 2.4s ease-out infinite;
+  }
+
+  /* Hairline joining the timeline nodes. */
+  .why-timeline::before {
+    content: '';
+    position: absolute;
+    left: 7px;
+    top: 14px;
+    bottom: 14px;
+    width: 2px;
+    background: var(--color-accent);
+    opacity: 0.35;
+  }
+
+  .why-tile {
+    rotate: var(--tilt);
+    box-shadow: 0 18px 32px -12px rgb(4 28 48 / 55%);
+    animation: why-float 7s ease-in-out var(--d) infinite alternate;
+  }
+
+  @keyframes why-typing {
+    0%,
+    60%,
+    100% {
+      translate: 0 0;
+      opacity: 0.5;
+    }
+
+    30% {
+      translate: 0 -3px;
+      opacity: 1;
+    }
+  }
+
+  @keyframes why-ping {
+    from {
+      scale: 1;
+      opacity: 0.7;
+    }
+
+    to {
+      scale: 1.9;
+      opacity: 0;
+    }
+  }
+
+  @keyframes why-float {
+    to {
+      translate: 0 -8px;
+    }
+  }
+
+  @keyframes why-drift {
+    from {
+      translate: 0 var(--from);
+    }
+
+    to {
+      translate: 0 var(--to);
+    }
+  }
+
+  @keyframes why-recede {
+    to {
+      scale: 0.94;
+    }
+  }
+
+  @keyframes why-dim {
+    to {
+      opacity: 0.3;
+    }
+  }
+
+  @supports (animation-timeline: view()) {
+    .why-blob {
+      animation: why-drift linear both;
+      animation-timeline: view();
+      animation-range: cover 0% cover 100%;
+    }
+  }
+
+  /*
+   * Promises stack: from lg up each card sticks a little lower than the one before and the next one slides over it.
+   * Below lg the cards are an ordinary column. The grid gap is zero at lg, so spacing comes from the card margin.
+   */
+  @media (min-width: 64rem) {
+    .why-card {
+      position: sticky;
+      top: calc(7rem + var(--i) * 1.5rem);
+      margin-bottom: 14vh;
+    }
+
+    .why-card:last-child {
+      margin-bottom: 0;
+    }
+
+    .why-panel {
+      position: relative;
+      transform-origin: 50% 0;
+    }
+
+    .why-panel::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      background: #0a4f7d;
+      opacity: 0;
+      pointer-events: none;
+    }
+  }
+
+  /* Cards recede (shrink and dim) while the next card travels up to its resting position. Without timeline-scope they simply stack. */
+  @supports (animation-timeline: view()) and (timeline-scope: --a) {
+    @media (min-width: 64rem) {
+      .why-stack {
+        timeline-scope: --why-2, --why-3;
+      }
+
+      .why-card:nth-child(2) {
+        view-timeline: --why-2 block;
+      }
+
+      .why-card:nth-child(3) {
+        view-timeline: --why-3 block;
+      }
+
+      .why-card:nth-child(1) .why-panel,
+      .why-card:nth-child(1) .why-panel::after {
+        animation-timeline: --why-2;
+        animation-range: cover 0% cover calc(100vh - 8.5rem);
+      }
+
+      .why-card:nth-child(2) .why-panel,
+      .why-card:nth-child(2) .why-panel::after {
+        animation-timeline: --why-3;
+        animation-range: cover 0% cover calc(100vh - 10rem);
+      }
+
+      .why-card:nth-child(-n + 2) .why-panel {
+        animation-name: why-recede;
+        animation-timing-function: linear;
+        animation-fill-mode: both;
+      }
+
+      .why-card:nth-child(-n + 2) .why-panel::after {
+        animation-name: why-dim;
+        animation-timing-function: linear;
+        animation-fill-mode: both;
+      }
+    }
+  }
+}

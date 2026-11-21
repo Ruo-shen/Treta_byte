@@ -3,7 +3,7 @@
     <x-slot:actions>
         <x-inner.button href="#map-the-work" variant="link" :arrow="false">How we start ↓</x-inner.button>
     </x-slot:actions>
-    <x-inner.sketch label="Concept workflow — shaped around your actual process">
+    <x-inner.sketch label="Concept workflow: shaped around your actual process">
         <ol class="relative space-y-3">
             @foreach([
                 ['Request comes in', 'One place to capture the information.'],
@@ -45,7 +45,7 @@
             <p class="font-mono text-[12px] uppercase tracking-[0.14em] text-muted">Where it starts</p>
             <ul class="mt-5 space-y-3">
                 @foreach($service['problems'] as $problem)
-                    <li class="flex gap-3 text-[16px] leading-[1.5]"><span class="text-muted" aria-hidden="true">—</span>{{ $problem }}</li>
+                    <li class="flex gap-3 text-[16px] leading-[1.5]"><span class="mt-2.5 h-1.5 w-1.5 shrink-0 rounded-full bg-muted" aria-hidden="true"></span>{{ $problem }}</li>
                 @endforeach
             </ul>
         </div>
@@ -53,7 +53,7 @@
         <div class="rounded-[14px] bg-dark p-6 text-white sm:p-8">
             <p class="font-mono text-[12px] uppercase tracking-[0.14em] text-sage">What we agree</p>
             <p class="mt-5 text-[16px] leading-[1.65] text-white/75">Sometimes the answer is connecting existing tools. Sometimes it’s a small internal application. We agree a focused scope, test it against real tasks, and leave room to learn.</p>
-            <p class="mt-4 text-[16px] leading-[1.65] text-white/75">Access controls, validation, error states and handover are part of the conversation — not details to discover at the end.</p>
+            <p class="mt-4 text-[16px] leading-[1.65] text-white/75">Access controls, validation, error states and handover are part of the conversation, not details to discover at the end.</p>
         </div>
     </div>
     <x-inner.placeholder class="mt-10" what="example of a delivered tool, with the client's permission" />

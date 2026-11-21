@@ -1,5 +1,5 @@
 <section id="services" class="scroll-mt-16 overflow-hidden bg-cloud py-16 sm:py-16">
-<div class="mx-auto w-full max-w-[1260px] px-6 sm:px-8">
+<div class="mx-auto w-full max-w-[1440px] px-6 sm:px-8 lg:px-12">
 <div class="grid gap-16">
 <div class="reveal text-center" style="transition-delay:0ms">
 <p class="flex items-center justify-center gap-4 text-[13px] font-medium text-ink/80">
@@ -9,42 +9,19 @@
 </h2>
 <p class="mx-auto mt-8 max-w-[62ch] text-[16px] leading-[1.5] text-muted">Engage us for a single fix, a full build, or ongoing care. Same team, same standards, from quick wins to long-term partnerships.</p>
 </div>
-<div class="reveal is-in relative grid gap-8 sm:grid-cols-[210px_1fr] sm:items-start lg:grid-cols-[0.7fr_1.3fr] lg:items-center lg:gap-16" style="transition-delay:0ms">
-<div class="sm:pt-12">
-<span class="font-mono text-[12px] text-muted">01</span>
+<div class="reveal is-in relative grid gap-8 lg:grid-cols-2 lg:items-center lg:gap-16" style="transition-delay:0ms">
+<div class="lg:px-8">
 <h3 class="mt-4 text-[40px] font-medium leading-[1.1] tracking-[-0.04em]">Fix</h3>
-<p class="mt-6 max-w-[260px] text-[16px] leading-[1.5] text-muted">Diagnose, repair and stabilise what's not working — from bugs and performance issues to failing deployments.</p>
+<p class="mt-6 max-w-[380px] text-[16px] leading-[1.5] text-muted">Diagnose, repair and stabilise what's not working, from bugs and performance issues to failing deployments.</p>
 <a href="/services/website-repair" class="group mt-2 inline-flex min-h-11 items-center gap-2 text-[15px] font-medium text-accent transition-colors duration-200 hover:text-accent-hover">Explore Fix <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" class="h-4 w-4 transition-transform group-hover:translate-x-0.5" aria-hidden="true">
 <path d="M2.5 8h11M9 3.5L13.5 8 9 12.5" />
 </svg>
 </a>
 </div>
-<div class="relative sm:-ml-4">
-<div aria-hidden="true" class="absolute overflow-hidden rounded-[10px] -left-[26%] -top-[28px] hidden h-[66%] w-[66%] sm:block" style="background:#dcecf7">
-<svg class="absolute inset-0 h-full w-full" viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice">
-<defs>
-<filter id="grain-sage-blur-1">
-<fegaussianblur stdDeviation="14" />
-</filter>
-<filter id="grain-sage-2">
-<feturbulence type="fractalNoise" baseFrequency="1.4" numOctaves="3" stitchTiles="stitch" />
-<fecolormatrix values="0 0 0 0 0.3  0 0 0 0 0.32  0 0 0 0 0.3  0 0 0 0.55 0" />
-</filter>
-</defs>
-<g filter="url(#grain-sage-blur-1)">
-<ellipse cx="330" cy="-40" rx="260" ry="210" fill="#f2f8fc" />
-<ellipse cx="-30" cy="250" rx="190" ry="240" fill="#8fc3e8" opacity="0.85" />
-<ellipse cx="60" cy="330" rx="150" ry="120" fill="#bcdcf2" />
-<ellipse cx="170" cy="190" rx="120" ry="200" fill="#f2f8fc" opacity="0.55" transform="rotate(-28 170 190)" />
-<ellipse cx="420" cy="300" rx="160" ry="120" fill="#bcdcf2" opacity="0.7" />
-</g>
-<rect width="100%" height="100%" filter="url(#grain-sage-2)" opacity="0.5" />
-</svg>
-</div>
-<div aria-hidden="true" class="absolute -right-6 -top-14 hidden h-14 w-28 sm:block" style="background-image:radial-gradient(rgba(19,26,33,0.28) 1px, transparent 1.2px);background-size:12px 12px">
-</div>
-<div class="relative sm:mt-2">
-<div class="rounded-[14px] bg-white shadow-[0_24px_48px_-28px_rgba(9,101,156,0.28)] ring-1 ring-ink/[0.05] p-4">
+<div class="relative flex min-h-[400px] w-full items-center overflow-hidden rounded-[28px] bg-paper p-8 lg:min-h-[460px] lg:p-12">
+<i aria-hidden="true" class="absolute -left-12 -top-12 h-64 w-64 rounded-full bg-accent/35 blur-3xl"></i><i aria-hidden="true" class="absolute -bottom-16 right-4 h-72 w-72 rounded-full bg-sage/80 blur-3xl"></i><i aria-hidden="true" class="absolute right-20 top-6 h-32 w-32 rounded-full bg-pop/25 blur-2xl"></i>
+<div class="relative w-full">
+<div class="rounded-[22px] bg-white/50 backdrop-blur-2xl shadow-[0_24px_48px_-24px_rgba(9,101,156,0.35),inset_0_1px_0_rgba(255,255,255,0.8)] ring-1 ring-white/70 p-4">
 <div class="flex items-center justify-between px-1 pb-4">
 <p class="text-[13px] font-medium">Site audit</p>
 <span class="rounded-md px-2 py-[3px] text-[11px] bg-[#fdecec] text-[#d93f43]">12 issues</span>
@@ -54,7 +31,7 @@
 <span class="grid h-[18px] w-[18px] shrink-0 place-items-center rounded-full text-[11px] font-bold text-white bg-[#e5484d]">!</span>
 <span class="min-w-0 flex-1">
 <span class="block text-[12px]">Slow page load speed</span>
-<span class="block text-[11px] text-muted">Home page — 4.2s</span>
+<span class="block text-[11px] text-muted">Home page, 4.2s</span>
 </span>
 <span class="rounded-md px-2 py-[3px] text-[11px] bg-[#fdecec] text-[#d93f43]">High</span>
 </li>
@@ -88,33 +65,11 @@
 </div>
 </div>
 </div>
-<div class="mt-16 grid gap-12 lg:mt-16 lg:grid-cols-[1.25fr_0.75fr] lg:items-center lg:gap-16">
-<div class="reveal is-in relative order-2 lg:order-1 lg:ml-16" style="transition-delay:0ms">
-<div aria-hidden="true" class="absolute overflow-hidden rounded-[10px] -top-[26px] left-0 hidden h-[118%] w-[56%] sm:block" style="background:#f9e4d8">
-<svg class="absolute inset-0 h-full w-full" viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice">
-<defs>
-<filter id="grain-blue-blur-3">
-<fegaussianblur stdDeviation="14" />
-</filter>
-<filter id="grain-blue-4">
-<feturbulence type="fractalNoise" baseFrequency="1.4" numOctaves="3" stitchTiles="stitch" />
-<fecolormatrix values="0 0 0 0 0.3  0 0 0 0 0.32  0 0 0 0 0.3  0 0 0 0.55 0" />
-</filter>
-</defs>
-<g filter="url(#grain-blue-blur-3)">
-<ellipse cx="330" cy="-40" rx="260" ry="210" fill="#fff4ee" />
-<ellipse cx="-30" cy="250" rx="190" ry="240" fill="#eea585" opacity="0.85" />
-<ellipse cx="60" cy="330" rx="150" ry="120" fill="#f6cdb6" />
-<ellipse cx="170" cy="190" rx="120" ry="200" fill="#fff4ee" opacity="0.55" transform="rotate(-28 170 190)" />
-<ellipse cx="420" cy="300" rx="160" ry="120" fill="#f6cdb6" opacity="0.7" />
-</g>
-<rect width="100%" height="100%" filter="url(#grain-blue-4)" opacity="0.5" />
-</svg>
-</div>
-<div aria-hidden="true" class="absolute -left-[60px] top-[96px] hidden h-28 w-14 lg:block" style="background-image:radial-gradient(rgba(19,26,33,0.28) 1px, transparent 1.2px);background-size:12px 12px">
-</div>
-<div class="relative sm:ml-[125px]">
-<div class="rounded-[14px] bg-white shadow-[0_24px_48px_-28px_rgba(9,101,156,0.28)] ring-1 ring-ink/[0.05] p-4 sm:p-6">
+<div class="mt-16 grid gap-12 lg:mt-24 lg:grid-cols-2 lg:items-center lg:gap-16">
+<div class="reveal is-in order-2 lg:order-1 relative flex min-h-[400px] w-full items-center overflow-hidden rounded-[28px] bg-paper p-8 lg:min-h-[460px] lg:p-12" style="transition-delay:0ms">
+<i aria-hidden="true" class="absolute -right-12 -top-12 h-64 w-64 rounded-full bg-sage/80 blur-3xl"></i><i aria-hidden="true" class="absolute -bottom-16 left-4 h-72 w-72 rounded-full bg-accent/35 blur-3xl"></i><i aria-hidden="true" class="absolute bottom-10 right-16 h-32 w-32 rounded-full bg-pop/25 blur-2xl"></i>
+<div class="relative w-full">
+<div class="rounded-[22px] bg-white/50 backdrop-blur-2xl shadow-[0_24px_48px_-24px_rgba(9,101,156,0.35),inset_0_1px_0_rgba(255,255,255,0.8)] ring-1 ring-white/70 p-4 sm:p-6">
 <div class="flex items-center gap-4 border-b border-ink/[0.07] pb-0">
 <span class="mb-4 grid h-6 w-6 place-items-center rounded-md bg-ink text-[9px] text-white">▣</span>
 <p class="mb-4 text-[13px] font-medium">Website build</p>
@@ -167,11 +122,10 @@
 </div>
 </div>
 </div>
-<div class="reveal is-in order-1 lg:order-2 lg:pt-6" style="transition-delay:0ms">
+<div class="reveal is-in order-1 lg:order-2 lg:px-8" style="transition-delay:0ms">
 <div>
-<span class="font-mono text-[12px] text-muted">02</span>
 <h3 class="mt-4 text-[40px] font-medium leading-[1.1] tracking-[-0.04em]">Build</h3>
-<p class="mt-6 max-w-[260px] text-[16px] leading-[1.5] text-muted">End-to-end websites, tools or platforms, built for performance and built to last beyond launch.</p>
+<p class="mt-6 max-w-[380px] text-[16px] leading-[1.5] text-muted">End-to-end websites, tools or platforms, built for performance and built to last beyond launch.</p>
 <a href="/services/web-development" class="group mt-2 inline-flex min-h-11 items-center gap-2 text-[15px] font-medium text-accent transition-colors duration-200 hover:text-accent-hover">Explore Build <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" class="h-4 w-4 transition-transform group-hover:translate-x-0.5" aria-hidden="true">
 <path d="M2.5 8h11M9 3.5L13.5 8 9 12.5" />
 </svg>
@@ -179,44 +133,21 @@
 </div>
 </div>
 </div>
-<div class="mt-16 grid gap-12 lg:mt-12 lg:grid-cols-[0.62fr_1.38fr] lg:items-end lg:gap-6">
-<div class="reveal is-in lg:pb-2" style="transition-delay:0ms">
-<div class="[&_p]:max-w-[270px]">
-<span class="font-mono text-[12px] text-muted">03</span>
+<div class="mt-16 grid gap-12 lg:mt-24 lg:grid-cols-2 lg:items-center lg:gap-16">
+<div class="reveal is-in lg:px-8" style="transition-delay:0ms">
+<div class="[&_p]:max-w-[380px]">
 <h3 class="mt-4 text-[40px] font-medium leading-[1.1] tracking-[-0.04em]">Care</h3>
-<p class="mt-6 max-w-[260px] text-[16px] leading-[1.5] text-muted">Ongoing support, monitoring, updates and improvements so everything keeps running smoothly.</p>
+<p class="mt-6 max-w-[380px] text-[16px] leading-[1.5] text-muted">Ongoing support, monitoring, updates and improvements so everything keeps running smoothly.</p>
 <a href="/services/website-maintenance" class="group mt-2 inline-flex min-h-11 items-center gap-2 text-[15px] font-medium text-accent transition-colors duration-200 hover:text-accent-hover">Explore Care <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" class="h-4 w-4 transition-transform group-hover:translate-x-0.5" aria-hidden="true">
 <path d="M2.5 8h11M9 3.5L13.5 8 9 12.5" />
 </svg>
 </a>
 </div>
 </div>
-<div class="reveal is-in relative" style="transition-delay:0ms">
-<div aria-hidden="true" class="absolute overflow-hidden rounded-[10px] -top-[22px] left-0 hidden h-[115%] w-[86%] sm:block" style="background:#dcecf7">
-<svg class="absolute inset-0 h-full w-full" viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice">
-<defs>
-<filter id="grain-sage-blur-5">
-<fegaussianblur stdDeviation="14" />
-</filter>
-<filter id="grain-sage-6">
-<feturbulence type="fractalNoise" baseFrequency="1.4" numOctaves="3" stitchTiles="stitch" />
-<fecolormatrix values="0 0 0 0 0.3  0 0 0 0 0.32  0 0 0 0 0.3  0 0 0 0.55 0" />
-</filter>
-</defs>
-<g filter="url(#grain-sage-blur-5)">
-<ellipse cx="330" cy="-40" rx="260" ry="210" fill="#f2f8fc" />
-<ellipse cx="-30" cy="250" rx="190" ry="240" fill="#8fc3e8" opacity="0.85" />
-<ellipse cx="60" cy="330" rx="150" ry="120" fill="#bcdcf2" />
-<ellipse cx="170" cy="190" rx="120" ry="200" fill="#f2f8fc" opacity="0.55" transform="rotate(-28 170 190)" />
-<ellipse cx="420" cy="300" rx="160" ry="120" fill="#bcdcf2" opacity="0.7" />
-</g>
-<rect width="100%" height="100%" filter="url(#grain-sage-6)" opacity="0.5" />
-</svg>
-</div>
-<div aria-hidden="true" class="absolute -right-4 -top-2 hidden h-32 w-20 lg:block" style="background-image:radial-gradient(rgba(19,26,33,0.28) 1px, transparent 1.2px);background-size:12px 12px">
-</div>
-<div class="relative sm:ml-12">
-<div class="rounded-[14px] bg-white shadow-[0_24px_48px_-28px_rgba(9,101,156,0.28)] ring-1 ring-ink/[0.05] p-4 sm:p-6">
+<div class="reveal is-in relative flex min-h-[400px] w-full items-center overflow-hidden rounded-[28px] bg-paper p-8 lg:min-h-[460px] lg:p-12" style="transition-delay:0ms">
+<i aria-hidden="true" class="absolute -left-12 -bottom-12 h-64 w-64 rounded-full bg-sage/80 blur-3xl"></i><i aria-hidden="true" class="absolute -right-8 -top-16 h-72 w-72 rounded-full bg-accent/35 blur-3xl"></i><i aria-hidden="true" class="absolute left-24 top-8 h-32 w-32 rounded-full bg-pop/25 blur-2xl"></i>
+<div class="relative w-full">
+<div class="rounded-[22px] bg-white/50 backdrop-blur-2xl shadow-[0_24px_48px_-24px_rgba(9,101,156,0.35),inset_0_1px_0_rgba(255,255,255,0.8)] ring-1 ring-white/70 p-4 sm:p-6">
 <div class="flex items-center justify-between pb-4">
 <p class="flex items-center gap-2 text-[13px] font-medium">
 <span class="h-2.5 w-2.5 rounded-full bg-[#2eb56c]">
@@ -224,8 +155,8 @@
 <p class="flex items-center gap-1.5 text-[11px] text-[#2e9e6a]">
 <span class="grid h-3 w-3 place-items-center rounded-full border border-current text-[7px]">✓</span>All systems operational</p>
 </div>
-<div class="grid grid-cols-2 gap-2 sm:grid-cols-4">
-<div class="rounded-[10px] p-4 ring-1 ring-ink/[0.08]">
+<div class="grid grid-cols-2 gap-3">
+<div class="rounded-[14px] bg-white/40 p-4 ring-1 ring-white/70 backdrop-blur-md">
 <p class="text-[11px]">Uptime</p>
 <svg viewBox="0 0 100 10" class="mt-1.5 h-2.5 w-full">
 <path d="M0 6 Q5 2 10 6 T20 6 T30 6 T40 6 T50 6 T60 6 T70 6 T80 6 T90 6 T100 6" fill="none" stroke="#2eb56c" stroke-width="1.4" />
@@ -233,7 +164,7 @@
 <p class="mt-4 text-[17px] font-medium tracking-[-0.01em]">99.98%</p>
 <p class="mt-0.5 text-[11px] text-muted">Last 30 days</p>
 </div>
-<div class="rounded-[10px] p-4 ring-1 ring-ink/[0.08]">
+<div class="rounded-[14px] bg-white/40 p-4 ring-1 ring-white/70 backdrop-blur-md">
 <p class="flex items-center gap-2 text-[11px]">
 <svg viewBox="0 0 24 24" class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round">
 <path d="M4 5c0-1.1 3.6-2 8-2s8 .9 8 2-3.6 2-8 2-8-.9-8-2zm0 0v14c0 1.1 3.6 2 8 2s8-.9 8-2V5M4 12c0 1.1 3.6 2 8 2s8-.9 8-2" />
@@ -241,7 +172,7 @@
 <p class="mt-6 text-[16px] font-medium tracking-[-0.01em]">Daily</p>
 <p class="mt-0.5 text-[11px] text-muted">Last backup 2h ago</p>
 </div>
-<div class="rounded-[10px] p-4 ring-1 ring-ink/[0.08]">
+<div class="rounded-[14px] bg-white/40 p-4 ring-1 ring-white/70 backdrop-blur-md">
 <p class="flex items-center gap-2 text-[11px]">
 <svg viewBox="0 0 24 24" class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round">
 <path d="M20 11a8 8 0 0 0-14.5-4.5M4 4v3h3M4 13a8 8 0 0 0 14.5 4.5M20 20v-3h-3" />
@@ -249,7 +180,7 @@
 <p class="mt-6 text-[16px] font-medium tracking-[-0.01em]">Up to date</p>
 <p class="mt-0.5 text-[11px] text-muted">v2.4.1</p>
 </div>
-<div class="rounded-[10px] p-4 ring-1 ring-ink/[0.08]">
+<div class="rounded-[14px] bg-white/40 p-4 ring-1 ring-white/70 backdrop-blur-md">
 <p class="flex items-center gap-2 text-[11px]">
 <svg viewBox="0 0 24 24" class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round">
 <path d="M4 5h16v11H9l-5 4z" />
@@ -260,7 +191,7 @@
 </div>
 </div>
 </div>
-<p class="relative mt-4 text-right text-[12px] text-muted sm:mr-1">Sample interfaces, for illustration</p>
+<p class="absolute bottom-4 left-0 right-0 text-center text-[12px] text-ink/60">Sample interfaces, for illustration</p>
 </div>
 </div>
 </div>

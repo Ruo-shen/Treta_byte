@@ -39,4 +39,16 @@
       color: #fff;
     }
   }
+
+  /* Dot-matrix wordmark: the canvas replaces the plain text once footer-dots.ts has drawn it. */
+  .ft-dots canvas {
+    display: none;
+  }
+  .ft-dots.is-ready canvas {
+    display: block;
+    margin-inline: auto;
+  }
+  .ft-dots.is-ready p {
+    display: none;
+  }
 }

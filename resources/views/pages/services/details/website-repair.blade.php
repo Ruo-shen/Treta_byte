@@ -3,7 +3,7 @@
     <x-slot:actions>
         <x-inner.button href="#repair-start" variant="link" :arrow="false">What’s happening? ↓</x-inner.button>
     </x-slot:actions>
-    <x-inner.mockup dark tilt="left" label="repair.log — a repair, made understandable">
+    <x-inner.mockup dark tilt="left" label="repair.log: a repair, made understandable">
         <ol class="space-y-5">
             @foreach([
                 ['reproduce the problem', 'See what the visitor or team sees.'],

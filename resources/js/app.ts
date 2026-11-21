@@ -6,6 +6,12 @@ import "./hero-water"
 
 import "./problems-scene"
 
+import "./footer-dots"
+
+import "./dither-logo"
+
+import "./work-preview"
+
 const header = document.querySelector("header")
 
 const toggle = document.querySelector<HTMLButtonElement>("[data-menu-toggle]")

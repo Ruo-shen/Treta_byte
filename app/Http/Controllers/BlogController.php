@@ -39,10 +39,10 @@ class BlogController extends Controller
         // A filtered view is a thin duplicate of the journal: canonical stays /blog and it is kept out of the index.
         $seo = Seo::forPage('blog', $page > 1 && ! $category ? "/blog?page={$page}" : '/blog', $category ? ['robots' => 'noindex,follow'] : []);
         if ($category) {
-            $seo['title'] .= " — {$category->name}";
+            $seo['title'] .= " | {$category->name}";
         }
         if ($page > 1) {
-            $seo['title'] .= " — Page {$page}";
+            $seo['title'] .= " | Page {$page}";
         }
 
         return view('blog.index', [

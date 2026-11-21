@@ -1,0 +1,248 @@
+/* Process: four steps hang off a sky-blue rail. Without scroll timelines every dot, segment and numeral is already in its "reached" state, so the list reads as a clean static timeline. */
+@layer components {
+  .prc-flow {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .prc-step {
+    position: relative;
+    padding: 0 0 24px 48px;
+  }
+  .prc-step:last-child {
+    padding-bottom: 0;
+  }
+  @media (min-width: 640px) {
+    .prc-step {
+      padding-left: 64px;
+    }
+  }
+
+  /* marker: 20px outline ring, the inner disc fills when the step is reached */
+  .prc-dot {
+    position: absolute;
+    left: 0;
+    top: 30px;
+    z-index: 1;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: var(--color-mist);
+    box-shadow: inset 0 0 0 2px var(--color-accent);
+    view-timeline: --prc-dot block;
+  }
+  .prc-dot i {
+    position: absolute;
+    inset: 4px;
+    border-radius: 50%;
+    background: var(--color-accent);
+    box-shadow: 0 0 0 7px rgb(11 120 184 / 16%);
+  }
+
+  /* connector from this marker to the next one */
+  .prc-seg {
+    position: absolute;
+    left: 9px;
+    top: 40px;
+    bottom: -40px;
+    width: 2px;
+    overflow: hidden;
+    border-radius: 2px;
+    background: var(--color-line);
+    view-timeline: --prc-seg block;
+  }
+  .prc-seg i {
+    position: absolute;
+    inset: 0;
+    transform-origin: top;
+    background: var(--color-accent);
+  }
+
+  /* large Fraunces numeral: sky fill with an accent outline */
+  .prc-num {
+    display: block;
+    font-family: var(--font-display);
+    font-size: clamp(3.75rem, 6vw, 5.5rem);
+    font-weight: 400;
+    line-height: 0.9;
+    letter-spacing: -0.04em;
+    color: var(--color-sage);
+    -webkit-text-stroke: 1.5px var(--color-accent);
+    paint-order: stroke fill;
+  }
+
+  /* illustration panel */
+  .prc-vis {
+    position: relative;
+    display: grid;
+    min-height: 260px;
+    place-items: center;
+    overflow: hidden;
+    border-radius: 22px;
+    background: var(--color-paper);
+    padding: 24px;
+  }
+
+  /* Listen: typing indicator */
+  .prc-typing {
+    display: flex;
+    gap: 5px;
+  }
+  .prc-typing i {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #fff;
+    animation: prc-bounce 1.4s ease-in-out var(--d) infinite;
+  }
+
+  /* Diagnose: magnifier */
+  .prc-lens {
+    position: absolute;
+    right: -14px;
+    bottom: -22px;
+    width: 52px;
+    height: 52px;
+    border: 4px solid var(--color-accent);
+    border-radius: 50%;
+    background: rgb(255 255 255 / 35%);
+    box-shadow: 0 12px 24px -12px rgb(9 101 156 / 55%);
+    backdrop-filter: blur(3px);
+  }
+  .prc-lens::after {
+    content: '';
+    position: absolute;
+    left: 38px;
+    top: 38px;
+    width: 4px;
+    height: 24px;
+    border-radius: 2px;
+    background: var(--color-accent);
+    transform-origin: 2px 2px;
+    rotate: -45deg;
+  }
+
+  /* shared "in progress" ring */
+  .prc-pulse {
+    animation: prc-pulse 2.4s ease-out infinite;
+  }
+
+  /* Deliver: connector between the three steps */
+  .prc-ship > li {
+    position: relative;
+  }
+  .prc-ship > li + li::before {
+    content: '';
+    position: absolute;
+    left: 8px;
+    top: -16px;
+    width: 2px;
+    height: 16px;
+    background: rgb(11 120 184 / 30%);
+  }
+
+  /* Maintain: pulse travelling along the heartbeat line */
+  .prc-beat {
+    stroke-dasharray: 26 74;
+    animation: prc-beat 3.4s linear infinite;
+  }
+
+  @keyframes prc-bounce {
+    0%,
+    60%,
+    100% {
+      translate: 0 0;
+      opacity: 0.6;
+    }
+    30% {
+      translate: 0 -3px;
+      opacity: 1;
+    }
+  }
+  @keyframes prc-pulse {
+    0% {
+      box-shadow: 0 0 0 0 rgb(11 120 184 / 35%);
+    }
+    70%,
+    100% {
+      box-shadow: 0 0 0 8px rgb(11 120 184 / 0%);
+    }
+  }
+  @keyframes prc-beat {
+    from {
+      stroke-dashoffset: 26;
+    }
+    to {
+      stroke-dashoffset: -74;
+    }
+  }
+
+  /* Scroll-scrubbed: the rail fills as the section passes, markers and numerals switch to "reached" at the same line (about 55% down the viewport). */
+  @supports (animation-timeline: view()) {
+    .prc-step {
+      view-timeline: --prc-step block;
+    }
+
+    .prc-seg i {
+      animation: prc-grow linear both;
+      animation-timeline: --prc-seg;
+      animation-range: cover 45dvh cover calc(100% - 55dvh);
+    }
+
+    .prc-dot i {
+      animation: prc-pop linear both;
+      animation-timeline: --prc-dot;
+      animation-range: cover calc(45dvh + 10px) cover calc(45dvh + 44px);
+    }
+
+    .prc-num {
+      animation: prc-ink linear both;
+      animation-timeline: view();
+      animation-range: cover 44dvh cover calc(44dvh + 120px);
+    }
+
+    .prc-card {
+      animation: prc-rise linear both;
+      animation-timeline: --prc-step;
+      animation-range: entry 0% entry 60%;
+    }
+  }
+
+  @keyframes prc-grow {
+    from {
+      scale: 1 0;
+    }
+    to {
+      scale: 1 1;
+    }
+  }
+  @keyframes prc-pop {
+    from {
+      scale: 0;
+      box-shadow: 0 0 0 0 rgb(11 120 184 / 0%);
+    }
+    to {
+      scale: 1;
+      box-shadow: 0 0 0 7px rgb(11 120 184 / 16%);
+    }
+  }
+  @keyframes prc-ink {
+    from {
+      color: rgb(156 208 240 / 0%);
+    }
+    to {
+      color: var(--color-sage);
+    }
+  }
+  @keyframes prc-rise {
+    from {
+      translate: 0 36px;
+      scale: 0.98;
+    }
+    to {
+      translate: 0 0;
+      scale: 1;
+    }
+  }
+}

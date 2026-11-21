@@ -74,7 +74,7 @@
 <nav
     id="mobile-navigation"
     hidden
-    class="mx-auto w-full max-w-[1320px] px-6 pb-6 sm:px-8 lg:px-12 md:hidden"
+    class="mx-auto w-full max-w-[1440px] px-6 pb-6 sm:px-8 lg:px-12 md:hidden"
     aria-label="Mobile">
 <a href="/services" class="block border-b border-line py-4 text-[22px] tracking-tight">Services</a>
 <a href="/work" class="block border-b border-line py-4 text-[22px] tracking-tight">Work</a>

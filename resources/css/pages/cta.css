@@ -1,0 +1,38 @@
+@layer components {
+  /* Tiles bob gently on their own; where the browser supports scroll timelines they also drift as the section passes. */
+  .cta-tile {
+    rotate: var(--tilt);
+    box-shadow:
+      0 2px 4px rgb(9 101 156 / 14%),
+      0 18px 32px -10px rgb(9 101 156 / 45%),
+      0 42px 72px -28px rgb(9 101 156 / 40%);
+    animation: cta-float 7s ease-in-out infinite alternate;
+    animation-delay: var(--d);
+  }
+
+  @supports (animation-timeline: view()) {
+    .cta-tile {
+      animation:
+        cta-drift linear both,
+        cta-float 7s ease-in-out var(--d) infinite alternate;
+      animation-timeline: view(), auto;
+      animation-range: cover 0% cover 100%, normal;
+    }
+  }
+
+  @keyframes cta-drift {
+    from {
+      translate: 0 var(--from);
+    }
+
+    to {
+      translate: 0 var(--to);
+    }
+  }
+
+  @keyframes cta-float {
+    to {
+      transform: translateY(-10px);
+    }
+  }
+}

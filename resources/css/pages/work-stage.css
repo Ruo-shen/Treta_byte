@@ -1,0 +1,230 @@
+/* Registered so the 3D pose can be scrubbed by scroll: cards fly from a scattered field into a receding deck. */
+@property --tx { syntax: '<length>'; inherits: false; initial-value: 0px; }
+@property --ty { syntax: '<length>'; inherits: false; initial-value: 0px; }
+@property --tz { syntax: '<length>'; inherits: false; initial-value: 0px; }
+@property --rx { syntax: '<angle>'; inherits: false; initial-value: 0deg; }
+@property --ry { syntax: '<angle>'; inherits: false; initial-value: 0deg; }
+@property --rz { syntax: '<angle>'; inherits: false; initial-value: 0deg; }
+@property --wx { syntax: '<angle>'; inherits: false; initial-value: 0deg; }
+@property --wy { syntax: '<angle>'; inherits: false; initial-value: 0deg; }
+
+@layer components {
+  .wk3 {
+    --u: clamp(0.45px, 0.0694vw, 1.1px);
+  }
+  .wk3-track {
+    position: relative;
+    height: 300dvh;
+    view-timeline: --wk3 block;
+  }
+  .wk3-pin {
+    position: sticky;
+    top: 0;
+    display: flex;
+    height: 100dvh;
+    flex-direction: column;
+    gap: 24px;
+    padding-top: 96px;
+    padding-bottom: 24px;
+  }
+  .wk3-stage {
+    position: relative;
+    width: min(1344px, calc(100% - 48px));
+    height: min(calc(100dvh - 240px), 760px);
+    min-height: 460px;
+    margin-inline: auto;
+    overflow: hidden;
+    border-radius: 36px;
+    perspective: 1500px;
+    background:
+      radial-gradient(rgb(255 255 255 / 7%) 1px, transparent 1.3px) 0 0 / 22px 22px,
+      radial-gradient(120% 90% at 20% 0%, #1c3d59 0%, #0d1b28 62%),
+      #0d1b28;
+    box-shadow: 0 40px 80px -48px rgb(9 101 156 / 60%);
+  }
+  .wk3-world {
+    position: absolute;
+    inset: 0;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    transform-style: preserve-3d;
+    transform: rotateX(var(--wx)) rotateY(var(--wy));
+  }
+  .wk3-card {
+    --cw: calc(var(--u) * 250);
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: var(--cw);
+    height: calc(var(--cw) * 1.25);
+    margin: calc(var(--cw) * -0.625) 0 0 calc(var(--cw) * -0.5);
+    /* Resting pose is the finished deck, so the section reads correctly with no scroll animation. */
+    --tx: var(--dx);
+    --ty: var(--dy);
+    --tz: var(--dz);
+    --rx: var(--drx);
+    --ry: var(--dry);
+    --rz: var(--drz);
+    transform: translate3d(var(--tx), var(--ty), var(--tz)) rotateX(var(--rx)) rotateY(var(--ry)) rotateZ(var(--rz));
+  }
+  .wk3-face {
+    position: relative;
+    display: block;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    border-radius: 20px;
+    background: #0d1b28;
+    backface-visibility: hidden;
+    box-shadow:
+      0 2px 4px rgb(0 0 0 / 30%),
+      0 24px 40px -12px rgb(0 0 0 / 55%);
+  }
+  .wk3-face img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .wk3-face:hover,
+  .wk3-face:focus-visible {
+    outline: 2px solid rgb(255 255 255 / 75%);
+    outline-offset: -2px;
+  }
+  .wk3-meta {
+    position: absolute;
+    inset: auto 0 0 0;
+    display: grid;
+    gap: 8px;
+    padding: 14px;
+    background: linear-gradient(to top, rgb(8 20 32 / 78%), transparent);
+  }
+  .wk3-title {
+    font-family: var(--font-display);
+    font-size: 17px;
+    line-height: 1.15;
+    color: #fff;
+  }
+  .wk3-tag {
+    justify-self: start;
+    padding: 3px 10px;
+    border-radius: 999px;
+    background: rgb(255 255 255 / 18%);
+    font-size: 12px;
+    color: #fff;
+    backdrop-filter: blur(8px);
+  }
+  .wk3-note {
+    position: absolute;
+    right: 24px;
+    top: 16px;
+    z-index: 50;
+    margin: 0;
+    font-size: 12px;
+    color: rgb(255 255 255 / 60%);
+  }
+
+  /* Scroll-scrubbed: scatter, then assemble into the deck while the world settles from a tilt. */
+  @media (min-width: 1024px) {
+    @supports (animation-timeline: view()) {
+      .wk3-card {
+        animation: wk3-assemble linear both;
+        animation-timeline: --wk3;
+        animation-range: cover calc(27% + var(--i) * 1.4%) cover calc(52% + var(--i) * 1.4%);
+      }
+      .wk3-world {
+        animation: wk3-turn linear both;
+        animation-timeline: --wk3;
+        animation-range: cover 22% cover 72%;
+      }
+    }
+  }
+
+  /* Phones and tablets: a plain swipeable rail, no pinned 3D scene. */
+  @media (max-width: 1023px) {
+    .wk3-track {
+      height: auto;
+    }
+    .wk3-pin {
+      position: static;
+      height: auto;
+      padding-block: 64px;
+    }
+    .wk3-stage {
+      width: 100%;
+      height: auto;
+      min-height: 0;
+      overflow: visible;
+      perspective: none;
+      background: none;
+      box-shadow: none;
+    }
+    .wk3-world {
+      position: static;
+      display: flex;
+      gap: 16px;
+      overflow-x: auto;
+      padding: 8px 24px 32px;
+      transform: none;
+      scroll-snap-type: x mandatory;
+      scroll-padding-inline: 24px;
+    }
+    .wk3-card {
+      flex: 0 0 min(72vw, 270px);
+      height: auto;
+      aspect-ratio: 4 / 5;
+      margin: 0;
+      position: relative;
+      left: auto;
+      top: auto;
+      width: auto;
+      transform: none;
+      scroll-snap-align: start;
+    }
+    .wk3-note {
+      position: static;
+      padding: 0 24px;
+      color: var(--color-muted);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .wk3-track {
+      height: auto;
+    }
+    .wk3-pin {
+      position: static;
+      height: auto;
+      padding-block: 64px;
+    }
+  }
+
+  @keyframes wk3-assemble {
+    from {
+      --tx: var(--sx);
+      --ty: var(--sy);
+      --tz: var(--sz);
+      --rx: var(--srx);
+      --ry: var(--sry);
+      --rz: var(--srz);
+    }
+    to {
+      --tx: var(--dx);
+      --ty: var(--dy);
+      --tz: var(--dz);
+      --rx: var(--drx);
+      --ry: var(--dry);
+      --rz: var(--drz);
+    }
+  }
+  @keyframes wk3-turn {
+    from {
+      --wx: 8deg;
+      --wy: 16deg;
+    }
+    to {
+      --wx: 0deg;
+      --wy: 0deg;
+    }
+  }
+}

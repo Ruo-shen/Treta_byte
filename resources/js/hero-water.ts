@@ -1,5 +1,6 @@
-// Hero water: draws the rising photo stream and the liquid sky in WebGL so the pointer can ripple the whole scene.
-// The DOM tiles stay as the fallback (no WebGL, reduced motion, context loss). Frames run only while the hero is visible.
+// Hero water: draws the rising photo stream and the liquid sky in WebGL. The pointer drags the water: it writes its
+// movement into a small flow field that decays and softens, and the scene is pushed along that flow (a "flowmap").
+// No rings and no waves, so nothing reflects. The DOM tiles stay as the fallback (no WebGL, reduced motion, context loss).
 const stage = document.querySelector<HTMLElement>("[data-hero-field]")
 
 const canvas = stage?.querySelector<HTMLCanvasElement>("[data-hero-water]")
@@ -20,9 +21,19 @@ const MAX = 24
 
 const CELL = 256
 
-const GRID_W = 112
+// Flow field: grid width in cells, how far one touch reaches (cells), the pointer speed (px per frame) that counts as
+// full strength, how much flow survives each frame, how much it blurs into its neighbours, and the push in px.
+const FLOW_W = 96
 
-const AMP = 0.6
+const REACH = 4.5
+
+const FULL_SPEED = 38
+
+const KEEP = 0.972
+
+const SPREAD = 0.14
+
+const PUSH = 84
 
 const VERT = `attribute vec2 a; void main(){ gl_Position = vec4(a, 0., 1.); }`
 
@@ -35,9 +46,9 @@ precision mediump float;
 uniform vec2 uSize;
 uniform float uScale;
 uniform sampler2D uAtlas;
-uniform sampler2D uWave;
+uniform sampler2D uFlow;
 uniform vec2 uGrid;
-uniform float uStrength;
+uniform float uPush;
 uniform int uCount;
 uniform vec4 uA[${MAX}];
 uniform vec4 uB[${MAX}];
@@ -48,19 +59,8 @@ float box(vec2 q, vec2 hs, float r) {
   vec2 d = abs(q) - hs + r;
   return length(max(d, 0.)) + min(max(d.x, d.y), 0.) - r;
 }
-float hgt(vec2 uv) { return (texture2D(uWave, uv).r - .5) * 2.; }
 
-void main() {
-  vec2 p = vec2(gl_FragCoord.x, uSize.y * uScale - gl_FragCoord.y) / uScale;
-  vec2 uv = p / uSize;
-  vec2 e = 1. / uGrid;
-  vec2 g = vec2(
-    hgt(uv + vec2(e.x, 0.)) - hgt(uv - vec2(e.x, 0.)),
-    hgt(uv + vec2(0., e.y)) - hgt(uv - vec2(0., e.y))
-  );
-  vec2 disp = g * uStrength;
-  disp *= min(1., 20. / max(length(disp), .0001));
-  p += disp;
+vec3 scene(vec2 p) {
   vec2 uv2 = p / uSize;
 
   vec3 col = vec3(.788, .894, .969);
@@ -111,8 +111,28 @@ void main() {
     }
     col = mix(col, tc, aOut * B.w * mk);
   }
+  return col;
+}
 
-  col += vec3(clamp((g.x + g.y) * .3, -.07, .07));
+void main() {
+  vec2 p = vec2(gl_FragCoord.x, uSize.y * uScale - gl_FragCoord.y) / uScale;
+  vec2 uv = p / uSize;
+  vec4 f = texture2D(uFlow, uv);
+  vec2 fv = f.rg * 2. - 1.;
+  float sp = f.b;
+
+  vec3 col;
+  if (sp < .01) col = scene(p);
+  else col = vec3(
+    scene(p - fv * uPush).r,
+    scene(p - fv * uPush * 1.25).g,
+    scene(p - fv * uPush * 1.5).b
+  );
+
+  vec2 e = 1. / uGrid;
+  float edge = (texture2D(uFlow, uv + vec2(e.x, 0.)).b - texture2D(uFlow, uv - vec2(e.x, 0.)).b)
+    + (texture2D(uFlow, uv + vec2(0., e.y)).b - texture2D(uFlow, uv - vec2(0., e.y)).b);
+  col += vec3(.85, .95, 1.) * (clamp(edge * .5, -.09, .09) + sp * .05);
   gl_FragColor = vec4(col, 1.);
 }
 `
@@ -247,7 +267,7 @@ const start = async (stageEl: HTMLElement, canvasEl: HTMLCanvasElement) => {
 
   const uGrid = U("uGrid")
 
-  const uStrength = U("uStrength")
+  const uPush = U("uPush")
 
   const uCount = U("uCount")
 
@@ -281,9 +301,9 @@ const start = async (stageEl: HTMLElement, canvasEl: HTMLCanvasElement) => {
 
   gl.activeTexture(gl.TEXTURE1)
 
-  const waveTex = gl.createTexture()
+  const flowTex = gl.createTexture()
 
-  gl.bindTexture(gl.TEXTURE_2D, waveTex)
+  gl.bindTexture(gl.TEXTURE_2D, flowTex)
 
   gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR)
 
@@ -293,9 +313,7 @@ const start = async (stageEl: HTMLElement, canvasEl: HTMLCanvasElement) => {
 
   gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE)
 
-  gl.uniform1i(U("uWave"), 1)
-
-  gl.pixelStorei(gl.UNPACK_ALIGNMENT, 1)
+  gl.uniform1i(U("uFlow"), 1)
 
   let W = 0
 
@@ -303,17 +321,29 @@ const start = async (stageEl: HTMLElement, canvasEl: HTMLCanvasElement) => {
 
   let scale = 1
 
-  let gw = GRID_W
+  let gw = FLOW_W
 
   let gh = 2
 
-  let cur = new Float32Array(0)
+  let vx = new Float32Array(0)
 
-  let prev = new Float32Array(0)
+  let vy = new Float32Array(0)
+
+  let nx = new Float32Array(0)
+
+  let ny = new Float32Array(0)
 
   let bytes = new Uint8Array(0)
 
-  let sponge = new Float32Array(0)
+  let px = -1
+
+  let py = -1
+
+  let lastX = -1
+
+  let lastY = -1
+
+  let lastNow = performance.now()
 
   let tick = 0
 
@@ -342,34 +372,36 @@ const start = async (stageEl: HTMLElement, canvasEl: HTMLCanvasElement) => {
 
     gl.viewport(0, 0, canvasEl.width, canvasEl.height)
 
-    gh = Math.max(2, Math.round((GRID_W * H) / W))
+    gh = Math.max(2, Math.round((FLOW_W * H) / W))
 
-    cur = new Float32Array(gw * gh)
+    vx = new Float32Array(gw * gh)
 
-    prev = new Float32Array(gw * gh)
+    vy = new Float32Array(gw * gh)
 
-    bytes = new Uint8Array(gw * gh).fill(128)
+    nx = new Float32Array(gw * gh)
 
-    // Absorbing rim: waves fade out before the edge, so nothing bounces back.
-    sponge = new Float32Array(gw * gh)
+    ny = new Float32Array(gw * gh)
 
-    for (let y = 0; y < gh; y++)
-      for (let x = 0; x < gw; x++) {
-        const f = Math.min(1, Math.min(x, y, gw - 1 - x, gh - 1 - y) / 12)
+    bytes = new Uint8Array(gw * gh * 4)
 
-        sponge[y * gw + x] = f * f * (3 - 2 * f)
-      }
+    for (let i = 0; i < gw * gh; i++) {
+      bytes[i * 4] = 128
+
+      bytes[i * 4 + 1] = 128
+
+      bytes[i * 4 + 3] = 255
+    }
 
     gl.activeTexture(gl.TEXTURE1)
 
     gl.texImage2D(
       gl.TEXTURE_2D,
       0,
-      gl.LUMINANCE,
+      gl.RGBA,
       gw,
       gh,
       0,
-      gl.LUMINANCE,
+      gl.RGBA,
       gl.UNSIGNED_BYTE,
       bytes,
     )
@@ -379,101 +411,127 @@ const start = async (stageEl: HTMLElement, canvasEl: HTMLCanvasElement) => {
     dirty = true
   }
 
-  const splat = (x: number, y: number, amp: number) => {
+  stageEl.addEventListener("pointermove", (event) => {
+    const box = stageEl.getBoundingClientRect()
+
+    px = event.clientX - box.left
+
+    py = event.clientY - box.top
+  })
+
+  stageEl.addEventListener("pointerleave", () => {
+    px = -1
+
+    py = -1
+
+    lastX = -1
+  })
+
+  // Write the pointer's movement (ux, uy in -1..1) into the flow field around (x, y).
+  const push = (x: number, y: number, ux: number, uy: number) => {
     const cx = (x / W) * gw
 
     const cy = (y / H) * gh
 
-    for (let j = -2; j <= 2; j++)
-      for (let i = -2; i <= 2; i++) {
+    const r = Math.ceil(REACH)
+
+    const sigma = REACH / 2.2
+
+    for (let j = -r; j <= r; j++)
+      for (let i = -r; i <= r; i++) {
         const gx = Math.round(cx) + i
 
         const gy = Math.round(cy) + j
 
-        if (gx < 1 || gy < 1 || gx >= gw - 1 || gy >= gh - 1) continue
+        if (gx < 0 || gy < 0 || gx >= gw || gy >= gh) continue
 
-        cur[gy * gw + gx] = Math.max(
-          -AMP,
-          cur[gy * gw + gx] -
-            amp * Math.exp(-((gx - cx) ** 2 + (gy - cy) ** 2) / 1.7),
+        const w = Math.exp(
+          -((gx - cx) ** 2 + (gy - cy) ** 2) / (2 * sigma ** 2),
         )
+
+        const k = gy * gw + gx
+
+        vx[k] = Math.max(-1, Math.min(1, vx[k] + ux * w))
+
+        vy[k] = Math.max(-1, Math.min(1, vy[k] + uy * w))
       }
 
     active = true
   }
 
-  let lastX = -1
+  // Inject the pointer's movement along its path, then let the flow soften and fade (frame-rate independent).
+  const flow = (n: number) => {
+    if (px >= 0 && lastX >= 0) {
+      const dx = px - lastX
 
-  let lastY = -1
+      const dy = py - lastY
 
-  stageEl.addEventListener("pointermove", (event) => {
-    const box = stageEl.getBoundingClientRect()
+      const dist = Math.hypot(dx, dy)
 
-    const x = event.clientX - box.left
+      if (dist > 0.5) {
+        const ux = dx / n / FULL_SPEED
 
-    const y = event.clientY - box.top
+        const uy = dy / n / FULL_SPEED
 
-    if (lastX >= 0) {
-      const dist = Math.hypot(x - lastX, y - lastY)
+        const steps = Math.max(1, Math.ceil(dist / ((W / gw) * 1.4)))
 
-      const steps = Math.max(1, Math.ceil(dist / 14))
-
-      const amp = Math.min(0.12 + dist * 0.008, 0.4)
-
-      for (let s = 1; s <= steps; s++)
-        splat(
-          lastX + ((x - lastX) * s) / steps,
-          lastY + ((y - lastY) * s) / steps,
-          amp,
-        )
+        for (let s = 1; s <= steps; s++)
+          push(
+            lastX + (dx * s) / steps,
+            lastY + (dy * s) / steps,
+            ux * 0.5,
+            uy * 0.5,
+          )
+      }
     }
 
-    lastX = x
+    lastX = px
 
-    lastY = y
-  })
+    lastY = py
 
-  stageEl.addEventListener("pointerleave", () => {
-    lastX = -1
-  })
+    if (!active) return
 
-  stageEl.addEventListener("pointerdown", (event) => {
-    const box = stageEl.getBoundingClientRect()
+    const keep = KEEP ** n
 
-    splat(event.clientX - box.left, event.clientY - box.top, 0.2)
-  })
-
-  const step = () => {
     let peak = 0
 
-    for (let y = 1; y < gh - 1; y++)
-      for (let x = 1; x < gw - 1; x++) {
+    for (let y = 0; y < gh; y++)
+      for (let x = 0; x < gw; x++) {
         const i = y * gw + x
 
-        const n =
-          (cur[i - 1] + cur[i + 1] + cur[i - gw] + cur[i + gw]) * 0.5 - prev[i]
+        const l = y * gw + Math.max(0, x - 1)
 
-        const v = Math.max(-AMP, Math.min(AMP, n * 0.94 * sponge[i]))
+        const r = y * gw + Math.min(gw - 1, x + 1)
 
-        prev[i] = v
+        const u = Math.max(0, y - 1) * gw + x
 
-        const m = Math.abs(v)
+        const d = Math.min(gh - 1, y + 1) * gw + x
+
+        nx[i] =
+          (vx[i] * (1 - SPREAD) +
+            ((vx[l] + vx[r] + vx[u] + vx[d]) / 4) * SPREAD) *
+          keep
+
+        ny[i] =
+          (vy[i] * (1 - SPREAD) +
+            ((vy[l] + vy[r] + vy[u] + vy[d]) / 4) * SPREAD) *
+          keep
+
+        const m = Math.abs(nx[i]) + Math.abs(ny[i])
 
         if (m > peak) peak = m
       }
+    ;[vx, nx] = [nx, vx]
+    ;[vy, ny] = [ny, vy]
 
-    const tmp = cur
+    if (peak < 0.004) {
+      vx.fill(0)
 
-    cur = prev
-
-    prev = tmp
-
-    if (peak < 0.0008) {
-      cur.fill(0)
-
-      prev.fill(0)
+      vy.fill(0)
 
       active = false
+
+      dirty = true
     }
   }
 
@@ -486,7 +544,7 @@ const start = async (stageEl: HTMLElement, canvasEl: HTMLCanvasElement) => {
   const frame = (now: number) => {
     frameId = 0
 
-    // Idle (no ripple): the stream drifts slowly, so 30fps is plenty.
+    // Idle (no flow): the stream drifts slowly, so 30fps is plenty.
 
     if (!active && !dirty && tick++ % 2) {
       wake()
@@ -500,11 +558,18 @@ const start = async (stageEl: HTMLElement, canvasEl: HTMLCanvasElement) => {
 
     const cq = W / 100
 
-    if (active || dirty) {
-      if (active) step()
+    flow(Math.min(3, (now - lastNow) / 16.667))
 
-      for (let i = 0; i < cur.length; i++)
-        bytes[i] = Math.max(0, Math.min(255, 128 + cur[i] * 127))
+    lastNow = now
+
+    if (active || dirty) {
+      for (let i = 0; i < gw * gh; i++) {
+        bytes[i * 4] = 128 + vx[i] * 127
+
+        bytes[i * 4 + 1] = 128 + vy[i] * 127
+
+        bytes[i * 4 + 2] = Math.min(255, Math.hypot(vx[i], vy[i]) * 255)
+      }
 
       gl.activeTexture(gl.TEXTURE1)
 
@@ -515,12 +580,12 @@ const start = async (stageEl: HTMLElement, canvasEl: HTMLCanvasElement) => {
         0,
         gw,
         gh,
-        gl.LUMINANCE,
+        gl.RGBA,
         gl.UNSIGNED_BYTE,
         bytes,
       )
 
-      dirty = active
+      dirty = false
     }
 
     tiles.forEach((tile, i) => {
@@ -577,7 +642,7 @@ const start = async (stageEl: HTMLElement, canvasEl: HTMLCanvasElement) => {
 
     gl.uniform2f(uGrid, gw, gh)
 
-    gl.uniform1f(uStrength, 64)
+    gl.uniform1f(uPush, PUSH)
 
     gl.uniform1i(uCount, tiles.length)
 

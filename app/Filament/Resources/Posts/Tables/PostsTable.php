@@ -38,7 +38,7 @@ class PostsTable
                     ->badge()
                     ->state(fn (Post $record) => self::isScheduled($record) ? 'Scheduled' : $record->status->getLabel())
                     ->color(fn (Post $record) => self::isScheduled($record) ? 'warning' : $record->status->getColor()),
-                TextColumn::make('published_at')->label('Publish date')->dateTime('j M Y')->sortable()->placeholder('—')->visibleFrom('md'),
+                TextColumn::make('published_at')->label('Publish date')->dateTime('j M Y')->sortable()->placeholder('-')->visibleFrom('md'),
                 TextColumn::make('updated_at')->label('Edited')->since()->sortable()->visibleFrom('lg'),
             ])
             ->filters([

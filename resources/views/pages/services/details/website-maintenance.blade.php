@@ -1,4 +1,4 @@
-<x-inner.header variant="editorial" kicker="Care / Website maintenance" lede="Websites don’t stand still after launch. Updates, small issues and everyday changes need someone to notice — and someone to act.">
+<x-inner.header variant="editorial" kicker="Care / Website maintenance" lede="Websites don’t stand still after launch. Updates, small issues and everyday changes need someone to notice, and someone to act.">
     <x-slot:title>A little care.<br><span class="text-moss">A lot less uncertainty.</span></x-slot:title>
     <x-inner.mockup label="care-rhythm / an example month">
         <div class="grid gap-8 lg:grid-cols-[0.8fr_1.2fr_1fr] lg:items-center lg:gap-10">

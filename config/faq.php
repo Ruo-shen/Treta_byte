@@ -9,10 +9,10 @@
 return [
     'home' => [
         ['q' => 'What if I don’t know what’s wrong?', 'a' => 'An error message helps. So does “the form stopped sending on Tuesday.” You don’t need to diagnose it first.'],
-        ['q' => 'Who will I be talking to?', 'a' => 'You talk directly to the people doing the work — a small team taking responsibility from the first conversation onward.'],
+        ['q' => 'Who will I be talking to?', 'a' => 'You talk directly to the people doing the work, a small team taking responsibility from the first conversation onward.'],
         ['q' => 'How does it start?', 'a' => 'We start with a conversation about what is working, what is not, and what success should look like.'],
         ['q' => 'What happens after launch?', 'a' => 'After launch we stay close: monitoring, improving and fixing before small issues become big ones.'],
-        ['q' => 'What if my problem isn’t on your list?', 'a' => 'Tell us what\'s going on. We\'ll reply with honest next steps — even if that means pointing you elsewhere.'],
+        ['q' => 'What if my problem isn’t on your list?', 'a' => 'Tell us what\'s going on. We\'ll reply with honest next steps, even if that means pointing you elsewhere.'],
         ['placeholder' => 'FAQ: how pricing works (owner to supply approved answer)'],
         ['placeholder' => 'FAQ: typical timelines and reply times (owner to supply approved answer)'],
     ],
@@ -32,7 +32,7 @@ return [
         'web-applications' => [
             ['q' => 'How does an application project start?', 'a' => 'We start with how your team works today: what comes in, where information moves, who needs to act, and where things get stuck.'],
             ['q' => 'Do we need a custom application?', 'a' => 'Sometimes the answer is connecting existing tools. Sometimes it’s a small internal application. We agree a focused scope, test it against real tasks, and leave room to learn.'],
-            ['q' => 'What about access and security?', 'a' => 'Access controls, validation, error states and handover are part of the conversation — not details to discover at the end.'],
+            ['q' => 'What about access and security?', 'a' => 'Access controls, validation, error states and handover are part of the conversation, not details to discover at the end.'],
             ['placeholder' => 'FAQ: application pricing and typical timeline (owner to supply approved answer)'],
         ],
         'website-maintenance' => [

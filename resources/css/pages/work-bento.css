@@ -1,0 +1,115 @@
+@layer components {
+  /* Featured + bento work grid: image-led tiles with a frosted caption; tiles rise and images drift as they scroll in. */
+  .wkb-card {
+    position: relative;
+    display: block;
+    height: 100%;
+    min-height: 300px;
+    overflow: clip;
+    border-radius: 28px;
+    background: var(--color-sky-field);
+    box-shadow:
+      0 2px 4px rgb(9 101 156 / 12%),
+      0 24px 48px -28px rgb(9 101 156 / 45%);
+    transition:
+      translate 350ms cubic-bezier(0.22, 1, 0.36, 1),
+      box-shadow 350ms ease;
+  }
+  .wkb-card--feature {
+    min-height: 420px;
+  }
+  @media (min-width: 1024px) {
+    .wkb-card {
+      min-height: 260px;
+    }
+    .wkb-card--feature {
+      min-height: 560px;
+    }
+  }
+  .wkb-card:hover,
+  .wkb-card:focus-visible {
+    translate: 0 -6px;
+    box-shadow:
+      0 2px 4px rgb(9 101 156 / 14%),
+      0 36px 60px -28px rgb(9 101 156 / 55%);
+  }
+  .wkb-img {
+    position: absolute;
+    inset: -8% 0;
+    width: 100%;
+    height: 116%;
+    object-fit: cover;
+    transition: scale 700ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .wkb-card:hover .wkb-img,
+  .wkb-card:focus-visible .wkb-img {
+    scale: 1.06;
+  }
+  .wkb-glass {
+    position: absolute;
+    inset: auto 16px 16px 16px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 16px 16px 16px 20px;
+    border-radius: 20px;
+    background: rgb(255 255 255 / 62%);
+    box-shadow: inset 0 1px 0 rgb(255 255 255 / 80%);
+    outline: 1px solid rgb(255 255 255 / 70%);
+    outline-offset: -1px;
+    backdrop-filter: blur(20px);
+  }
+  .wkb-arrow {
+    display: grid;
+    flex-shrink: 0;
+    width: 40px;
+    height: 40px;
+    place-items: center;
+    border-radius: 999px;
+    background: var(--color-ink);
+    color: #fff;
+    transition:
+      background-color 250ms ease,
+      rotate 350ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .wkb-card:hover .wkb-arrow {
+    background: var(--color-pop);
+    rotate: 45deg;
+  }
+
+  @media (min-width: 1024px) {
+    @supports (animation-timeline: view()) {
+      .wkb-tile {
+        animation: wkb-rise linear both;
+        animation-timeline: view();
+        animation-range: entry calc(0% + var(--i) * 4%) entry calc(60% + var(--i) * 4%);
+      }
+      .wkb-img {
+        animation: wkb-drift linear both;
+        animation-timeline: view();
+        animation-range: cover 0% cover 100%;
+      }
+    }
+  }
+  @keyframes wkb-rise {
+    from {
+      opacity: 0;
+      translate: 0 64px;
+      scale: 0.96;
+    }
+    to {
+      opacity: 1;
+      translate: 0 0;
+      scale: 1;
+    }
+  }
+  @keyframes wkb-drift {
+    from {
+      translate: 0 -5%;
+    }
+    to {
+      translate: 0 5%;
+    }
+  }
+}

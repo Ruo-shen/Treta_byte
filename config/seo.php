@@ -7,14 +7,14 @@ return [
 
     // Approved page titles (mirrors the approved copy in the frontend preview router).
     'titles' => [
-        'home' => 'TRETA — Fix. Build. Care.',
-        'services' => 'Services — TRETA',
-        'work' => 'Selected work — TRETA',
-        'about' => 'About the studio — TRETA',
-        'contact' => 'Start a conversation — TRETA',
-        'blog' => 'The journal — TRETA',
-        'privacy' => 'Privacy information — TRETA',
-        'not_found' => 'Page not found — TRETA',
+        'home' => 'TRETA | Fix. Build. Care.',
+        'services' => 'Services | TRETA',
+        'work' => 'Selected work | TRETA',
+        'about' => 'About the studio | TRETA',
+        'contact' => 'Start a conversation | TRETA',
+        'blog' => 'The journal | TRETA',
+        'privacy' => 'Privacy information | TRETA',
+        'not_found' => 'Page not found | TRETA',
     ],
 
     // Unique meta descriptions, each taken from approved copy already on that page (no new claims).

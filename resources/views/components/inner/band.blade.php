@@ -5,7 +5,7 @@
 --}}
 @props(['tone' => 'light', 'kicker' => null])
 <section {{ $attributes->class([$tone === 'soft' ? 'bg-soft' : 'bg-paper', 'scroll-mt-16 overflow-x-clip py-12 sm:py-20 lg:py-24']) }}>
-    <div class="mx-auto w-full max-w-[1320px] px-5 sm:px-8 lg:px-12">
+    <div class="mx-auto w-full max-w-[1440px] px-5 sm:px-8 lg:px-12">
         @if($kicker || isset($heading))
             <div class="mb-10 max-w-[760px] sm:mb-14">
                 @if($kicker)<x-inner.kicker>{{ $kicker }}</x-inner.kicker>@endif

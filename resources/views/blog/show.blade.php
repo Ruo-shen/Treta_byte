@@ -4,7 +4,7 @@
     <header class="mx-auto w-full max-w-[1000px] px-5 pb-10 pt-6 sm:px-8 sm:pb-12 lg:pt-12">
         <x-inner.button :href="route('blog.index')" variant="link" :arrow="false">← Back to the journal</x-inner.button>
         @if($preview ?? false)
-            <p role="status" class="mt-6 inline-block rounded-[6px] border border-dashed border-ink/30 px-3 py-2 font-mono text-[12px] uppercase tracking-widest text-muted">Preview — not published</p>
+            <p role="status" class="mt-6 inline-block rounded-[6px] border border-dashed border-ink/30 px-3 py-2 font-mono text-[12px] uppercase tracking-widest text-muted">Preview: not published</p>
         @endif
         <p class="mt-8 font-mono text-[12px] uppercase leading-relaxed tracking-[0.14em] text-accent">
             @if($post->category){{ $post->category->name }} · @endif

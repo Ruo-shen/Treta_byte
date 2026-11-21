@@ -1,187 +1,61 @@
-<section id="about" class="scroll-mt-16 overflow-hidden bg-cloud py-16 sm:py-16">
-<div class="mx-auto w-full max-w-[1320px] px-6 sm:px-8 lg:px-12">
-<div class="grid items-center gap-16 lg:grid-cols-[0.8fr_1.2fr] lg:gap-12">
-<div class="reveal" style="transition-delay:0ms">
-<p class="flex items-center gap-4 text-[13px] font-medium text-ink/80">
-<span class="h-2 w-2 bg-accent">
-</span>About TRETA</p>
-<h2 class="mt-8 text-[clamp(2.3rem,4vw,3.4rem)] font-display font-normal leading-[1.1] tracking-[-0.02em]">A small, senior studio.<br>
-<span class="text-muted">You talk directly to the people doing the work.</span>
-</h2>
-<p class="mt-8 max-w-[62ch] text-[18px] leading-[1.6] text-muted">We came together to fix what’s broken, build what’s needed, and care for what matters. You talk directly to the people doing the work — a small team taking responsibility from the first conversation onward.</p>
-</div>
-<div aria-label="How our disciplines work together" class="reveal relative w-full" style="transition-delay:0ms">
-<div class="hidden sm:block">
-<div data-fit-diagram="" class="relative w-full about-diagram">
-<div data-diagram-canvas="" class="absolute left-0 top-0 origin-top-left" style="width:1000px;height:560px;transform:scale(var(--diagram-scale, 0.5))">
-<span aria-hidden="true" class="absolute rounded-[18px] bg-[#eef0f4]/80" style="left:58px;top:83px;width:92px;height:70px">
-</span>
-<span aria-hidden="true" class="absolute rounded-[18px] bg-[#e3e8fb]" style="left:802px;top:50px;width:88px;height:85px">
-</span>
-<span aria-hidden="true" class="absolute rounded-[16px] bg-[#eef0f6]" style="left:556px;top:437px;width:103px;height:76px">
-</span>
-<div aria-hidden="true" class="absolute left-[695px] top-[100px] h-[80px] w-[80px]" style="background-image:radial-gradient(rgba(19,26,33,0.28) 1px, transparent 1.2px);background-size:12px 12px">
-</div>
-<div aria-hidden="true" class="absolute left-[85px] top-[320px] h-[70px] w-[75px]" style="background-image:radial-gradient(rgba(19,26,33,0.28) 1px, transparent 1.2px);background-size:12px 12px">
-</div>
-<svg aria-hidden="true" class="absolute inset-0" width="1000" height="560" viewBox="0 0 1000 560" fill="none">
-<path d="M130 60 V122 M234 60 V104 M505 186 V225 M182 104 V120" stroke="#e9eef3" />
-<path d="M410 105 H805 Q832 105 832 132 V296 M556 105 V214" stroke="#e9eef3" />
-<path d="M205 233 C 240 290, 330 322, 400 322 L 432 322" stroke="#bccaf0" stroke-width="1.5" />
-<path d="M530 328 C 600 365, 680 412, 740 410 Q 775 408 795 392" stroke="#c9c1f2" stroke-width="1.5" />
-<circle cx="224" cy="255" r="5" fill="#38bdf8" />
-<circle cx="400" cy="322" r="5" fill="#0b78b8" />
-<circle cx="556" cy="343" r="5" fill="#8b5cf6" />
-<circle cx="760" cy="410" r="5" fill="#f97316" />
-</svg>
-<div>
-<span class="absolute -translate-x-1/2 -translate-y-1/2" style="left:183px;top:178px">
-<span class="grid shrink-0 place-items-end overflow-hidden rounded-full" style="width:108px;height:108px;background:#e0eff9">
-<svg viewBox="0 0 40 40" class="h-[80%] w-[80%] text-ink/15" fill="currentColor" aria-hidden="true">
-<circle cx="20" cy="15" r="7.5" />
-<path d="M5 40c1-9 7.5-14 15-14s14 5 15 14z" />
-</svg>
-</span>
-</span>
-<span aria-hidden="true" class="grid h-10 w-10 place-items-center rounded-[11px] absolute" style="background:#e0eff9;color:#0b78b8;left:208px;top:104px">
-<svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-<path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-3.5 10.9c.6.5 1 1.2 1 2V16h5v-.1c0-.8.4-1.5 1-2A6 6 0 0 0 12 3z" />
-</svg>
-</span>
-<div class="rounded-[12px] bg-white/85 px-4 py-4 shadow-[0_12px_32px_-24px_rgba(9,101,156,0.18)] ring-1 ring-line/40 absolute w-[218px]" style="left:248px;top:133px">
-<p class="flex items-center gap-2 text-[18px] font-medium tracking-[-0.01em]">
-<span class="h-2 w-2 rounded-full" style="background:#0b78b8">
-</span>Design</p>
-<p class="mt-1 pl-4 text-[15px] leading-[1.45] text-muted">Turns ideas into simple experiences.</p>
-</div>
-</div>
-<div>
-<span class="absolute -translate-x-1/2 -translate-y-1/2" style="left:506px;top:268px">
-<span class="grid shrink-0 place-items-end overflow-hidden rounded-full" style="width:108px;height:108px;background:#ece6fb">
-<svg viewBox="0 0 40 40" class="h-[80%] w-[80%] text-ink/15" fill="currentColor" aria-hidden="true">
-<circle cx="20" cy="15" r="7.5" />
-<path d="M5 40c1-9 7.5-14 15-14s14 5 15 14z" />
-</svg>
-</span>
-</span>
-<span aria-hidden="true" class="grid h-10 w-10 place-items-center rounded-[11px] absolute" style="background:#ece6fb;color:#8b5cf6;left:531px;top:194px">
-<svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-<path d="M5 20V10M10 20V5M15 20v-7M20 20V8M4 20h17" />
-</svg>
-</span>
-<div class="rounded-[12px] bg-white/85 px-4 py-4 shadow-[0_12px_32px_-24px_rgba(9,101,156,0.18)] ring-1 ring-line/40 absolute w-[218px]" style="left:572px;top:225px">
-<p class="flex items-center gap-2 text-[18px] font-medium tracking-[-0.01em]">
-<span class="h-2 w-2 rounded-full" style="background:#8b5cf6">
-</span>Technical direction</p>
-<p class="mt-1 pl-4 text-[15px] leading-[1.45] text-muted">Understands your setup and goals.</p>
-</div>
-</div>
-<div>
-<span class="absolute -translate-x-1/2 -translate-y-1/2" style="left:243px;top:380px">
-<span class="grid shrink-0 place-items-end overflow-hidden rounded-full" style="width:108px;height:108px;background:#dcf1ec">
-<svg viewBox="0 0 40 40" class="h-[80%] w-[80%] text-ink/15" fill="currentColor" aria-hidden="true">
-<circle cx="20" cy="15" r="7.5" />
-<path d="M5 40c1-9 7.5-14 15-14s14 5 15 14z" />
-</svg>
-</span>
-</span>
-<span aria-hidden="true" class="grid h-10 w-10 place-items-center rounded-[11px] absolute" style="background:#dcf1ec;color:#14b8a6;left:292px;top:328px">
-<svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-<path d="M8 7l-5 5 5 5M16 7l5 5-5 5M14 4l-4 16" />
-</svg>
-</span>
-<div class="rounded-[12px] bg-white/85 px-4 py-4 shadow-[0_12px_32px_-24px_rgba(9,101,156,0.18)] ring-1 ring-line/40 absolute w-[218px]" style="left:306px;top:377px">
-<p class="flex items-center gap-2 text-[18px] font-medium tracking-[-0.01em]">
-<span class="h-2 w-2 rounded-full" style="background:#14b8a6">
-</span>Engineering</p>
-<p class="mt-1 pl-4 text-[15px] leading-[1.45] text-muted">Builds useful, reliable systems.</p>
-</div>
-</div>
-<div>
-<span class="absolute -translate-x-1/2 -translate-y-1/2" style="left:833px;top:352px">
-<span class="grid shrink-0 place-items-end overflow-hidden rounded-full" style="width:108px;height:108px;background:#fbe9dc">
-<svg viewBox="0 0 40 40" class="h-[80%] w-[80%] text-ink/15" fill="currentColor" aria-hidden="true">
-<circle cx="20" cy="15" r="7.5" />
-<path d="M5 40c1-9 7.5-14 15-14s14 5 15 14z" />
-</svg>
-</span>
-</span>
-<span aria-hidden="true" class="grid h-10 w-10 place-items-center rounded-[11px] absolute" style="background:#fbe9dc;color:#f97316;left:861px;top:278px">
-<svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-<circle cx="12" cy="12" r="3" />
-<path d="M12 2v3M12 19v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M2 12h3M19 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1" />
-</svg>
-</span>
-<div class="rounded-[12px] bg-white/85 px-4 py-4 shadow-[0_12px_32px_-24px_rgba(9,101,156,0.18)] ring-1 ring-line/40 absolute w-[218px]" style="left:790px;top:418px">
-<p class="flex items-center gap-2 text-[18px] font-medium tracking-[-0.01em]">
-<span class="h-2 w-2 rounded-full" style="background:#f97316">
-</span>Support</p>
-<p class="mt-1 pl-4 text-[15px] leading-[1.45] text-muted">Keeps everything running smoothly.</p>
-</div>
-</div>
-</div>
-</div>
-</div>
-<ul class="grid gap-4 sm:hidden">
-<li class="flex items-center gap-4">
-<span class="grid shrink-0 place-items-end overflow-hidden rounded-full" style="width:64px;height:64px;background:#e0eff9">
-<svg viewBox="0 0 40 40" class="h-[80%] w-[80%] text-ink/15" fill="currentColor" aria-hidden="true">
-<circle cx="20" cy="15" r="7.5" />
-<path d="M5 40c1-9 7.5-14 15-14s14 5 15 14z" />
-</svg>
-</span>
-<div class="rounded-[12px] bg-white/85 px-4 py-4 shadow-[0_12px_32px_-24px_rgba(9,101,156,0.18)] ring-1 ring-line/40 flex-1 !px-4 !py-4">
-<p class="flex items-center gap-2 text-[18px] font-medium tracking-[-0.01em]">
-<span class="h-2 w-2 rounded-full" style="background:#0b78b8">
-</span>Design</p>
-<p class="mt-1 pl-4 text-[15px] leading-[1.45] text-muted">Turns ideas into simple experiences.</p>
-</div>
-</li>
-<li class="flex items-center gap-4">
-<span class="grid shrink-0 place-items-end overflow-hidden rounded-full" style="width:64px;height:64px;background:#ece6fb">
-<svg viewBox="0 0 40 40" class="h-[80%] w-[80%] text-ink/15" fill="currentColor" aria-hidden="true">
-<circle cx="20" cy="15" r="7.5" />
-<path d="M5 40c1-9 7.5-14 15-14s14 5 15 14z" />
-</svg>
-</span>
-<div class="rounded-[12px] bg-white/85 px-4 py-4 shadow-[0_12px_32px_-24px_rgba(9,101,156,0.18)] ring-1 ring-line/40 flex-1 !px-4 !py-4">
-<p class="flex items-center gap-2 text-[18px] font-medium tracking-[-0.01em]">
-<span class="h-2 w-2 rounded-full" style="background:#8b5cf6">
-</span>Technical direction</p>
-<p class="mt-1 pl-4 text-[15px] leading-[1.45] text-muted">Understands your setup and goals.</p>
-</div>
-</li>
-<li class="flex items-center gap-4">
-<span class="grid shrink-0 place-items-end overflow-hidden rounded-full" style="width:64px;height:64px;background:#dcf1ec">
-<svg viewBox="0 0 40 40" class="h-[80%] w-[80%] text-ink/15" fill="currentColor" aria-hidden="true">
-<circle cx="20" cy="15" r="7.5" />
-<path d="M5 40c1-9 7.5-14 15-14s14 5 15 14z" />
-</svg>
-</span>
-<div class="rounded-[12px] bg-white/85 px-4 py-4 shadow-[0_12px_32px_-24px_rgba(9,101,156,0.18)] ring-1 ring-line/40 flex-1 !px-4 !py-4">
-<p class="flex items-center gap-2 text-[18px] font-medium tracking-[-0.01em]">
-<span class="h-2 w-2 rounded-full" style="background:#14b8a6">
-</span>Engineering</p>
-<p class="mt-1 pl-4 text-[15px] leading-[1.45] text-muted">Builds useful, reliable systems.</p>
-</div>
-</li>
-<li class="flex items-center gap-4">
-<span class="grid shrink-0 place-items-end overflow-hidden rounded-full" style="width:64px;height:64px;background:#fbe9dc">
-<svg viewBox="0 0 40 40" class="h-[80%] w-[80%] text-ink/15" fill="currentColor" aria-hidden="true">
-<circle cx="20" cy="15" r="7.5" />
-<path d="M5 40c1-9 7.5-14 15-14s14 5 15 14z" />
-</svg>
-</span>
-<div class="rounded-[12px] bg-white/85 px-4 py-4 shadow-[0_12px_32px_-24px_rgba(9,101,156,0.18)] ring-1 ring-line/40 flex-1 !px-4 !py-4">
-<p class="flex items-center gap-2 text-[18px] font-medium tracking-[-0.01em]">
-<span class="h-2 w-2 rounded-full" style="background:#f97316">
-</span>Support</p>
-<p class="mt-1 pl-4 text-[15px] leading-[1.45] text-muted">Keeps everything running smoothly.</p>
-</div>
-</li>
-</ul>
-<p class="sr-only">Design, technical direction, engineering and support are disciplines we bring together, not individual staff profiles.</p>
-</div>
-</div>
-</div>
+@php
+    // Disciplines, not people: no staff names, faces or titles. --jx/--jy is the resting offset toward the middle of the cluster;
+    // --fx/--fy is where the card starts when the section scrolls into view (scroll-driven browsers only).
+    $disciplines = [
+        ['Design', 'Turns ideas into simple experiences.', 'glass-diagonal', '-6deg', '1.5deg', '10px', '12px', '-36px', '-26px'],
+        ['Technical direction', 'Understands your setup and goals.', 'desk-marble', '5deg', '-1.5deg', '-10px', '12px', '36px', '-18px'],
+        ['Engineering', 'Builds useful, reliable systems.', 'glass-tower', '6deg', '-1deg', '10px', '-6px', '-30px', '34px'],
+        ['Support', 'Keeps everything running smoothly.', 'sky-cloud', '-5deg', '1.2deg', '-10px', '-6px', '30px', '28px'],
+    ];
+    $principles = [['Fix', 'what is broken.'], ['Build', 'what is needed.'], ['Care', 'for what matters.']];
+@endphp
+<section id="about" class="scroll-mt-16 overflow-clip bg-white py-16 sm:py-24" aria-labelledby="about-title">
+    <div class="mx-auto w-full max-w-[1440px] px-6 sm:px-8 lg:px-12">
+        <div class="grid items-center gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:gap-16">
+            <div class="reveal">
+                <p class="flex items-center gap-4 text-[15px] font-medium text-accent">
+                    <span class="h-2 w-2 bg-pop" aria-hidden="true"></span>About TRETA
+                </p>
+                <h2 id="about-title" class="mt-8 font-display text-[clamp(2.4rem,4.4vw,3.6rem)] font-normal leading-[1.1] tracking-[-0.02em]">
+                    A small, senior studio. <span class="block text-ink/55">You talk directly to the people doing the work.</span>
+                </h2>
+                <p class="mt-8 max-w-[56ch] text-[17px] leading-[1.6] text-muted">
+                    Design, technical direction, engineering and support work as one coordinated team. Nothing gets passed along a chain: the specialists who shape the work are the ones you speak to, from the first conversation onward.
+                </p>
+                <ul class="mt-10 flex flex-wrap gap-x-8 gap-y-3">
+                    @foreach ($principles as [$verb, $rest])
+                        <li class="font-display text-[22px] font-normal leading-[1.2] tracking-[-0.01em]">
+                            <span class="text-accent">{{ $verb }}</span> <span class="text-ink/65">{{ $rest }}</span>
+                        </li>
+                    @endforeach
+                </ul>
+                <a href="/about" class="group mt-10 inline-flex min-h-11 items-center gap-2 text-[15px] font-medium text-accent transition-colors duration-200 hover:text-accent-hover">
+                    How we work together
+                    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" class="h-4 w-4 transition-transform group-hover:translate-x-0.5" aria-hidden="true"><path d="M2.5 8h11M9 3.5L13.5 8 9 12.5" /></svg>
+                </a>
+            </div>
+
+            <div class="reveal ab-stage relative isolate flex min-h-[520px] flex-col items-center justify-center gap-8 overflow-clip rounded-[28px] bg-sky-field p-6 sm:min-h-[600px] sm:p-10 lg:p-12" role="group" aria-label="Four disciplines working as one team">
+                <img src="{{ asset('images/hero/sky-cirrus.webp') }}" alt="" width="1200" height="900" loading="lazy" decoding="async" class="absolute inset-0 -z-20 h-full w-full object-cover opacity-70">
+                <span aria-hidden="true" class="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_50%_45%,rgba(124,192,239,0.45),rgba(124,192,239,0)_70%)]"></span>
+                <img src="{{ asset('images/hero/glass-blue.webp') }}" alt="" width="120" height="120" loading="lazy" decoding="async" class="ab-tile absolute right-6 top-6 -z-10 hidden h-24 w-24 rounded-[22px] object-cover sm:block lg:right-10 lg:top-10 lg:h-28 lg:w-28" style="--tilt:8deg;--from:34px;--to:-34px">
+                <img src="{{ asset('images/hero/desk-laptop.webp') }}" alt="" width="120" height="120" loading="lazy" decoding="async" class="ab-tile absolute bottom-6 left-6 -z-10 hidden h-24 w-24 rounded-[22px] object-cover sm:block lg:bottom-10 lg:left-10 lg:h-28 lg:w-28" style="--tilt:-8deg;--from:-30px;--to:30px">
+
+                <ul class="ab-cluster relative mx-auto grid w-full max-w-[560px] gap-3 sm:grid-cols-2 sm:gap-4" role="list">
+                    @foreach ($disciplines as [$name, $line, $img, $tileTilt, $tilt, $jx, $jy, $fx, $fy])
+                        <li class="ab-card rounded-[22px] bg-white/75 p-5 shadow-[0_24px_48px_-24px_rgba(9,101,156,0.35),inset_0_1px_0_rgba(255,255,255,0.8)] ring-1 ring-white/70 backdrop-blur-xl" style="--tilt:{{ $tilt }};--jx:{{ $jx }};--jy:{{ $jy }};--fx:{{ $fx }};--fy:{{ $fy }}">
+                            <img src="{{ asset('images/hero/'.$img.'.webp') }}" alt="" width="56" height="56" loading="lazy" decoding="async" class="h-14 w-14 rounded-[16px] object-cover shadow-[0_12px_24px_-12px_rgba(9,101,156,0.45)]" style="rotate:{{ $tileTilt }}">
+                            <h3 class="mt-5 font-display text-[22px] font-normal leading-[1.15] tracking-[-0.01em]">{{ $name }}</h3>
+                            <p class="mt-2 text-[15px] leading-[1.45] text-muted">{{ $line }}</p>
+                        </li>
+                    @endforeach
+                </ul>
+
+                <span aria-hidden="true" class="ab-badge relative flex items-center gap-2 rounded-full bg-white px-5 py-2.5 text-[15px] font-medium text-ink shadow-[0_18px_36px_-14px_rgba(9,101,156,0.5)] ring-1 ring-line/70">
+                    <span class="h-2 w-2 bg-pop"></span>One team
+                </span>
+            </div>
+        </div>
+        <p class="sr-only">Design, technical direction, engineering and support are disciplines we bring together, not individual staff profiles.</p>
+    </div>
 </section>

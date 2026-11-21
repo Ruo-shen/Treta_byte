@@ -46,11 +46,11 @@ class SiteContractTest extends TestCase
 
         $this->get("/blog/{$post->slug}")->assertOk()
             ->assertSee('width="640" height="360"', false)->assertSee('alt="Alt text"', false)
-            ->assertDontSee('Preview — not published');
+            ->assertDontSee('Preview: not published');
 
         $draft = Post::factory()->create(['featured_image_path' => 'posts/missing.png']);
         $this->actingAs(User::factory()->create())->get("/admin/preview/posts/{$draft->id}")
-            ->assertOk()->assertSee('Preview — not published')->assertDontSee('class="h-auto w-full rounded-[14px]"', false);
+            ->assertOk()->assertSee('Preview: not published')->assertDontSee('class="h-auto w-full rounded-[14px]"', false);
     }
 
     public function test_blog_pagination_renders_project_markup(): void
@@ -68,13 +68,13 @@ class SiteContractTest extends TestCase
     public function test_pages_use_approved_titles_and_default_description(): void
     {
         $titles = [
-            '/' => 'TRETA — Fix. Build. Care.',
-            '/services' => 'Services — TRETA',
-            '/work' => 'Selected work — TRETA',
-            '/about' => 'About the studio — TRETA',
-            '/contact' => 'Start a conversation — TRETA',
-            '/blog' => 'The journal — TRETA',
-            '/privacy' => 'Privacy information — TRETA',
+            '/' => 'TRETA | Fix. Build. Care.',
+            '/services' => 'Services | TRETA',
+            '/work' => 'Selected work | TRETA',
+            '/about' => 'About the studio | TRETA',
+            '/contact' => 'Start a conversation | TRETA',
+            '/blog' => 'The journal | TRETA',
+            '/privacy' => 'Privacy information | TRETA',
         ];
 
         foreach ($titles as $url => $title) {
@@ -91,7 +91,7 @@ class SiteContractTest extends TestCase
     {
         foreach (['/nope', '/blog/missing', '/services/missing'] as $url) {
             $this->get($url)->assertNotFound()
-                ->assertSee('<title>Page not found — TRETA</title>', false)
+                ->assertSee('<title>Page not found | TRETA</title>', false)
                 ->assertSee('content="noindex,follow"', false);
         }
     }
@@ -304,11 +304,11 @@ class SiteContractTest extends TestCase
         Post::factory()->published()->count(13)->create();
 
         $this->get('/blog')->assertSee('<link rel="canonical" href="https://tretabyte.com/blog">', false)
-            ->assertSee('<title>The journal — TRETA</title>', false);
+            ->assertSee('<title>The journal | TRETA</title>', false);
 
         $page2 = $this->get('/blog?page=2')->assertOk()
             ->assertSee('<link rel="canonical" href="https://tretabyte.com/blog?page=2">', false)
-            ->assertSee('<title>The journal — TRETA — Page 2</title>', false)
+            ->assertSee('<title>The journal | TRETA | Page 2</title>', false)
             ->assertDontSee('?page=1', false);
         $page2->assertSee('href="'.route('blog.index').'"', false);
 

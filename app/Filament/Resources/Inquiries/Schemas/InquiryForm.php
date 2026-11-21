@@ -22,7 +22,7 @@ class InquiryForm
                 Section::make('Original submission (read-only)')->collapsed()->columns(2)->schema([
                     TextInput::make('name')->disabled(),
                     TextInput::make('email')->disabled(),
-                    TextInput::make('company')->disabled()->placeholder('—'),
+                    TextInput::make('company')->disabled()->placeholder('-'),
                     Select::make('topic')->options(InquiryTopic::class)->disabled(),
                     Textarea::make('message')->disabled()->rows(6)->columnSpanFull(),
                     DateTimePicker::make('created_at')->label('Received')->disabled(),

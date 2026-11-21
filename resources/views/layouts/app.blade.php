@@ -1,6 +1,6 @@
 @php
     $seo = array_merge([
-        'title' => 'TRETA — Fix. Build. Care.',
+        'title' => 'TRETA | Fix. Build. Care.',
         'description' => 'A technology solutions studio. We fix what is broken, build what is needed, and care for what matters.',
         'canonical' => url()->current(),
         'robots' => 'index,follow',

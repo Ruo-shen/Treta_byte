@@ -1,0 +1,104 @@
+@layer components {
+  /* Resting state is the finished cluster: four glass cards tilted and pulled slightly toward the middle so they overlap. */
+  .ab-card {
+    rotate: var(--tilt);
+    translate: var(--jx) var(--jy);
+  }
+
+  @media (max-width: 639px) {
+    .ab-card {
+      translate: 0 0;
+      --fx: 12px !important; /* beats the inline start offset so a mid-scroll card cannot clip on narrow screens */
+    }
+
+    .ab-card:nth-child(odd) {
+      margin-right: 20px;
+    }
+
+    .ab-card:nth-child(even) {
+      margin-left: 20px;
+    }
+  }
+
+  @media (min-width: 640px) {
+    .ab-card:nth-child(even) {
+      margin-top: 40px;
+    }
+  }
+
+  .ab-tile {
+    rotate: var(--tilt);
+    box-shadow:
+      0 2px 4px rgb(9 101 156 / 14%),
+      0 18px 32px -10px rgb(9 101 156 / 45%);
+  }
+
+  /* Where scroll timelines exist, the disciplines start apart and come together as the section crosses the viewport. */
+  @supports (animation-timeline: view()) {
+    .ab-card {
+      animation: ab-join linear both;
+      animation-timeline: view();
+      animation-range: entry 5% cover 34%;
+    }
+
+    .ab-tile {
+      animation: ab-drift linear both;
+      animation-timeline: view();
+      animation-range: cover 0% cover 100%;
+    }
+
+    .ab-badge {
+      animation: ab-pop linear both;
+      animation-timeline: view();
+      animation-range: entry 10% entry 100%;
+    }
+
+    @media (max-width: 639px) {
+      .ab-card {
+        animation-name: ab-join-sm;
+      }
+    }
+  }
+
+  @keyframes ab-join {
+    from {
+      translate: var(--fx) var(--fy);
+    }
+
+    to {
+      translate: var(--jx) var(--jy);
+    }
+  }
+
+  @keyframes ab-join-sm {
+    from {
+      translate: var(--fx) 0;
+    }
+
+    to {
+      translate: 0 0;
+    }
+  }
+
+  @keyframes ab-drift {
+    from {
+      translate: 0 var(--from);
+    }
+
+    to {
+      translate: 0 var(--to);
+    }
+  }
+
+  @keyframes ab-pop {
+    from {
+      scale: 0.6;
+      opacity: 0;
+    }
+
+    to {
+      scale: 1;
+      opacity: 1;
+    }
+  }
+}

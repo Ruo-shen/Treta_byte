@@ -10,7 +10,7 @@
     $dark = $variant === 'dark';
     $h1 = 'text-[clamp(2.5rem,8.5vw,5.1rem)] font-medium leading-[1.04] tracking-[-0.045em]';
     $ledeClass = 'text-[17px] leading-[1.6] sm:text-[19px] ' . ($dark ? 'text-white/70' : 'text-muted');
-    $shell = 'mx-auto w-full max-w-[1320px] px-5 sm:px-8 lg:px-12';
+    $shell = 'mx-auto w-full max-w-[1440px] px-5 sm:px-8 lg:px-12';
 @endphp
 @if($variant === 'editorial')
     <header {{ $attributes->class('overflow-x-clip bg-soft pt-[72px]') }}>

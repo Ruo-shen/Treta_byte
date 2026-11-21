@@ -46,7 +46,7 @@ class InnerKitTest extends TestCase
         $plain = Post::factory()->published()->create(['title' => 'Plain article']);
         $custom = Post::factory()->published()->create(['title' => 'Other', 'seo_title' => 'Custom SEO title']);
 
-        $this->get("/blog/{$plain->slug}")->assertSee('<title>Plain article — '.config('app.name').'</title>', false);
+        $this->get("/blog/{$plain->slug}")->assertSee('<title>Plain article | '.config('app.name').'</title>', false);
         $this->get("/blog/{$custom->slug}")->assertSee('<title>Custom SEO title</title>', false);
     }
 

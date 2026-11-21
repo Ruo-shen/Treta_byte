@@ -38,31 +38,4 @@
 </div>
 </div>
 </div>
-<div class="relative mx-auto w-full max-w-[1440px] px-6 sm:px-8 lg:px-12">
-<div class="relative mx-auto mt-16 max-w-[1180px] pb-16 sm:pb-16">
-<p aria-hidden="true" class="absolute -top-9 left-2 hidden rotate-[-3deg] font-hand text-[19px] text-ink/60 lg:block">Here's the work behind that promise ↓</p>
-<div id="work" class="scroll-mt-20 overflow-hidden rounded-[22px] border border-line bg-white shadow-[0_40px_80px_-60px_rgba(9,101,156,0.35)]">
-<div class="grid lg:grid-cols-[210px_1fr]">
-<aside class="hidden border-r border-line p-6 lg:block">
-<p class="px-4 pb-6 pt-1 text-[13px] font-medium tracking-[0.42em]">TRETA</p>
-<p class="rounded-lg bg-soft px-4 py-2 text-[13px] font-medium">Selected work</p>
-<p class="mt-12 px-4 font-hand text-[17px] leading-tight text-muted">Thoughtful work.<br>Real stories.</p>
-</aside>
-<div class="min-w-0 p-4 sm:p-6 lg:p-8">
-<div class="flex items-center justify-between gap-4">
-<h2 class="text-[17px] font-medium">Selected work</h2>
-<a href="/work" class="inline-flex min-h-11 items-center text-[13px] text-ink/70 transition-colors duration-200 hover:text-ink">All work →</a>
-</div>
-<div class="flex min-h-[390px] flex-col justify-center rounded-xl border border-dashed border-line px-6 py-12 sm:min-h-[470px] sm:px-12">
-<p class="text-[13px] font-medium text-muted">A little more context</p>
-<h3 class="mt-6 max-w-[480px] text-[clamp(1.8rem,3vw,2.7rem)] font-medium leading-[1.1] tracking-[-0.035em]">Good work deserves<br>a proper introduction.</h3>
-<p class="mt-6 max-w-[400px] text-[16px] leading-[1.6] text-muted">We’ll share project stories here when they’re ready to be published. In the meantime, tell us what you’re working on.</p>
-<a class="mt-8 inline-flex min-h-11 items-center gap-4 self-start border-b border-ink/30 text-[14px] transition-colors duration-200 hover:border-ink hover:text-accent" href="/contact">Discuss your project <span aria-hidden="true">↗</span>
-</a>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
 </section>

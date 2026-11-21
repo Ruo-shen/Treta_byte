@@ -1,0 +1,24 @@
+@layer components {
+  /* Dithered logo: the canvas replaces the plain image once dither-logo.ts has drawn it. */
+  .dl {
+    position: relative;
+    aspect-ratio: 1;
+  }
+  .dl-canvas {
+    display: none;
+    touch-action: pan-y;
+  }
+  .dl.is-ready .dl-canvas {
+    display: block;
+    cursor: crosshair;
+  }
+  .dl.is-ready .dl-fallback {
+    display: none;
+  }
+  .dl-hint {
+    visibility: hidden;
+  }
+  section:has(.dl.is-ready) .dl-hint {
+    visibility: visible;
+  }
+}

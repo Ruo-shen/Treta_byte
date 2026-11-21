@@ -12,7 +12,7 @@
             <div class="mt-8 grid grid-cols-3 gap-3"><span class="h-12 rounded-[6px] bg-ink/[0.08]"></span><span class="h-12 rounded-[6px] bg-ink/[0.08]"></span><span class="h-12 rounded-[6px] bg-ink/[0.08]"></span></div>
         </x-inner.mockup>
         <x-inner.note tilt="left" class="absolute -bottom-1 right-2 w-[210px] p-4 text-[22px] sm:right-6">Clarity before decoration.</x-inner.note>
-        <p class="mt-5 font-mono text-[12px] text-muted">Concept illustration — not a client website</p>
+        <p class="mt-5 font-mono text-[12px] text-muted">Concept illustration: not a client website</p>
     </div>
 </x-inner.header>
 

@@ -4,12 +4,12 @@
 --}}
 @props([
     'kicker' => 'Start a conversation',
-    'body' => "Tell us what's going on. We'll reply with honest next steps — even if that means pointing you elsewhere.",
+    'body' => "Tell us what's going on. We'll reply with honest next steps, even if that means pointing you elsewhere.",
     'label' => 'Tell us what you need',
     'href' => null,
 ])
 <section {{ $attributes->class('bg-paper pb-12 pt-6 sm:pt-10') }}>
-    <div class="mx-auto w-full max-w-[1260px] px-5 sm:px-8">
+    <div class="mx-auto w-full max-w-[1440px] px-5 sm:px-8">
         <div class="on-dark relative overflow-hidden rounded-[16px] bg-dark px-6 py-12 text-white sm:px-14 sm:py-16 lg:px-20">
             <svg aria-hidden="true" class="pointer-events-none absolute bottom-0 right-0 hidden h-[86%] w-[360px] md:block" viewBox="0 0 360 340" fill="none" preserveAspectRatio="xMaxYMax meet">
                 <path d="M10 340 A170 170 0 0 1 340 160" stroke="#9a9b9d" stroke-width="1" />
